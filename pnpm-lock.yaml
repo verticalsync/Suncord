@@ -1,9 +1,6 @@
 lockfileVersion: '6.0'
 
 patchedDependencies:
-  eslint-plugin-path-alias@1.0.0:
-    hash: m6sma4g6bh67km3q6igf6uxaja
-    path: patches/eslint-plugin-path-alias@1.0.0.patch
   eslint@8.46.0:
     hash: xm46kqcmdgzlmm4aifkfpxaho4
     path: patches/eslint@8.46.0.patch
@@ -82,7 +79,7 @@ devDependencies:
     version: 1.1.2
   eslint-plugin-path-alias:
     specifier: ^1.0.0
-    version: 1.0.0(patch_hash=m6sma4g6bh67km3q6igf6uxaja)(eslint@8.46.0)
+    version: 1.0.0(eslint@8.46.0)
   eslint-plugin-simple-import-sort:
     specifier: ^10.0.0
     version: 10.0.0(eslint@8.46.0)
