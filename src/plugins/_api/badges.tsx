@@ -61,26 +61,21 @@ const SuncordContributorBadge: ProfileBadge = {
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
-async function loadBadges(noCache = false) {
-    DonorBadges = {};
-
+async function loadBadges(url: string, noCache = false) {
     const init = {} as RequestInit;
-    if (noCache)
-        init.cache = "no-cache";
+    if (noCache) init.cache = "no-cache";
 
-    DonorBadges = await fetch("https://badges.vencord.dev/badges.json", init)
-        .then(r => r.json());
+    return await fetch(url, init).then((r) => r.json());
 }
 
-async function loadSuncordBadges(noCache = false) {
-    DonorBadges = {};
+async function loadAllBadges(noCache = false) {
+    const vencordBadges = await loadBadges("https://badges.vencord.dev/badges.json", noCache);
+    const suncordBadges = await loadBadges("https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/badges.json", noCache);
 
-    const init = {} as RequestInit;
-    if (noCache)
-        init.cache = "no-cache";
-
-    DonorBadges = await fetch("https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/badges.json", init)
-        .then(r => r.json());
+    DonorBadges = {
+        ...vencordBadges,
+        ...suncordBadges,
+    };
 }
 
 export default definePlugin({
@@ -119,8 +114,7 @@ export default definePlugin({
 
     toolboxActions: {
         async "Refetch Badges"() {
-            await loadBadges(true);
-            await loadSuncordBadges(true);
+            await loadAllBadges(true);
             Toasts.show({
                 id: Toasts.genId(),
                 message: "Successfully refetched badges!",
@@ -131,8 +125,8 @@ export default definePlugin({
 
     async start() {
         Vencord.Api.Badges.addBadge(ContributorBadge);
-        await loadBadges();
-        await loadSuncordBadges();
+        Vencord.Api.Badges.addBadge(SuncordContributorBadge);
+        await loadAllBadges();
     },
 
     renderBadgeComponent: ErrorBoundary.wrap((badge: ProfileBadge & BadgeUserArgs) => {
