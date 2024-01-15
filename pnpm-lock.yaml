@@ -1505,7 +1505,7 @@ packages:
         optional: true
     dev: true
 
-  /eslint-plugin-path-alias@1.0.0(patch_hash=m6sma4g6bh67km3q6igf6uxaja)(eslint@8.46.0):
+  /eslint-plugin-path-alias@1.0.0(eslint@8.46.0):
     resolution: {integrity: sha512-FXus57yC+Zd3sMv46pbloXYwFeNVNHJqlACr9V68FG/IzGFBBokGJpmjDbEjpt8ZCeVSndUubeDWWl2A8sCNVQ==}
     peerDependencies:
       eslint: ^7
@@ -1518,7 +1518,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-    patched: true
 
   /eslint-plugin-simple-header@1.0.2:
     resolution: {integrity: sha512-K1EJ/ueBIjPRA8qR44Ymo+GDmPYYmfoODtainGxVr7PSbX6QiaY+pTuGCrOhO+AtVsYJs8GLSVdGUTXyAxAtOA==}
