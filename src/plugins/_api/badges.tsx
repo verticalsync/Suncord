@@ -65,7 +65,7 @@ async function loadBadges(url: string, noCache = false) {
     const init = {} as RequestInit;
     if (noCache) init.cache = "no-cache";
 
-    return await fetch(url, init).then((r) => r.json());
+    return await fetch(url, init).then(r => r.json());
 }
 
 async function loadAllBadges(noCache = false) {
