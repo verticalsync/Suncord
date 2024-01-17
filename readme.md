@@ -1,6 +1,6 @@
 # Suncord
 
-Suncord is a fork of [Suncord](https://github.com/Vendicated/Vencord).
+Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
 ## Installing / Uninstalling
 
