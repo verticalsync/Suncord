@@ -19,7 +19,7 @@
 import { showToast, Toasts } from "@webpack/common";
 
 import { Auth, authorize, getToken, updateAuth } from "./auth";
-import { Review, ReviewDBCurrentUser, ReviewDBUser, ReviewType } from "./entities";
+import { Review, ReviewDBCurrentUser, ReviewDBUser } from "./entities";
 import { settings } from "./settings";
 
 const API_URL = "https://manti.vendicated.dev/api/reviewdb";
