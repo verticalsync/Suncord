@@ -19,10 +19,10 @@
 import { app } from "electron";
 import { join } from "path";
 
-export const DATA_DIR = process.env.VENCORD_USER_DATA_DIR ?? (
+export const DATA_DIR = process.env.SUNCORD_USER_DATA_DIR ?? (
     process.env.DISCORD_USER_DATA_DIR
-        ? join(process.env.DISCORD_USER_DATA_DIR, "..", "VencordData")
-        : join(app.getPath("userData"), "..", "Vencord")
+        ? join(process.env.DISCORD_USER_DATA_DIR, "..", "SuncordData")
+        : join(app.getPath("userData"), "..", "Suncord")
 );
 export const SETTINGS_DIR = join(DATA_DIR, "settings");
 export const THEMES_DIR = join(DATA_DIR, "themes");
