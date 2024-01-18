@@ -5,7 +5,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { Devs, VENCORD_USER_AGENT } from "@utils/constants";
+import { Devs, VENCORD_USER_AGENT_HASHLESS } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { React, SearchableSelect, Text, Toasts, UserStore } from "@webpack/common";
@@ -43,7 +43,7 @@ export default definePlugin({
     ],
 
     settingsAboutComponent: () => {
-        const href = `${API_URL}?client_mod=${encodeURIComponent(VENCORD_USER_AGENT)}`;
+        const href = `${API_URL}?client_mod=${encodeURIComponent(VENCORD_USER_AGENT_HASHLESS)}`;
         return (
             <Text variant="text-md/normal">
                 A plugin that displays the local time for specific users using their timezone. <br />
