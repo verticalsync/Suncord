@@ -414,6 +414,14 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
         name: "verticalsync",
         id: 1181610810548686979n,
     },
+    bhop: {
+        name: "femie",
+        id: 442626774841556992n,
+    },
+    Drag: {
+        name: "dragalt_",
+        id: 1189903210564038697n,
+    },
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
