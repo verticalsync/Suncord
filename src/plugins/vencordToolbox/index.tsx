@@ -109,7 +109,7 @@ function VencordPopoutButton() {
                 <HeaderBarIcon
                     className="vc-toolbox-btn"
                     onClick={() => setShow(v => !v)}
-                    tooltip={isShown ? null : "Vencord Toolbox"}
+                    tooltip={isShown ? null : "Suncord Toolbox"}
                     icon={() => VencordPopoutIcon(isShown)}
                     selected={isShown}
                 />

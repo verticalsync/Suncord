@@ -116,7 +116,7 @@ export interface PluginDef {
         [E in FluxEvents]?: (event: any) => void;
     };
     /**
-     * Allows you to add custom actions to the Vencord Toolbox.
+     * Allows you to add custom actions to the Suncord Toolbox.
      * The key will be used as text for the button
      */
     toolboxActions?: Record<string, () => void>;

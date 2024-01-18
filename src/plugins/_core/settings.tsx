@@ -37,7 +37,7 @@ export default definePlugin({
         // sections to manually use SettingsRouter (which only works on desktop
         // but the context menu is usually not available on mobile anyway)
         addContextMenuPatch("user-settings-cog", children => () => {
-            const section = children.find(c => Array.isArray(c) && c.some(it => it?.props?.id === "VencordSettings")) as any;
+            const section = children.find(c => Array.isArray(c) && c.some(it => it?.props?.id === "SuncordSettings")) as any;
             section?.forEach(c => {
                 const id = c?.props?.id;
                 if (id?.startsWith("Vencord") || id?.startsWith("Vesktop")) {
@@ -87,43 +87,43 @@ export default definePlugin({
                 className: "vc-settings-header"
             },
             {
-                section: "VencordSettings",
+                section: "SuncordSettings",
                 label: "Suncord",
                 element: require("@components/VencordSettings/VencordTab").default,
                 className: "vc-settings"
             },
             {
-                section: "VencordPlugins",
+                section: "SuncordPlugins",
                 label: "Plugins",
                 element: require("@components/VencordSettings/PluginsTab").default,
                 className: "vc-plugins"
             },
             {
-                section: "VencordThemes",
+                section: "SuncordThemes",
                 label: "Themes",
                 element: require("@components/VencordSettings/ThemesTab").default,
                 className: "vc-themes"
             },
             !IS_UPDATER_DISABLED && {
-                section: "VencordUpdater",
+                section: "SuncordUpdater",
                 label: "Updater",
                 element: require("@components/VencordSettings/UpdaterTab").default,
                 className: "vc-updater"
             },
             {
-                section: "VencordCloud",
+                section: "SuncordCloud",
                 label: "Cloud",
                 element: require("@components/VencordSettings/CloudTab").default,
                 className: "vc-cloud"
             },
             {
-                section: "VencordSettingsSync",
+                section: "SuncordSettingsSync",
                 label: "Backup & Restore",
                 element: require("@components/VencordSettings/BackupAndRestoreTab").default,
                 className: "vc-backup-restore"
             },
             {
-                section: "VencordPatchHelper",
+                section: "SuncordPatchHelper",
                 label: "Patch Helper",
                 element: require("@components/VencordSettings/PatchHelperTab").default,
                 className: "vc-patch-helper"
