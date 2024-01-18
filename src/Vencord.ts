@@ -52,7 +52,7 @@ async function syncSettings() {
             body: "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will " +
                 "need to re-authenticate to continue using them. Click here to go to the settings page to do so!",
             color: "var(--yellow-360)",
-            onClick: () => SettingsRouter.open("VencordCloud")
+            onClick: () => SettingsRouter.open("SuncordCloud")
         });
         return;
     }
@@ -110,7 +110,7 @@ async function init() {
                     permanent: true,
                     noPersist: true,
                     onClick() {
-                        SettingsRouter.open("VencordUpdater");
+                        SettingsRouter.open("SuncordUpdater");
                     }
                 }), 10_000);
         } catch (err) {

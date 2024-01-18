@@ -37,7 +37,7 @@ const NOOP_ASYNC = async () => { };
 
 const setCssDebounced = debounce((css: string) => VencordNative.quickCss.set(css));
 
-const themeStore = DataStore.createStore("VencordThemes", "VencordThemeData");
+const themeStore = DataStore.createStore("SuncordThemes", "SuncordThemeData");
 
 // probably should make this less cursed at some point
 window.VencordNative = {
@@ -65,9 +65,9 @@ window.VencordNative = {
     },
 
     quickCss: {
-        get: () => DataStore.get("VencordQuickCss").then(s => s ?? ""),
+        get: () => DataStore.get("SuncordQuickCss").then(s => s ?? ""),
         set: async (css: string) => {
-            await DataStore.set("VencordQuickCss", css);
+            await DataStore.set("SuncordQuickCss", css);
             cssListeners.forEach(l => l(css));
         },
         addChangeListener(cb) {
@@ -77,7 +77,7 @@ window.VencordNative = {
         openFile: NOOP_ASYNC,
         async openEditor() {
             const features = `popup,width=${Math.min(window.innerWidth, 1000)},height=${Math.min(window.innerHeight, 1000)}`;
-            const win = open("about:blank", "VencordQuickCss", features);
+            const win = open("about:blank", "SuncordQuickCss", features);
             if (!win) {
                 alert("Failed to open QuickCSS popup. Make sure to allow popups!");
                 return;
@@ -96,8 +96,8 @@ window.VencordNative = {
     },
 
     settings: {
-        get: () => localStorage.getItem("VencordSettings") || "{}",
-        set: async (s: string) => localStorage.setItem("VencordSettings", s),
+        get: () => localStorage.getItem("SuncordSettings") || "{}",
+        set: async (s: string) => localStorage.setItem("SuncordSettings", s),
         getSettingsDir: async () => "LocalStorage"
     },
 
