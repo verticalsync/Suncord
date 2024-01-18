@@ -8,6 +8,9 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   platformSpoofer (by [drag](https://github.com/dragdotpng))
 -   doubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
 -   messageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
+-   relationshipDB (by ECHO & nea)
+-   Timezones (by mantikafasi & ArjixWasTaken)
+-   dndBypass (by mantikafasi)
 
 ## Installing / Uninstalling
 
