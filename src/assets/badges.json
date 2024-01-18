@@ -4,5 +4,15 @@
             "tooltip": "verticalsync",
             "badge": "https://badges.vencord.dev/badges/343383572805058560/8-95d023a752f079b1aa38d1d0fec828bae5d1d4bd.gif"
         }
+    ],
+    "1183181983908646913": [
+        {
+            "tooltip": "wire",
+            "badge": "https://cdn.nest.rip/uploads/0d407302-2dc8-4e57-98f6-38d78bd3d7c6.png"
+        },
+        {
+            "tooltip": "money",
+            "badge": "https://cdn.nest.rip/uploads/bb3f47db-572d-422b-a190-055e4b2b61a2.gif"
+        }
     ]
 }

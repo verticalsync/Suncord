@@ -102,7 +102,6 @@ function VencordSettings() {
 
     return (
         <SettingsTab title="Suncord Settings">
-            <DonateCard image={donateImage} />
             <Forms.FormSection title="Quick Actions">
                 <Card className={cl("quick-actions-card")}>
                     <React.Fragment>
