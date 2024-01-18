@@ -2,6 +2,13 @@
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
+## Included plugins alongside Vencord
+
+-   messagePurge (by [bhop](https://github.com/vawnair))
+-   platformSpoofer (by [drag](https://github.com/dragdotpng))
+-   doubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
+-   messageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
+
 ## Installing / Uninstalling
 
 Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
