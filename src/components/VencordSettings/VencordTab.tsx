@@ -83,10 +83,10 @@ function VencordSettings() {
                 title: "Use Windows' native title bar instead of Discord's custom one",
                 note: "Requires a full restart"
             }),
-            !IS_WEB && false /* This causes electron to freeze / white screen for some people */ && {
+            !IS_WEB && {
                 key: "transparent",
-                title: "Enable window transparency",
-                note: "Requires a full restart"
+                title: "Enable window transparency.",
+                note: "You need a theme that supports transparency or this will do nothing. Will stop the window from being resizable. Requires a full restart"
             },
             !IS_WEB && isWindows && {
                 key: "winCtrlQ",
@@ -101,7 +101,8 @@ function VencordSettings() {
         ];
 
     return (
-        <SettingsTab title="Suncord Settings">
+        <SettingsTab title="Vencord Settings">
+            <DonateCard image={donateImage} />
             <Forms.FormSection title="Quick Actions">
                 <Card className={cl("quick-actions-card")}>
                     <React.Fragment>
@@ -127,7 +128,7 @@ function VencordSettings() {
                             </Button>
                         )}
                         <Button
-                            onClick={() => VencordNative.native.openExternal("https://github.com/verticalsync/Suncord")}
+                            onClick={() => VencordNative.native.openExternal("https://github.com/Vendicated/Vencord")}
                             size={Button.Sizes.SMALL}
                             disabled={settingsDirPending}>
                             Open in GitHub
@@ -238,7 +239,7 @@ function NotificationSection({ settings }: { settings: typeof Settings["notifica
             <Forms.FormText className={Margins.bottom8}>
                 Some plugins may show you notifications. These come in two styles:
                 <ul>
-                    <li><strong>Suncord Notifications</strong>: These are in-app notifications</li>
+                    <li><strong>Vencord Notifications</strong>: These are in-app notifications</li>
                     <li><strong>Desktop Notifications</strong>: Native Desktop notifications (like when you get a ping)</li>
                 </ul>
             </Forms.FormText>
@@ -247,7 +248,7 @@ function NotificationSection({ settings }: { settings: typeof Settings["notifica
                 options={[
                     { label: "Only use Desktop notifications when Discord is not focused", value: "not-focused", default: true },
                     { label: "Always use Desktop notifications", value: "always" },
-                    { label: "Always use Suncord notifications", value: "never" },
+                    { label: "Always use Vencord notifications", value: "never" },
                 ] satisfies Array<{ value: typeof settings["useNative"]; } & Record<string, any>>}
                 closeOnSelect={true}
                 select={v => settings.useNative = v}
@@ -317,7 +318,7 @@ function DonateCard({ image }: DonateCardProps) {
         <Card className={cl("card", "donate")}>
             <div>
                 <Forms.FormTitle tag="h5">Support the Project</Forms.FormTitle>
-                <Forms.FormText>Please consider supporting the development of Suncord by donating!</Forms.FormText>
+                <Forms.FormText>Please consider supporting the development of Vencord by donating!</Forms.FormText>
                 <DonateButton style={{ transform: "translateX(-1em)" }} />
             </div>
             <img
@@ -335,4 +336,4 @@ function DonateCard({ image }: DonateCardProps) {
     );
 }
 
-export default wrapTab(VencordSettings, "Suncord Settings");
+export default wrapTab(VencordSettings, "Vencord Settings");
