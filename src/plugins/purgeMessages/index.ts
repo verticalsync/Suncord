@@ -53,49 +53,30 @@ export default definePlugin({
     commands: [
         {
             name: "purge",
-            description: "Manage Purge related Menu",
-            inputType: ApplicationCommandInputType.BUILT_IN,
+            description: "Purge a chosen amount of messages from a channel",
             options: [
                 {
-                    name: "purge",
-                    description: "Begins purging messages by a set amount",
-                    type: ApplicationCommandOptionType.SUB_COMMAND,
-                    options: [
-                        {
-                            name: "amount",
-                            description: "How many messages you wish to purge",
-                            type: ApplicationCommandOptionType.INTEGER,
-                            required: true
-                        },
-                        {
-                            name: "channel",
-                            description: "Channel ID you wish to purge from",
-                            type: ApplicationCommandOptionType.CHANNEL,
-                            required: false
-                        }
-                    ]
+                    name: "amount",
+                    description: "How many messages you wish to purge",
+                    type: ApplicationCommandOptionType.INTEGER,
+                    required: true
+                },
+                {
+                    name: "channel",
+                    description: "Channel ID you wish to purge from",
+                    type: ApplicationCommandOptionType.CHANNEL,
+                    required: false
                 }
             ],
-
-            async execute(args, ctx) {
-                switch (args[0].name) {
-                    case "purge": {
-                        const amount: number = findOption(args[0].options, "amount", 0);
-                        const channel: Channel = findOption(args[0].options, "channel", ctx.channel);
-                        const len = DeleteMessages(amount, channel);
-                        return sendBotMessage(ctx.channel.id, {
-                            content: `> deleted ${len} messages.`
-                        });
-                    }
-
-                    default: {
-                        return sendBotMessage(ctx.channel.id, {
-                            content: "> invalid sub-command."
-                        });
-
-                    }
-                }
-            }
+            inputType: ApplicationCommandInputType.BUILT_IN,
+            execute: (opts, ctx) => {
+                const amount: number = findOption(opts, "amount", 0);
+                const channel: Channel = findOption(opts, "channel", ctx.channel);
+                const len = DeleteMessages(amount, channel);
+                return sendBotMessage(ctx.channel.id, {
+                    content: `> deleted ${len} messages.`
+                });
+            },
         }
     ],
 });
