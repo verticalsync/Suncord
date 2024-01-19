@@ -74,7 +74,7 @@ export default definePlugin({
                 const channel: Channel = findOption(opts, "channel", ctx.channel);
                 const len = DeleteMessages(amount, channel);
                 return sendBotMessage(ctx.channel.id, {
-                    content: `> deleted ${len} messages.`
+                    content: `> deleting ${amount} messages.`
                 });
             },
         }
