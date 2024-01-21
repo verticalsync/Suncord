@@ -13,6 +13,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   dndBypass (by [mantikafasi](https://github.com/mantikafasi))
 -   declutter (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   customScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
+-   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 
 ## Installing / Uninstalling
 
