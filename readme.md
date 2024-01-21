@@ -15,7 +15,6 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   customScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
--   SpotiMbed (by [vap](https://codeberg.org/vap))
 
 ## Installing / Uninstalling
 
