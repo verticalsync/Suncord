@@ -41,12 +41,6 @@ const settings = definePluginSettings({
         default: true,
         type: OptionType.BOOLEAN,
     },
-    goofs: {
-        description: "Goofs and gags :^)",
-        default: false,
-        type: OptionType.BOOLEAN,
-        restartNeeded: true,
-    },
 });
 
 export default definePlugin({
