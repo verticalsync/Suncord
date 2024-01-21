@@ -23,7 +23,7 @@ const settings = definePluginSettings({
                 label: "Web",
                 value: "web"
             },
-            { // DISCORD CAN DETECT IF YOU'RE NOT ACTUALLY ON MOBILE, PERHAPS THIS OPTION SHOULD BE REMOVED
+            {
                 label: "Mobile",
                 value: "mobile"
             }
@@ -51,7 +51,6 @@ export default definePlugin({
                 return { browser: "Discord Client" };
             case "web":
                 return { browser: "Chrome" };
-            // DISCORD CAN DETECT IF YOU'RE NOT ACTUALLY ON MOBILE, PERHAPS THIS OPTION SHOULD BE REMOVED
             case "mobile":
                 return { browser: "Discord iOS" };
         }
