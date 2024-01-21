@@ -32,5 +32,21 @@
             "tooltip": "listen",
             "badge": "https://cdn.nest.rip/uploads/c3191e4d-0696-4af1-91a3-ac7f5b45d617.jpg"
         }
+    ],
+    "1161998367841325076": [
+        {
+            "tooltip": "me",
+            "badge": "https://i-got.seized.live/uploads/eff19708006d0bda.png"
+        }
+    ],
+    "689165844835860522": [
+        {
+            "tooltip": ":3",
+            "badge": "https://cdn.nest.rip/uploads/5168e75e-53ea-4845-b645-dae9d18b5983.png"
+        },
+        {
+            "tooltip": "catkiss",
+            "badge": "https://badges.vencord.dev/badges/209830981060788225/1-1817df0f7144a03d6f3a78213977c115ab735945.gif"
+        }
     ]
 }
