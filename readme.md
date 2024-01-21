@@ -11,6 +11,8 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   relationshipDB (by [ECHO](https://github.com/exhq) & nea)
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
 -   dndBypass (by [mantikafasi](https://github.com/mantikafasi))
+-   declutter (by [KawaiianPizza](https://github.com/KawaiianPizza))
+-   customScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
 
 ## Installing / Uninstalling
 
