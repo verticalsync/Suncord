@@ -368,12 +368,10 @@ class DataUI {
 }
 
 export default definePlugin({
-    name: constants.pluginLabel,
-    description:
-        "Locally saves everyone you've been communicating with (including servers), in case of lose",
+    name: "IRememberYou",
+    description: "Locally saves everyone you've been communicating with (including servers), in case of lose",
     authors: [Devs.zoodogood],
     dependencies: ["MessageEventsAPI"],
-
     patches: [],
 
     async start() {
