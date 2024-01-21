@@ -420,10 +420,6 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "zoodogood",
         id: 921403577539387454n,
     },
-    Woosh: {
-        name: "Woosh",
-        id: 689165844835860522n,
-    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({
@@ -438,6 +434,10 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
     Drag: {
         name: "dragalt_",
         id: 1189903210564038697n,
+    },
+    Woosh: {
+        name: "w00shh.",
+        id: 689165844835860522n,
     },
 } satisfies Record<string, Dev>);
 
