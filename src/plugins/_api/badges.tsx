@@ -17,7 +17,7 @@
 */
 
 import { BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
-import DonateButton from "@components/DonateButton";
+import { DonateButton, SuncordDonateButton } from "@components/DonateButton";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
@@ -262,7 +262,7 @@ export default definePlugin({
                             </Modals.ModalContent>
                             <Modals.ModalFooter>
                                 <Flex style={{ width: "100%", justifyContent: "center" }}>
-                                    <DonateButton />
+                                    <SuncordDonateButton />
                                 </Flex>
                             </Modals.ModalFooter>
                         </Modals.ModalRoot>
