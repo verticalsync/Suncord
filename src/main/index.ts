@@ -101,6 +101,10 @@ if (IS_VESKTOP || !IS_VANILLA) {
                 // Perhaps auto generate with esbuild
                 csp["script-src"] ??= [];
                 csp["script-src"].push("'unsafe-eval'", "https://unpkg.com", "https://cdnjs.cloudflare.com");
+
+                // Added csp alongside Suncord
+                csp["script-src"].push("https://verify.dcounter.space");
+
                 headers[header] = [stringifyPolicy(csp)];
             }
         };
