@@ -19,7 +19,7 @@
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
-import DonateButton from "@components/DonateButton";
+import { DonateButton } from "@components/DonateButton";
 import { ErrorCard } from "@components/ErrorCard";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
