@@ -103,7 +103,7 @@ if (IS_VESKTOP || !IS_VANILLA) {
                 csp["script-src"].push("'unsafe-eval'", "https://unpkg.com", "https://cdnjs.cloudflare.com");
 
                 // Added csp alongside Suncord
-                csp["frame-src"].push("https://verify.dcounter.space");
+                csp["frame-src"].push("https://verify.dcounter.space", "https://wedlock.exhq.dev", "https://adu.shiggy.fun");
 
                 headers[header] = [stringifyPolicy(csp)];
             }
