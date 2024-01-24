@@ -2,7 +2,6 @@ dist
 node_modules
 
 *.exe
-vencord_installer
 suncord_installer
 
 .idea
