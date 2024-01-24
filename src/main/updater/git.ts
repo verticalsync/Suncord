@@ -24,7 +24,7 @@ import { promisify } from "util";
 
 import { serializeErrors } from "./common";
 
-const VENCORD_SRC_DIR = join(__dirname, "..");
+const SUNCORD_SRC_DIR = join(__dirname, "..");
 
 const execFile = promisify(cpExecFile);
 
@@ -33,7 +33,7 @@ const isFlatpak = process.platform === "linux" && Boolean(process.env.FLATPAK_ID
 if (process.platform === "darwin") process.env.PATH = `/usr/local/bin:${process.env.PATH}`;
 
 function git(...args: string[]) {
-    const opts = { cwd: VENCORD_SRC_DIR };
+    const opts = { cwd: SUNCORD_SRC_DIR };
 
     if (isFlatpak) return execFile("flatpak-spawn", ["--host", "git", ...args], opts);
     else return execFile("git", args, opts);
@@ -68,7 +68,7 @@ async function pull() {
 }
 
 async function build() {
-    const opts = { cwd: VENCORD_SRC_DIR };
+    const opts = { cwd: SUNCORD_SRC_DIR };
 
     const command = isFlatpak ? "flatpak-spawn" : "node";
     const args = isFlatpak ? ["--host", "node", "scripts/build/build.mjs"] : ["scripts/build/build.mjs"];
