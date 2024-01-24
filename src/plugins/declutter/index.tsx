@@ -99,13 +99,6 @@ export default definePlugin({
             }
         },
         {
-            find: ",\"ChannelTextAreaButtons\")",
-            replacement: {
-                match: /,(.null===.+?"gift"..)/,
-                replace: ",$self.settings.store.giftButton&&$1"
-            }
-        },
-        {
             find: "Messages.LANGUAGES",
             replacement: {
                 match: /,(.\?.+?"languages".+?null)/,

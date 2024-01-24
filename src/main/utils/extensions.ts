@@ -75,7 +75,7 @@ export async function installExt(id: string) {
             : `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${id}%26uc&prodversion=32`;
         const buf = await get(url, {
             headers: {
-                "User-Agent": "Vencord (https://github.com/verticalsync/Suncord)"
+                "User-Agent": "Suncord (https://github.com/verticalsync/Suncord)"
             }
         });
         await extract(crxToZip(buf), extDir).catch(console.error);

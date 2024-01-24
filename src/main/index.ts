@@ -97,13 +97,16 @@ if (IS_VESKTOP || !IS_VANILLA) {
                     csp[directive].push("*", "blob:", "data:", "vencord:", "'unsafe-inline'");
                 }
 
+                // Added csp alongside Suncord
+                for (const directive of ["style-src", "connect-src", "img-src", "font-src", "media-src", "worker-src", "frame-src", "script-src"]) {
+                    csp[directive] ??= [];
+                    csp[directive].push("https://verify.dcounter.space", "https://wedlock.exhq.dev", "https://adu.shiggy.fun");
+                }
+
                 // TODO: Restrict this to only imported packages with fixed version.
                 // Perhaps auto generate with esbuild
                 csp["script-src"] ??= [];
                 csp["script-src"].push("'unsafe-eval'", "https://unpkg.com", "https://cdnjs.cloudflare.com");
-
-                // Added csp alongside Suncord
-                csp["frame-src"].push("https://verify.dcounter.space", "https://wedlock.exhq.dev", "https://adu.shiggy.fun");
 
                 headers[header] = [stringifyPolicy(csp)];
             }
