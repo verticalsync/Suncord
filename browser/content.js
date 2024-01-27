@@ -4,7 +4,7 @@ if (typeof browser === "undefined") {
 
 const script = document.createElement("script");
 script.src = browser.runtime.getURL("dist/Vencord.js");
-script.id = "suncord-script";
+script.id = "vencord-script";
 Object.assign(script.dataset, {
     extensionBaseUrl: browser.runtime.getURL(""),
     version: browser.runtime.getManifest().version
