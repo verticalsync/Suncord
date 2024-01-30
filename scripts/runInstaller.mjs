@@ -35,13 +35,11 @@ const ETAG_FILE = join(FILE_DIR, "etag.txt");
 function getFilename() {
     switch (process.platform) {
         case "win32":
-            return "SuncordInstaller.exe";
+            return "VencordInstallerCli.exe";
         case "darwin":
             return "SuncordInstaller.MacOS.zip";
         case "linux":
-            if (process.env.WAYLAND_DISPLAY)
-                throw new Error("Wayland is not supported on Linux yet!");
-            return "SuncordInstaller-x11";
+            return "VencordInstallerCli-linux";
         default:
             throw new Error("Unsupported platform: " + process.platform);
     }

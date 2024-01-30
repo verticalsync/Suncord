@@ -137,7 +137,7 @@ async function printReport() {
             body: JSON.stringify({
                 description: "Here's the latest Suncord Report!",
                 username: "Suncord Reporter" + (CANARY ? " (Canary)" : ""),
-                avatar_url: "https://github.com/verticalsync/Suncord/blob/main/src/assets/icon.png",
+                avatar_url: "https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/icon.png",
                 embeds: [
                     {
                         title: "Bad Patches",
