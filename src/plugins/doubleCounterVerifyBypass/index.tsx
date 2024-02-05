@@ -79,7 +79,16 @@ export default definePlugin({
                 label: "Verify a Double Counter Link",
                 callback: async () => {
                     const link = await openSimpleTextInput("Please enter the Double Counter link you want to verify.");
-                    if (link) verify(link);
+                    if (link) {
+                        await verify(link).then(() => {
+                            Alerts.show({
+                                title: "Verified",
+                                body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
+                                confirmText: "Okay",
+                                onConfirm: () => { }
+                            });
+                        });
+                    }
                 },
                 registrar: "DoubleCounterVerifyBypass"
             });
