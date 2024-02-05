@@ -33,17 +33,11 @@ import { SettingsTab, wrapTab } from "./shared";
 
 function withDispatcher(dispatcher: React.Dispatch<React.SetStateAction<boolean>>, action: () => any) {
     return async () => {
-        console.log("a1");
         dispatcher(true);
-        console.log("b1");
         try {
-            console.log("c1");
             await action();
-            console.log("d1");
         } catch (e: any) {
-            console.log("e1");
             UpdateLogger.error("Failed to update", e);
-            console.log("f1");
             if (!e) {
                 var err = "An unknown error occurred (error is undefined).\nPlease try again.";
             } else if (e.code && e.cmd) {
@@ -157,17 +151,11 @@ function Updatable(props: CommonProps) {
                     size={Button.Sizes.SMALL}
                     disabled={isUpdating || isChecking}
                     onClick={withDispatcher(setIsChecking, async () => {
-                        console.log("1");
                         const outdated = await checkForUpdates();
-                        console.log("2");
                         if (outdated) {
-                            console.log("3");
                             setUpdates(changes);
-                            console.log("4");
                         } else {
-                            console.log("5");
                             setUpdates([]);
-                            console.log("6");
                             Toasts.show({
                                 message: "No updates found!",
                                 id: Toasts.genId(),
