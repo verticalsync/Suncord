@@ -10,6 +10,8 @@ import { relaunch, showItemInFolder } from "@utils/native";
 import { checkForUpdates, getRepo } from "@utils/updater";
 import { Clipboard, GuildStore, NavigationRouter, SettingsRouter, Toasts } from "@webpack/common";
 
+import gitHash from "~git-hash";
+import gitRemote from "~git-remote";
 import Plugins from "~plugins";
 
 import { openMultipleChoice } from "./components/MultipleChoice";
@@ -108,6 +110,21 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
+        }, registrar: "Suncord"
+    },
+
+    {
+        id: "copyGitInfo", label: "Copy Git Info", callback: async () => {
+            Clipboard.copy(`gitHash: ${gitHash}\ngitRemote: ${gitRemote}`);
+
+            Toasts.show({
+                message: "Copied git info to clipboard!",
+                type: Toasts.Type.SUCCESS,
+                id: Toasts.genId(),
+                options: {
+                    position: Toasts.Position.BOTTOM
+                }
+            });
         }, registrar: "Suncord"
     },
 
