@@ -116,8 +116,8 @@ export default definePlugin({
             registerAction({
                 id: "openDevSettings",
                 label: "Open Dev tab",
-                callback: () => SettingsRouter.open("VencordPatchHelper"),
-                registrar: "Vencord"
+                callback: () => SettingsRouter.open("SuncordPatchHelper"),
+                registrar: "Suncord"
             });
         }
     },
