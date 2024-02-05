@@ -16,7 +16,8 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
 -   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
--   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145/files#diff-e1c355941697139e187f44e2ad89762fd955a1c15c11482306e5d2a94f31f778) to vencord)
+-   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
+-   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
 
 ## Installing / Uninstalling
 
