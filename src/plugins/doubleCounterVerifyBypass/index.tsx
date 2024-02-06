@@ -21,9 +21,10 @@ import { SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Alerts, Menu } from "@webpack/common";
 import { Message } from "discord-types/general";
-import { registerAction } from "plugins/commandPalette/commands";
-import { openSimpleTextInput } from "plugins/commandPalette/components/TextInput";
 import { Settings } from "Vencord";
+
+import { registerAction } from "../commandPalette/commands";
+import { openSimpleTextInput } from "../commandPalette/components/TextInput";
 
 const DOUBLECOUNTER_APP_ID = "703886990948565003";
 const VERIFICATION_COMPONENT_ID = "verification_panel:verify";
