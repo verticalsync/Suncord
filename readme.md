@@ -18,6 +18,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
 -   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
+-   ReplyTimestamp (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 
 ## Installing / Uninstalling
 
