@@ -50,7 +50,7 @@ export default definePlugin({
                 id={MessageIds.getMessageTimestampId(referencedMessage.message)}
                 className="c98-reply-timestamp"
                 compact={refTimestamp.isSame(baseTimestamp, "date")}
-                timestamp={refTimestamp.toDate()}
+                timestamp={new Date(refTimestamp.valueOf())}
                 isInline={false}
             >
                 <Sep>[</Sep>
