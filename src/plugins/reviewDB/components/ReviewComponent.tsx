@@ -20,7 +20,8 @@ import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { LazyComponent } from "@utils/react";
 import { filters, findBulk } from "@webpack";
-import { Alerts, Parser, Timestamp, useState } from "@webpack/common";
+import { Alerts, LegacyTimestamp, Parser, useState } from "@webpack/common";
+import moment from "moment";
 
 import { Auth, getToken } from "../auth";
 import { Review, ReviewType } from "../entities";
@@ -163,9 +164,9 @@ export default LazyComponent(() => {
 
                 {
                     !settings.store.hideTimestamps && review.type !== ReviewType.System && (
-                        <Timestamp timestamp={new Date(review.timestamp * 1000)} >
+                        <LegacyTimestamp timestamp={moment(review.timestamp * 1000)} >
                             {dateFormat.format(review.timestamp * 1000)}
-                        </Timestamp>)
+                        </LegacyTimestamp>)
                 }
 
                 <div className={cl("review-comment")}>
