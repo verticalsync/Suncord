@@ -53,6 +53,7 @@ export let useToken: t.useToken;
 
 export const MaskedLink = waitForComponent<t.MaskedLink>("MaskedLink", m => m?.type?.toString().includes("MASKED_LINK)"));
 export const Timestamp = waitForComponent<t.Timestamp>("Timestamp", filters.byCode(".Messages.MESSAGE_EDITED_TIMESTAMP_A11Y_LABEL.format"));
+export const LegacyTimestamp = waitForComponent<t.LegacyTimestamp>("Timestamp", filters.byCode(".Messages.MESSAGE_EDITED_TIMESTAMP_A11Y_LABEL.format"));
 export const Flex = waitForComponent<t.Flex>("Flex", ["Justify", "Align", "Wrap"]);
 
 export const { OAuth2AuthorizeModal } = findByPropsLazy("OAuth2AuthorizeModal");
