@@ -235,7 +235,7 @@ export default definePlugin({
 
         return (
             <span className={classes(styles.timestampInline, styles.timestamp)}>
-                {timezone && "• " + getTimeString(timezone, message.timestamp.toDate())}
+                {timezone && "• " + getTimeString(timezone, new Date(message.timestamp.valueOf()))}
             </span>);
     }
 });
