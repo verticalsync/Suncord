@@ -19,7 +19,7 @@
 import { get, set } from "@api/DataStore";
 import { PluginNative } from "@utils/types";
 import { findByPropsLazy, findLazy } from "@webpack";
-import { ChannelStore, moment, UserStore } from "@webpack/common";
+import { ChannelStore, UserStore } from "@webpack/common";
 
 import { LOGGED_MESSAGES_KEY, MessageLoggerStore } from "../LoggedMessageManager";
 import { LoggedMessage, LoggedMessageJSON } from "../types";
@@ -78,7 +78,7 @@ export function findLastIndex<T>(array: T[], predicate: (e: T, t: number, n: T[]
 }
 
 export const mapEditHistory = (m: any) => {
-    m.timestamp = moment(m.timestamp);
+    m.timestamp = new Date(m.timestamp);
     return m;
 };
 
@@ -87,14 +87,16 @@ export const messageJsonToMessageClass = memoize((log: { message: LoggedMessageJ
     if (!log?.message) return null;
 
     const message: LoggedMessage = new MessageClass(log.message);
-    message.timestamp = moment(message.timestamp);
+    // @ts-ignore
+    message.timestamp = new Date(message.timestamp);
 
     const editHistory = message.editHistory?.map(mapEditHistory);
     if (editHistory && editHistory.length > 0) {
         message.editHistory = editHistory;
     }
     if (message.editedTimestamp)
-        message.editedTimestamp = moment(message.editedTimestamp);
+        // @ts-ignore
+        message.editedTimestamp = new Date(message.editedTimestamp);
     message.author = new AuthorClass(message.author);
     (message.author as any).nick = (message.author as any).globalName ?? message.author.username;
 
