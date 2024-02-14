@@ -9,7 +9,7 @@ import "./style.css";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { LegacyTimestamp } from "@webpack/common";
+import { Timestamp } from "@webpack/common";
 import { Message } from "discord-types/general";
 import { HTMLAttributes } from "react";
 
@@ -46,11 +46,11 @@ export default definePlugin({
         if (referencedMessage.state === 0) {
             const refTimestamp = referencedMessage.message!.timestamp;
             const baseTimestamp = baseMessage.timestamp;
-            return <LegacyTimestamp
+            return <Timestamp
                 id={MessageIds.getMessageTimestampId(referencedMessage.message)}
                 className="c98-reply-timestamp"
                 compact={refTimestamp.isSame(baseTimestamp, "date")}
-                timestamp={refTimestamp}
+                timestamp={refTimestamp.toDate()}
                 isInline={false}
             >
                 <Sep>[</Sep>
@@ -59,7 +59,7 @@ export default definePlugin({
                     : DateUtils.calendarFormat(refTimestamp)
                 }
                 <Sep>]</Sep>
-            </LegacyTimestamp>;
+            </Timestamp>;
         }
     },
 });
