@@ -469,7 +469,7 @@ function isGroupStart(
     if (newestMessage.author.id !== oldestMessage.author.id) return true;
 
     const timeDifferenceInMinutes = Math.abs(
-        (new Date(newestMessage.timestamp).getTime() - new Date(oldestMessage.timestamp).getTime()) / (1000 * 60)
+        (new Date(newestMessage.timestamp).valueOf() - new Date(oldestMessage.timestamp).valueOf()) / (1000 * 60)
     );
 
     return timeDifferenceInMinutes >= 5;
