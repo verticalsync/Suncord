@@ -444,8 +444,8 @@ export const Devs = /* #__PURE__*/ Object.freeze({
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({
     nyx: {
-        name: "verticalsync.",
-        id: 1207087393929171095n,
+        name: "dropped#0001",
+        id: 328165170536775680n,
     },
     bhop: {
         name: "femie",
