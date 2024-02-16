@@ -21,6 +21,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   ReplyTimestamp (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   MemberListActivities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
+-   VoiceChatUtilities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
 
 ## Installing / Uninstalling
 
