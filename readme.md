@@ -20,6 +20,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
 -   ReplyTimestamp (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
+-   MemberListActivities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
 
 ## Installing / Uninstalling
 
