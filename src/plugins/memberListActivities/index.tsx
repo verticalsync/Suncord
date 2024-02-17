@@ -122,7 +122,7 @@ export default definePlugin({
 
         const applications = activities.filter(activity => activity.application_id);
         applications.forEach(activity => {
-            const { assets, application_id } = activity;
+            const { assets, application_id, name } = activity;
             if (!application_id) {
                 return;
             }
