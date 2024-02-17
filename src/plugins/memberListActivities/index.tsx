@@ -122,13 +122,17 @@ export default definePlugin({
 
         const applications = activities.filter(activity => activity.application_id);
         applications.forEach(activity => {
-            const { assets, application_id } = activity;
+            const { assets, application_id, name } = activity;
             if (!application_id) {
                 return;
             }
             if (assets) {
 
                 const addImage = (image: string, alt: string) => {
+                    if (name === "XBox") {
+                        icons.push(<img src="https://discord.com/assets/9a15d086141be29d9fcd.png" alt={alt} />);
+                        return;
+                    }
                     if (image.startsWith("mp:")) {
                         const discordMediaLink = `https://media.discordapp.net/${image.replace(/mp:/, "")}`;
                         if (settings.store.renderGifs || !discordMediaLink.endsWith(".gif")) {
