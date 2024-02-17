@@ -79,8 +79,7 @@ if (!IS_VANILLA) {
                     delete options.frame;
                 }
 
-                // This causes electron to freeze / white screen for some people
-                if ((settings as any).transparentUNSAFE_USE_AT_OWN_RISK) {
+                if (settings.transparent) {
                     options.transparent = true;
                     options.backgroundColor = "#00000000";
                 }
@@ -129,9 +128,18 @@ if (!IS_VANILLA) {
         }
     });
 
-    process.env.DATA_DIR = join(app.getPath("userData"), "..", "Vencord");
+    process.env.DATA_DIR = join(app.getPath("userData"), "..", "Suncord");
+
+    // Monkey patch commandLine to disable WidgetLayering: Fix DevTools context menus https://github.com/electron/electron/issues/38790
+    const originalAppend = app.commandLine.appendSwitch;
+    app.commandLine.appendSwitch = function (...args) {
+        if (args[0] === "disable-features" && !args[1]?.includes("WidgetLayering")) {
+            args[1] += ",WidgetLayering";
+        }
+        return originalAppend.apply(this, args);
+    };
 } else {
-    console.log("[Suncord] Running in vanilla mode. Not loading Vencord");
+    console.log("[Suncord] Running in vanilla mode. Not loading Suncord");
 }
 
 console.log("[Suncord] Loading original Discord app.asar");

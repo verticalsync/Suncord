@@ -40,7 +40,7 @@ export default definePlugin({
             const section = children.find(c => Array.isArray(c) && c.some(it => it?.props?.id === "SuncordSettings")) as any;
             section?.forEach(c => {
                 const id = c?.props?.id;
-                if (id?.startsWith("Vencord") || id?.startsWith("Vesktop")) {
+                if (id?.startsWith("Vencord") || id?.startsWith("Vesktop") || id?.startsWith("Suncord")) {
                     c.props.action = () => SettingsRouter.open(id);
                 }
             });

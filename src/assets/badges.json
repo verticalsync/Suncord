@@ -1,8 +1,8 @@
 {
-    "1181610810548686979": [
+    "328165170536775680": [
         {
-            "tooltip": "verticalsync",
-            "badge": "https://badges.vencord.dev/badges/343383572805058560/8-95d023a752f079b1aa38d1d0fec828bae5d1d4bd.gif"
+            "tooltip": "vsync",
+            "badge": "https://cdn.nest.rip/uploads/4e782e66-ea22-436c-af39-21e97a44cfa5.gif"
         }
     ],
     "1183181983908646913": [
@@ -21,10 +21,57 @@
             "badge": "https://r2.e-z.host/d9fc6be5-2bee-4f58-a979-7bf0902eea54/1kk1p9i4.webp"
         }
     ],
+
     "1162295184156004382": [
         {
             "tooltip": ">skull<",
             "badge": "https://cdn.nest.rip/uploads/2d02c9c5-9de8-44c3-a21c-014ac5ed8a2f.png"
+
+    "1189903210564038697": [
+        {
+            "tooltip": "Hi",
+            "badge": "https://cdn.nest.rip/uploads/d64a1e6c-f370-4b1d-a9c7-a608827d2174.jpg"
+        }
+    ],
+    "1184919955054022657": [
+        {
+            "tooltip": "listen",
+            "badge": "https://cdn.nest.rip/uploads/c3191e4d-0696-4af1-91a3-ac7f5b45d617.jpg"
+        }
+    ],
+    "1161998367841325076": [
+        {
+            "tooltip": "me",
+            "badge": "https://i-got.seized.live/uploads/eff19708006d0bda.png"
+        }
+    ],
+    "689165844835860522": [
+        {
+            "tooltip": ":3",
+            "badge": "https://cdn.nest.rip/uploads/5168e75e-53ea-4845-b645-dae9d18b5983.png"
+        },
+        {
+            "tooltip": "catkiss",
+            "badge": "https://badges.vencord.dev/badges/209830981060788225/1-1817df0f7144a03d6f3a78213977c115ab735945.gif"
+        }
+    ],
+    "1103990609171193867": [
+        {
+            "tooltip": "discord.gg/nitrosnipe",
+            "badge": "https://cdn.discordapp.com/emojis/879877073546653776.png"
+        }
+    ],
+    "1049056042266394766": [
+        {
+            "tooltip": "21",
+            "badge": "https://cdn.nest.rip/uploads/495bfe5c-3d9d-48b0-a184-d76de2935f92.png"
+        }
+    ],
+    "1183870467757576254": [
+        {
+            "tooltip": "d",
+            "badge": "https://cdn.nest.rip/uploads/e3650f2b-c9e8-444a-87ed-b5741e6e57a0.jpg"
+
         }
     ]
 }

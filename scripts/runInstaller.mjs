@@ -35,13 +35,11 @@ const ETAG_FILE = join(FILE_DIR, "etag.txt");
 function getFilename() {
     switch (process.platform) {
         case "win32":
-            return "SuncordInstaller.exe";
+            return "SuncordInstallerCli.exe";
         case "darwin":
             return "SuncordInstaller.MacOS.zip";
         case "linux":
-            if (process.env.WAYLAND_DISPLAY)
-                throw new Error("Wayland is not supported on Linux yet!");
-            return "SuncordInstaller-x11";
+            return "SuncordInstallerCli-linux";
         default:
             throw new Error("Unsupported platform: " + process.platform);
     }
@@ -120,11 +118,15 @@ const installerBin = await ensureBinary();
 
 console.log("Now running Installer...");
 
-execFileSync(installerBin, {
-    stdio: "inherit",
-    env: {
-        ...process.env,
-        SUNCORD_USER_DATA_DIR: BASE_DIR,
-        SUNCORD_DEV_INSTALL: "1"
-    }
-});
+try {
+    execFileSync(installerBin, {
+        stdio: "inherit",
+        env: {
+            ...process.env,
+            SUNCORD_USER_DATA_DIR: BASE_DIR,
+            SUNCORD_DEV_INSTALL: "1"
+        }
+    });
+} catch {
+    console.error("Something went wrong. Please check the logs above.");
+}

@@ -72,6 +72,12 @@ export function removeBadge(badge: ProfileBadge) {
  */
 export function _getBadges(args: BadgeUserArgs) {
     const badges = [] as ProfileBadge[];
+
+    const donorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getDonorBadges(args.user.id);
+    const suncordDonorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getSuncordDonorBadges(args.user.id);
+    if (donorBadges) badges.unshift(...donorBadges);
+    if (suncordDonorBadges) badges.unshift(...suncordDonorBadges);
+
     for (const badge of Badges) {
         if (!badge.shouldShow || badge.shouldShow(args)) {
             badge.position === BadgePosition.START
@@ -79,8 +85,6 @@ export function _getBadges(args: BadgeUserArgs) {
                 : badges.push({ ...badge, ...args });
         }
     }
-    const donorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getDonorBadges(args.user.id);
-    if (donorBadges) badges.unshift(...donorBadges);
 
     return badges;
 }
