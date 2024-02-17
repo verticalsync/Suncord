@@ -21,7 +21,7 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs } from "@utils/constants";
+import { Devs, SuncordDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStoreLazy } from "@webpack";
 
@@ -104,7 +104,7 @@ const fetchedApplications = new Map<string, Application | null>();
 export default definePlugin({
     name: "MemberListActivities",
     description: "Shows activity icons in the member list",
-    authors: [Devs.D3SOX],
+    authors: [Devs.D3SOX, SuncordDevs.nyx],
     tags: ["activity"],
 
     settings,
@@ -122,13 +122,17 @@ export default definePlugin({
 
         const applications = activities.filter(activity => activity.application_id);
         applications.forEach(activity => {
-            const { assets, application_id } = activity;
+            const { assets, application_id, name } = activity;
             if (!application_id) {
                 return;
             }
             if (assets) {
 
                 const addImage = (image: string, alt: string) => {
+                    if (name === "XBox") {
+                        icons.push(<img src="https://discord.com/assets/9a15d086141be29d9fcd.png" alt={alt} />);
+                        return;
+                    }
                     if (image.startsWith("mp:")) {
                         const discordMediaLink = `https://media.discordapp.net/${image.replace(/mp:/, "")}`;
                         if (settings.store.renderGifs || !discordMediaLink.endsWith(".gif")) {
