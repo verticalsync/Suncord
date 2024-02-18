@@ -89,7 +89,7 @@ const GlobalBadges = ({ user }: { user: User; }) => {
             if (!badge.custom) badge.name = `${prefix} ${cleanName.charAt(0).toUpperCase() + cleanName.slice(1)}`;
             if (badge.custom) {
                 if (cleanName.toLowerCase().includes(mod)) return;
-                else if (prefix) badge.name = `${cleanName} (${prefix})`;
+                else if (prefix !== "") badge.name = `${cleanName} (${prefix})`;
             }
             globalBadges.push(<BadgeComponent name={badge.name} img={badge.badge} />);
         });
