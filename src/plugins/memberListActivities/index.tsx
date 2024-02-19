@@ -138,8 +138,13 @@ export default definePlugin({
             if (!application_id && !platform) {
                 return;
             }
-            if (assets) {
-
+            if (platform) {
+                if (platform === "xbox") {
+                    pushIcon(xboxUrl, "XBox");
+                } else if (platform === "ps4" || platform === "ps5") {
+                    pushIcon(<PlaystationIcon />, "PlayStation");
+                }
+            } else if (assets) {
                 const addImage = (image: string, alt: string) => {
                     if (image.startsWith("mp:")) {
                         const discordMediaLink = `https://media.discordapp.net/${image.replace(/mp:/, "")}`;
@@ -181,12 +186,6 @@ export default definePlugin({
                         pushIcon(<UnknownIcon />, application.name);
                     else
                         pushIcon(src, application.name);
-                }
-            } else {
-                if (platform === "xbox") {
-                    pushIcon(xboxUrl, "XBox");
-                } else if (platform === "ps4" || platform === "ps5") {
-                    pushIcon(<PlaystationIcon />, "PlayStation");
                 }
             }
         });
