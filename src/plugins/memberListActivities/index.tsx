@@ -28,6 +28,7 @@ import { findByPropsLazy, findStoreLazy } from "@webpack";
 import { PlaystationIcon } from "./components/PlaystationIcon";
 import { SpotifyIcon } from "./components/SpotifyIcon";
 import { TwitchIcon } from "./components/TwitchIcon";
+import { UnknownIcon } from "./components/UnknownIcon";
 
 const settings = definePluginSettings({
     iconSize: {
@@ -116,6 +117,13 @@ export default definePlugin({
     patchActivityList: (activities: Activity[]) => {
         const icons: JSX.Element[] = [];
 
+        const pushIcon = (icon: JSX.Element | string, alt: string) => {
+            if (typeof icon === "string")
+                icons.push(<img src={icon} alt={alt} />);
+            else
+                icons.push(icon);
+        };
+
         if (activities.some(activity => activity.name === "Spotify")) {
             icons.push(<SpotifyIcon />);
         }
@@ -136,11 +144,11 @@ export default definePlugin({
                     if (image.startsWith("mp:")) {
                         const discordMediaLink = `https://media.discordapp.net/${image.replace(/mp:/, "")}`;
                         if (settings.store.renderGifs || !discordMediaLink.endsWith(".gif")) {
-                            icons.push(<img src={discordMediaLink} alt={alt} />);
+                            pushIcon(discordMediaLink, alt);
                         }
                     } else {
                         const src = `https://cdn.discordapp.com/app-assets/${application_id}/${image}.png`;
-                        icons.push(<img src={src} alt={alt} />);
+                        pushIcon(src, alt);
                     }
                 };
 
@@ -168,14 +176,17 @@ export default definePlugin({
                 }
 
                 if (application) {
-                    const src = platform === "xbox" && application.icon === null ? xboxUrl : `https://cdn.discordapp.com/app-icons/${application.id}/${application.icon}.png`;
-                    icons.push(<img src={src} alt={application.name} />);
+                    const src = `https://cdn.discordapp.com/app-icons/${application.id}/${application.icon}.png`;
+                    if (application.icon === null)
+                        pushIcon(<UnknownIcon />, application.name);
+                    else
+                        pushIcon(src, application.name);
                 }
             } else {
                 if (platform === "xbox") {
-                    icons.push(<img src={xboxUrl} alt="Xbox" />);
+                    pushIcon(xboxUrl, "XBox");
                 } else if (platform === "ps4" || platform === "ps5") {
-                    icons.push(<PlaystationIcon />);
+                    pushIcon(<PlaystationIcon />, "PlayStation");
                 }
             }
         });
