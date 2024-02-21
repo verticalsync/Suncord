@@ -263,6 +263,16 @@ function makeLinkProps(name: string, condition: unknown, path: string) {
     } satisfies React.HTMLAttributes<HTMLElement>;
 }
 
+function Background({ track }: { track: Track; }) {
+    const img = track?.album?.image;
+    return (
+        <>
+            {img && (<img id={cl("background-image")} src={img.url} alt="Album Image Background" />)
+            }
+        </>
+    );
+}
+
 function Info({ track }: { track: Track; }) {
     const img = track?.album?.image;
 
@@ -340,7 +350,7 @@ function Info({ track }: { track: Track; }) {
     );
 }
 
-export function Player() {
+export function Player({ useBg }: { useBg: Boolean; }) {
     const track = useStateFromStores(
         [SpotifyStore],
         () => SpotifyStore.track,
@@ -379,6 +389,7 @@ export function Player() {
             </div>
         )}>
             <div id={cl("player")}>
+                {useBg && <Background track={track} />}
                 <Info track={track} />
                 <SeekBar />
                 <Controls />
