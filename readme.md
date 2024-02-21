@@ -23,6 +23,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   SettingsCog (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   FastMenu (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
+-   ModalFade (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 
 ## Installing / Uninstalling
 
