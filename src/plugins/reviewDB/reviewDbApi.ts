@@ -141,7 +141,7 @@ export async function reportReview(id: number) {
         },
         body: JSON.stringify({
             reviewid: id,
-        });
+        })
     }).then(r => r.json()) as Response;
 
     showToast(res.message);
@@ -157,7 +157,7 @@ async function patchBlock(action: "block" | "unblock", userId: string) {
         body: JSON.stringify({
             action: action,
             discordId: userId
-        });
+        })
     });
 
     if (!res.ok) {
