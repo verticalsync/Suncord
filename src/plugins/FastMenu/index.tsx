@@ -6,6 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, wreq } from "@webpack";
 import { ComponentDispatch, Forms, useEffect, useRef } from "@webpack/common";
@@ -34,7 +35,7 @@ function eagerLoad() {
 export default definePlugin({
     name: "FastMenu",
     description: "Makes the settings menu open faster.",
-    authors: [{ id: 236588665420251137n, name: "Kyuuhachi" }],
+    authors: [Devs.Kyuuhachi],
     settings,
 
     patches: [
