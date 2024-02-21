@@ -9,7 +9,6 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   doubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
 -   messageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
--   declutter (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   customScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
@@ -23,6 +22,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   BetterPinDMS (by [Syncxv](https://github.com/Syncxv/betterPinDMs))
 -   SettingsCog (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   FastMenu (by [Kyuuhachi](https://github.com/Kyuuhachi/))
+-   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 
 ## Installing / Uninstalling
 
