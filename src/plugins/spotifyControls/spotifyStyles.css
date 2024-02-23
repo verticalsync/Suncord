@@ -19,6 +19,11 @@
     z-index: -1;
 }
 
+.vc-spotify-rotate {
+    transform-origin: center;
+    animation: vc-spotify-rotate-anim 15s linear infinite;
+}
+
 .vc-spotify-button {
     background: none;
     color: var(--interactive-normal);
@@ -202,4 +207,14 @@
 .vc-spotify-fallback {
     padding: 0.5em;
     color: var(--text-normal);
+}
+
+@keyframes vc-spotify-rotate-anim {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
