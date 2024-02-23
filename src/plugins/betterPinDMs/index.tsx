@@ -9,17 +9,33 @@ import "./styles.css";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, ContextMenuApi, FluxDispatcher, Menu, React } from "@webpack/common";
+import { findByPropsLazy, waitFor } from "@webpack";
+import { Alerts, Button, ContextMenuApi, FluxDispatcher, Menu, React, UserStore } from "@webpack/common";
 import { Channel } from "discord-types/general";
 import { Settings } from "Vencord";
 
 import { addContextMenus, removeContextMenus } from "./components/contextMenu";
 import { openCategoryModal, requireSettingsMenu } from "./components/CreateCategoryModal";
-import { canMoveCategory, canMoveCategoryInDirection, categories, isPinned, moveCategory, removeCategory } from "./data";
-// import * as data from "./data";
+import { canMoveCategory, canMoveCategoryInDirection, categories, initCategories, isPinned, migrateData, moveCategory, removeCategory } from "./data";
+import * as data from "./data";
 
 const headerClasses = findByPropsLazy("privateChannelsHeaderContainer");
+
+export let instance: any;
+export const forceUpdate = () => instance?.props?._forceUpdate?.();
+
+// the flux property in definePlugin doenst fire, probably because startAt isnt Init
+waitFor(["dispatch", "subscribe"], m => {
+    m.subscribe("CONNECTION_OPEN", async () => {
+        const id = UserStore.getCurrentUser()?.id;
+        await initCategories(id);
+        await migrateData();
+        forceUpdate();
+        // dont want to unsubscribe because if they switch accounts we want to reinit
+    });
+});
+
+
 
 export default definePlugin({
     name: "BetterPinDMs",
@@ -36,8 +52,12 @@ export default definePlugin({
                     replace: "privateChannelIds:$1.filter(c=>!$self.isPinned(c)),pinCount2:$self.usePinCount($1)"
                 },
                 {
-                    match: /(renderRow:this\.renderRow,sections:)(\[\i,)/,
-                    replace: "$1$self.sections = $2...this.props.pinCount2??[],"
+                    match: /(renderRow:this\.renderRow,sections:)(\[\i,)Math.max\((\i)\.length,1\)/,
+                    replace: "$1$self.sections = $2...this.props.pinCount2??[],Math.max($3.length,0)"
+                },
+                {
+                    match: /\(\i,{},"no-private-channels"/,
+                    replace: "(Vencord.Util.NoopComponent,{},\"no-private-channels\""
                 },
                 {
                     match: /this\.renderSection=(\i)=>{/,
@@ -58,7 +78,22 @@ export default definePlugin({
                 },
                 {
                     match: /componentDidMount\(\){/,
-                    replace: "$&$self.instance = this;"
+                    replace: "$&$self._instance = this;"
+                },
+                {
+                    match: /this.getRowHeight=\((\i),(\i)\)=>{/,
+                    replace: "$&if($self.isChannelHidden($1,$2))return 0;"
+                },
+
+                {
+                    match: /this.getSectionHeight=(\i)=>{/,
+                    replace: "$&if($self.isCategoryIndex($1))return 40;"
+                },
+                {
+                    // Copied from PinDMs
+                    // Override scrollToChannel to properly account for pinned channels
+                    match: /(?<=scrollTo\(\{to:\i\}\):\(\i\+=)(\d+)\*\(.+?(?=,)/,
+                    replace: "$self.getScrollOffset(arguments[0],$1,this.props.padding,this.state.preRenderedChildren,$&)"
                 }
             ]
         },
@@ -97,14 +132,19 @@ export default definePlugin({
             }
         },
     ],
-    // data,
-    isPinned,
-
+    data,
     sections: null as number[] | null,
-    instance: null as any | null,
+
+    set _instance(i: any) {
+        this.instance = i;
+        instance = i;
+    },
+
+    isPinned,
     forceUpdate() {
         this.instance?.props?._forceUpdate?.();
     },
+
     start() {
         if (Settings.plugins.PinDMs?.enabled) {
             console.log("disable PinDMs to use this plugin");
@@ -125,12 +165,12 @@ export default definePlugin({
             return;
         }
 
-        addContextMenus(this.forceUpdate.bind(this));
+        addContextMenus();
         requireSettingsMenu();
     },
 
     stop() {
-        removeContextMenus(this.forceUpdate.bind(this));
+        removeContextMenus();
     },
 
     getSub() {
@@ -160,6 +200,29 @@ export default definePlugin({
         return this.sections && sectionIndex > (this.getSub() - 1) && sectionIndex < this.sections.length - 1;
     },
 
+    isChannelIndex(sectionIndex: number, channelIndex: number) {
+        return this.sections && this.isCategoryIndex(sectionIndex) && categories[sectionIndex - this.getSub()]?.channels[channelIndex];
+    },
+
+    isChannelHidden(categoryIndex: number, channelIndex: number) {
+        if (!this.instance || !this.isChannelIndex(categoryIndex, channelIndex)) return false;
+        const category = categories[categoryIndex - 1];
+        if (!category) return false;
+
+        return category.colapsed && this.instance.props.selectedChannelId !== category.channels[channelIndex];
+    },
+
+    getScrollOffset(channelId: string, rowHeight: number, padding: number, preRenderedChildren: number, originalOffset: number) {
+        if (!isPinned(channelId))
+            return (
+                (rowHeight + padding) * 2 // header
+                + rowHeight * this.getAllChannels().length // pins
+                + originalOffset // original pin offset minus pins
+            );
+
+        return rowHeight * (this.getAllChannels().indexOf(channelId) + preRenderedChildren) + padding;
+    },
+
     renderCategory({ section }: { section: number; }) {
         const category = categories[section - this.getSub()];
         // console.log("renderCat", section, category);
@@ -170,8 +233,8 @@ export default definePlugin({
             <h2
                 className={classes(headerClasses.privateChannelsHeaderContainer, "vc-pindms-section-container", category.colapsed ? "vc-pindms-colapsed" : "")}
                 style={{ color: `#${category.color.toString(16).padStart(6, "0")}` }}
-                onClick={() => {
-                    category.colapsed = !category.colapsed;
+                onClick={async () => {
+                    await data.collapseCategory(category.id, !category.colapsed);
                     this.forceUpdate();
                 }}
                 onContextMenu={e => {
@@ -185,7 +248,7 @@ export default definePlugin({
                             <Menu.MenuItem
                                 id="vc-pindms-edit-category"
                                 label="Edit Category"
-                                action={() => openCategoryModal(category.id, null, () => this.forceUpdate())}
+                                action={() => openCategoryModal(category.id, null)}
                             />
 
                             <Menu.MenuItem
@@ -229,6 +292,9 @@ export default definePlugin({
                 <span className={headerClasses.headerText}>
                     {category?.name ?? "uh oh"}
                 </span>
+                {/* <span className="vc-pindms-channel-count">
+                    {category.channels.length}
+                </span> */}
                 <svg className="vc-pindms-colapse-icon" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M9.3 5.3a1 1 0 0 0 0 1.4l5.29 5.3-5.3 5.3a1 1 0 1 0 1.42 1.4l6-6a1 1 0 0 0 0-1.4l-6-6a1 1 0 0 0-1.42 0Z"></path>
                 </svg>
@@ -267,4 +333,3 @@ export default definePlugin({
         return { channel: channels[channelId], category };
     }
 });
-

@@ -9,7 +9,9 @@ import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModa
 import { extractAndLoadChunksLazy, findComponentByCodeLazy } from "@webpack";
 import { Button, Forms, Text, TextInput, Toasts, useEffect, useState } from "@webpack/common";
 
+import { DEFAULT_COLOR, SWATCHES } from "../constants";
 import { categories, Category, createCategory, getCategory, updateCategory } from "../data";
+import { forceUpdate } from "../index";
 
 interface ColorPickerProps {
     color: number | null;
@@ -39,7 +41,6 @@ interface Props {
     categoryId: string | null;
     initalChannelId: string | null;
     modalProps: ModalProps;
-    forceUpdate: () => void;
 }
 
 const useCategory = (categoryId: string | null, initalChannelId: string | null) => {
@@ -64,7 +65,7 @@ const useCategory = (categoryId: string | null, initalChannelId: string | null) 
     };
 };
 
-export function NewCategoryModal({ categoryId, modalProps, initalChannelId, forceUpdate }: Props) {
+export function NewCategoryModal({ categoryId, modalProps, initalChannelId }: Props) {
     const { category, setCategory } = useCategory(categoryId, initalChannelId);
 
     if (!category) return null;
@@ -100,8 +101,8 @@ export function NewCategoryModal({ categoryId, modalProps, initalChannelId, forc
                     <Forms.FormTitle>Color</Forms.FormTitle>
                     <ColorPickerWithSwatches
                         key={category.name}
-                        defaultColor={10070709}
-                        colors={[1752220, 3066993, 3447003, 10181046, 15277667, 15844367, 15105570, 15158332, 9807270, 6323595, 1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306]}
+                        defaultColor={DEFAULT_COLOR}
+                        colors={SWATCHES}
                         onChange={c => setCategory({ ...category, color: c! })}
                         value={category.color}
                         renderDefaultButton={() => null}
@@ -124,6 +125,6 @@ export function NewCategoryModal({ categoryId, modalProps, initalChannelId, forc
     );
 }
 
-export const openCategoryModal = (categoryId: string | null, channelId: string | null, forceUpdate: () => void) =>
-    openModal(modalProps => <NewCategoryModal categoryId={categoryId} modalProps={modalProps} initalChannelId={channelId} forceUpdate={forceUpdate} />);
+export const openCategoryModal = (categoryId: string | null, channelId: string | null) =>
+    openModal(modalProps => <NewCategoryModal categoryId={categoryId} modalProps={modalProps} initalChannelId={channelId} />);
 

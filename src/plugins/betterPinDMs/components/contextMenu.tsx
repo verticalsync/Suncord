@@ -7,10 +7,11 @@
 import { addContextMenuPatch, findGroupChildrenByChildId, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
 import { Menu } from "@webpack/common";
 
+import { forceUpdate } from "..";
 import { addChannelToCategory, categories, isPinned, removeChannelFromCategory } from "../data";
 import { openCategoryModal } from "./CreateCategoryModal";
 
-function PinMenuItem(channelId: string, forceUpdate: () => void) {
+function PinMenuItem(channelId: string) {
     const pinned = isPinned(channelId);
 
     return (
@@ -25,7 +26,7 @@ function PinMenuItem(channelId: string, forceUpdate: () => void) {
                         id="add-category"
                         label="Add Category"
                         color="brand"
-                        action={() => openCategoryModal(null, channelId, forceUpdate)}
+                        action={() => openCategoryModal(null, channelId)}
                     />
                     <Menu.MenuSeparator />
 
@@ -54,26 +55,26 @@ function PinMenuItem(channelId: string, forceUpdate: () => void) {
     );
 }
 
-const GroupDMContext = (forceUpdate: () => void): NavContextMenuPatchCallback => (children, props) => () => {
+const GroupDMContext: NavContextMenuPatchCallback = (children, props) => () => {
     const container = findGroupChildrenByChildId("leave-channel", children);
     if (container)
-        container.unshift(PinMenuItem(props.channel.id, forceUpdate));
+        container.unshift(PinMenuItem(props.channel.id));
 };
 
-const UserContext = (forceUpdate: () => void): NavContextMenuPatchCallback => (children, props) => () => {
+const UserContext: NavContextMenuPatchCallback = (children, props) => () => {
     const container = findGroupChildrenByChildId("close-dm", children);
     if (container) {
         const idx = container.findIndex(c => c?.props?.id === "close-dm");
-        container.splice(idx, 0, PinMenuItem(props.channel.id, forceUpdate));
+        container.splice(idx, 0, PinMenuItem(props.channel.id));
     }
 };
 
-export function addContextMenus(forceUpdate: () => void) {
-    addContextMenuPatch("gdm-context", GroupDMContext(forceUpdate));
-    addContextMenuPatch("user-context", UserContext(forceUpdate));
+export function addContextMenus() {
+    addContextMenuPatch("gdm-context", GroupDMContext);
+    addContextMenuPatch("user-context", UserContext);
 }
 
-export function removeContextMenus(forceUpdate: () => void) {
-    removeContextMenuPatch("gdm-context", GroupDMContext(forceUpdate));
-    removeContextMenuPatch("user-context", UserContext(forceUpdate));
+export function removeContextMenus() {
+    removeContextMenuPatch("gdm-context", GroupDMContext);
+    removeContextMenuPatch("user-context", UserContext);
 }
