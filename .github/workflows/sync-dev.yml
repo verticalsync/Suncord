@@ -1,4 +1,4 @@
-name: Sync Upstream
+name: Sync Vencord dev branch
 
 env:
     WORKFLOW_TOKEN: ${{ secrets.PAT_TOKEN }}
