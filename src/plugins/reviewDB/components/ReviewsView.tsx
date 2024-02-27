@@ -31,6 +31,7 @@ import ReviewComponent from "./ReviewComponent";
 const { Editor, Transforms } = findByPropsLazy("Editor", "Transforms");
 const { ChatInputTypes } = findByPropsLazy("ChatInputTypes");
 
+const { createChannelRecordFromServer } = findByPropsLazy("createChannelRecordFromServer");
 const InputComponent = LazyComponent(() => find(m => m.default?.type?.render?.toString().includes("default.CHANNEL_TEXT_AREA")).default);
 
 interface UserProps {
@@ -125,19 +126,7 @@ export function ReviewsInputComponent({ discordId, isAuthor, refetch, name }: { 
     const inputType = ChatInputTypes.FORM;
     inputType.disableAutoFocus = true;
 
-    const channel = {
-        flags_: 256,
-        guild_id_: null,
-        id: "0",
-        getGuildId: () => null,
-        isPrivate: () => true,
-        isActiveThread: () => false,
-        isArchivedLockedThread: () => false,
-        isDM: () => true,
-        roles: { "0": { permissions: 0n } },
-        getRecipientId: () => "0",
-        hasFlag: () => false,
-    };
+    const channel = createChannelRecordFromServer({ id: "0", type: 1 });
 
     return (
         <>
