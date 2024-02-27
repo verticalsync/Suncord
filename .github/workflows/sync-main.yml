@@ -1,0 +1,29 @@
+name: Sync Upstream
+
+env:
+    WORKFLOW_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+    UPSTREAM_URL: "https://github.com/Vendicated/Vencord.git"
+    UPSTREAM_BRANCH: "main"
+
+    DOWNSTREAM_URL: "https://github.com/verticalsync/Suncord.git"
+
+    SPAWN_LOGS: "false"
+
+on:
+    schedule:
+        - cron: "0 * * * *"
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: GitHub Sync to Upstream Repository
+              uses: dchourasia/sync-upstream-repo@master
+              with:
+                  upstream_repo: ${{ env.UPSTREAM_URL }}
+                  upstream_branch: ${{ env.UPSTREAM_BRANCH }}
+                  downstream_repo: ${{ env.DOWNSTREAM_URL }}
+                  token: ${{ env.WORKFLOW_TOKEN }}
+                  spawn_logs: ${{ env.SPAWN_LOGS }}
