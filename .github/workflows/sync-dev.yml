@@ -9,7 +9,7 @@ env:
     DOWNSTREAM_URL: "https://github.com/verticalsync/Suncord.git"
     DOWNSTREAM_BRANCH: "dev"
 
-    SPAWN_LOGS: "true"
+    SPAWN_LOGS: "false"
 
 on:
     schedule:
