@@ -7,7 +7,6 @@ env:
     UPSTREAM_BRANCH: "dev"
 
     DOWNSTREAM_URL: "https://github.com/verticalsync/Suncord.git"
-    DOWNSTREAM_BRANCH: "dev"
 
     SPAWN_LOGS: "false"
 
@@ -21,11 +20,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: GitHub Sync to Upstream Repository
-              uses: dchourasia/sync-upstream-repo@master
+              uses: verticalsync/sync-upstream-repo@master
               with:
                   upstream_repo: ${{ env.UPSTREAM_URL }}
                   upstream_branch: ${{ env.UPSTREAM_BRANCH }}
                   downstream_repo: ${{ env.DOWNSTREAM_URL }}
-                  downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
                   token: ${{ env.WORKFLOW_TOKEN }}
                   spawn_logs: ${{ env.SPAWN_LOGS }}
