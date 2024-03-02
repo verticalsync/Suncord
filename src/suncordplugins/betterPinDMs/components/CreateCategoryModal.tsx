@@ -54,7 +54,7 @@ const useCategory = (categoryId: string | null, initalChannelId: string | null) 
                 id: Toasts.genId(),
                 name: `Pin Category ${categories.length + 1}`,
                 color: 10070709,
-                colapsed: false,
+                collapsed: false,
                 channels: [initalChannelId]
             });
     }, []);
@@ -70,7 +70,8 @@ export function NewCategoryModal({ categoryId, modalProps, initalChannelId }: Pr
 
     if (!category) return null;
 
-    const onClick = async () => {
+    const onSave = async (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
         if (!categoryId)
             await createCategory(category);
         else
@@ -86,41 +87,41 @@ export function NewCategoryModal({ categoryId, modalProps, initalChannelId }: Pr
                 <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{categoryId ? "Edit" : "New"} Category</Text>
             </ModalHeader>
 
-            <ModalContent className={cl("content")}>
-                <Forms.FormSection>
-                    <Forms.FormTitle>Name</Forms.FormTitle>
-                    <TextInput
-                        value={category.name}
-                        onChange={e => setCategory({ ...category, name: e })}
-                    />
-                </Forms.FormSection>
-
-                <Forms.FormDivider />
-
-                <Forms.FormSection>
-                    <Forms.FormTitle>Color</Forms.FormTitle>
-                    <ColorPickerWithSwatches
-                        key={category.name}
-                        defaultColor={DEFAULT_COLOR}
-                        colors={SWATCHES}
-                        onChange={c => setCategory({ ...category, color: c! })}
-                        value={category.color}
-                        renderDefaultButton={() => null}
-                        renderCustomButton={() => (
-                            <ColorPicker
-                                color={category.color}
-                                onChange={c => setCategory({ ...category, color: c! })}
-                                key={category.name}
-                                showEyeDropper={false}
-                            />
-                        )}
-                    />
-                </Forms.FormSection>
-            </ModalContent>
-
-            <ModalFooter>
-                <Button onClick={onClick} disabled={!category.name}>{categoryId ? "Save" : "Create"}</Button>
-            </ModalFooter>
+            {/* form is here so when you press enter while in the text input it submits */}
+            <form onSubmit={onSave}>
+                <ModalContent className={cl("content")}>
+                    <Forms.FormSection>
+                        <Forms.FormTitle>Name</Forms.FormTitle>
+                        <TextInput
+                            value={category.name}
+                            onChange={e => setCategory({ ...category, name: e })}
+                        />
+                    </Forms.FormSection>
+                    <Forms.FormDivider />
+                    <Forms.FormSection>
+                        <Forms.FormTitle>Color</Forms.FormTitle>
+                        <ColorPickerWithSwatches
+                            key={category.name}
+                            defaultColor={DEFAULT_COLOR}
+                            colors={SWATCHES}
+                            onChange={c => setCategory({ ...category, color: c! })}
+                            value={category.color}
+                            renderDefaultButton={() => null}
+                            renderCustomButton={() => (
+                                <ColorPicker
+                                    color={category.color}
+                                    onChange={c => setCategory({ ...category, color: c! })}
+                                    key={category.name}
+                                    showEyeDropper={false}
+                                />
+                            )}
+                        />
+                    </Forms.FormSection>
+                </ModalContent>
+                <ModalFooter>
+                    <Button type="submit" onClick={onSave} disabled={!category.name}>{categoryId ? "Save" : "Create"}</Button>
+                </ModalFooter>
+            </form>
         </ModalRoot>
     );
 }

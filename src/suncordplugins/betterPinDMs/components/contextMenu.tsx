@@ -7,8 +7,8 @@
 import { addContextMenuPatch, findGroupChildrenByChildId, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
 import { Menu } from "@webpack/common";
 
-import { forceUpdate } from "..";
-import { addChannelToCategory, categories, isPinned, removeChannelFromCategory } from "../data";
+import { addChannelToCategory, canMoveChannelInDirection, categories, isPinned, moveChannel, removeChannelFromCategory } from "../data";
+import { forceUpdate, settings } from "../index";
 import { openCategoryModal } from "./CreateCategoryModal";
 
 function PinMenuItem(channelId: string) {
@@ -43,12 +43,34 @@ function PinMenuItem(channelId: string) {
             )}
 
             {pinned && (
-                <Menu.MenuItem
-                    id="unpin-dm"
-                    label="Unpin DM"
-                    color="danger"
-                    action={() => removeChannelFromCategory(channelId).then(() => forceUpdate())}
-                />
+                <>
+                    <Menu.MenuItem
+                        id="unpin-dm"
+                        label="Unpin DM"
+                        color="danger"
+                        action={() => removeChannelFromCategory(channelId).then(() => forceUpdate())}
+                    />
+
+                    {
+                        !settings.store.sortDmsByNewestMessage && canMoveChannelInDirection(channelId, -1) && (
+                            <Menu.MenuItem
+                                id="move-up"
+                                label="Move Up"
+                                action={() => moveChannel(channelId, -1).then(() => forceUpdate())}
+                            />
+                        )
+                    }
+
+                    {
+                        !settings.store.sortDmsByNewestMessage && canMoveChannelInDirection(channelId, 1) && (
+                            <Menu.MenuItem
+                                id="move-down"
+                                label="Move Down"
+                                action={() => moveChannel(channelId, 1).then(() => forceUpdate())}
+                            />
+                        )
+                    }
+                </>
             )}
 
         </Menu.MenuItem>

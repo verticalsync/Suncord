@@ -1,12 +1,5 @@
-/*
- * Vencord, a Discord client mod
- * Copyright (c) 2024 Vendicated and contributors
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
-import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, wreq } from "@webpack";
 import { ComponentDispatch, Forms, useEffect, useRef } from "@webpack/common";
@@ -21,21 +14,20 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         onChange(val) {
-            if (val) eagerLoad();
+            if(val) eagerLoad();
         }
     },
 });
 
 const lazyLayers: string[] = [];
 function eagerLoad() {
-    // @ts-ignore
     lazyLayers.forEach(wreq.el);
 }
 
 export default definePlugin({
     name: "FastMenu",
     description: "Makes the settings menu open faster.",
-    authors: [Devs.Kyuuhachi],
+    authors: [{ id: 236588665420251137n, name: "Kyuuhachi" }],
     settings,
 
     patches: [
@@ -62,16 +54,10 @@ export default definePlugin({
         },
         { // load menu stuff on hover, not on click
             find: "Messages.USER_SETTINGS_WITH_BUILD_OVERRIDE.format",
-            replacement: ((module_id: string) => [
-                {
-                    match: /handleOpenSettingsContextMenu.{0,250}?\i\.el\(("\d+")\)\.then/,
-                    replace: (text, w) => (module_id = w, text)
-                },
-                {
-                    match: /(?<=Messages\.USER_SETTINGS,)/,
-                    replace: () => `async onMouseEnter(){let r=Vencord.Webpack.wreq;await r.el(${module_id});r(${module_id});},`,
-                },
-            ])(null as any),
+            replacement: {
+                match: /(?<=handleOpenSettingsContextMenu.{0,250}?\i\.el\(("\d+")\)\.then.*?Messages\.USER_SETTINGS,)(?=onClick:)/,
+                replace: "onMouseEnter(){let r=Vencord.Webpack.wreq;r.el($1).then(r.bind(r,$1));},"
+            },
             predicate: () => settings.store.eagerLoad,
         },
     ],
@@ -97,18 +83,17 @@ export default definePlugin({
             style={{ visibility: hidden ? "hidden" : "visible" }}
             {...props}
         />;
-        if (baseLayer) return node;
-        // @ts-ignore
+        if(baseLayer) return node;
         else return <Forms.FocusLock containerRef={containerRef}>{node}</Forms.FocusLock>;
     },
 
     lazyLayer(moduleId: string, name: string) {
-        if (name !== "CollectiblesShop")
+        if(name !== "CollectiblesShop")
             lazyLayers.push(moduleId);
     },
 
     start() {
-        if (settings.store.eagerLoad)
+        if(settings.store.eagerLoad)
             eagerLoad();
     },
 });

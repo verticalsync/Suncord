@@ -25,24 +25,17 @@
     display: none;
 }
 
-.vc-pindms-colapse-icon {
+.vc-pindms-collapse-icon {
     width: 16px;
     height: 16px;
     color: var(--interactive-normal);
     transform: rotate(90deg)
 }
 
-.vc-pindms-colapsed .vc-pindms-colapse-icon {
+.vc-pindms-collapsed .vc-pindms-collapse-icon {
     transform: rotate(0deg);
 }
 
-.vc-pindms-channel-count {
-    display: grid;
-    place-content: center;
-    border-radius: 8px;
-    background-color: var(--background-accent);
-    color: var(--white-500);
-    height: 16px;
-    min-width: 16px;
-    min-height: 16px;
+[class^="privateChannelsHeaderContainer"] > [class^="headerText"] {
+    cursor: pointer;
 }
