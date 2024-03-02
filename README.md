@@ -19,7 +19,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   MemberListActivities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
 -   VoiceChatUtilities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
--   BetterPinDMS (by [Syncxv](https://github.com/Syncxv/betterPinDMs))
+-   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs by [Syncxv](https://github.com/Syncxv/))
 -   SettingsCog (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   FastMenu (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
