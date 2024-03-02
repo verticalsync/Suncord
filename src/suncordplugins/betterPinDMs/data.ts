@@ -15,7 +15,7 @@ export interface Category {
     name: string;
     color: number;
     channels: string[];
-    colapsed?: boolean;
+    collapsed?: boolean;
 }
 
 export const KEYS = {
@@ -25,6 +25,7 @@ export const KEYS = {
     OLD_CATEGORY_KEY: "betterPinDmsCategories"
 };
 
+
 export let categories: Category[] = [];
 
 export async function saveCats(cats: Category[]) {
@@ -33,7 +34,7 @@ export async function saveCats(cats: Category[]) {
 }
 
 export async function initCategories(userId: string) {
-    return categories = await DataStore.get<Category[]>(KEYS.CATEGORY_BASE_KEY + userId) ?? [];
+    categories = await DataStore.get<Category[]>(KEYS.CATEGORY_BASE_KEY + userId) ?? [];
 }
 
 export function getCategory(id: string) {
@@ -85,23 +86,52 @@ export function isPinned(id: string) {
     return categories.some(c => c.channels.includes(id));
 }
 
-export const canMoveCategoryInDirection = (id: string, direction: -1 | 1) => {
-    const a = categories.map(m => m.id).indexOf(id);
-    const b = a + direction;
+export const canMoveArrayInDirection = (array: any[], index: number, direction: -1 | 1) => {
+    const a = array[index];
+    const b = array[index + direction];
 
-    return categories[a] && categories[b];
+    return a && b;
+};
+
+export const canMoveCategoryInDirection = (id: string, direction: -1 | 1) => {
+    const index = categories.findIndex(m => m.id === id);
+    return canMoveArrayInDirection(categories, index, direction);
 };
 
 export const canMoveCategory = (id: string) => canMoveCategoryInDirection(id, -1) || canMoveCategoryInDirection(id, 1);
 
+export const canMoveChannelInDirection = (channelId: string, direction: -1 | 1) => {
+    const category = categories.find(c => c.channels.includes(channelId));
+    if (!category) return false;
+
+    const index = category.channels.indexOf(channelId);
+    return canMoveArrayInDirection(category.channels, index, direction);
+};
+
+
+function swapElementsInArray(array: any[], index1: number, index2: number) {
+    if (!array[index1] || !array[index2]) return;
+    [array[index1], array[index2]] = [array[index2], array[index1]];
+}
+
 // stolen from PinDMs
 export async function moveCategory(id: string, direction: -1 | 1) {
-    const a = categories.map(m => m.id).indexOf(id);
+    const a = categories.findIndex(m => m.id === id);
     const b = a + direction;
 
-    if (!categories[a] || !categories[b]) return;
+    swapElementsInArray(categories, a, b);
 
-    [categories[a], categories[b]] = [categories[b], categories[a]];
+    saveCats(categories);
+}
+
+export async function moveChannel(channelId: string, direction: -1 | 1) {
+    const category = categories.find(c => c.channels.includes(channelId));
+    if (!category) return;
+
+    const a = category.channels.indexOf(channelId);
+    const b = a + direction;
+
+    swapElementsInArray(category.channels, a, b);
 
     saveCats(categories);
 }
@@ -110,7 +140,7 @@ export async function collapseCategory(id: string, value = true) {
     const category = categories.find(c => c.id === id);
     if (!category) return;
 
-    category.colapsed = value;
+    category.collapsed = value;
     saveCats(categories);
 }
 
