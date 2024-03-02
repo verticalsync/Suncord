@@ -1,5 +1,12 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, wreq } from "@webpack";
 import { ComponentDispatch, Forms, useEffect, useRef } from "@webpack/common";
@@ -14,20 +21,21 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         onChange(val) {
-            if(val) eagerLoad();
+            if (val) eagerLoad();
         }
     },
 });
 
 const lazyLayers: string[] = [];
 function eagerLoad() {
+    // @ts-ignore
     lazyLayers.forEach(wreq.el);
 }
 
 export default definePlugin({
     name: "FastMenu",
     description: "Makes the settings menu open faster.",
-    authors: [{ id: 236588665420251137n, name: "Kyuuhachi" }],
+    authors: [Devs.Kyuuhachi],
     settings,
 
     patches: [
@@ -83,17 +91,18 @@ export default definePlugin({
             style={{ visibility: hidden ? "hidden" : "visible" }}
             {...props}
         />;
-        if(baseLayer) return node;
+        if (baseLayer) return node;
+        // @ts-ignore
         else return <Forms.FocusLock containerRef={containerRef}>{node}</Forms.FocusLock>;
     },
 
     lazyLayer(moduleId: string, name: string) {
-        if(name !== "CollectiblesShop")
+        if (name !== "CollectiblesShop")
             lazyLayers.push(moduleId);
     },
 
     start() {
-        if(settings.store.eagerLoad)
+        if (settings.store.eagerLoad)
             eagerLoad();
     },
 });
