@@ -25,8 +25,6 @@ import definePlugin from "@utils/types";
 import { findStoreLazy } from "@webpack";
 import { FluxStore } from "@webpack/types";
 
-import { OnlineMemberCountStore } from "./OnlineMemberCountStore";
-
 import { MemberCount } from "./MemberCount";
 
 export const GuildMemberCountStore = findStoreLazy("GuildMemberCountStore") as FluxStore & { getMemberCount(guildId: string): number | null; };
