@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+export const DEFAULT_CHUNK_SIZE = 256;
 export const DEFAULT_COLOR = 10070709;
 
 export const SWATCHES = [
