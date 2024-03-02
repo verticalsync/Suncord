@@ -19,10 +19,10 @@ export interface Category {
 }
 
 export const KEYS = {
-    CATEGORY_BASE_KEY: "BetterPinDMsCategories-",
-    CATEGORY_MIGRATED_PINDMS_KEY: "BetterPinDMsMigratedPinDMs",
-    CATEGORY_MIGRATED_KEY: "BetterPinDMsMigratedOldCategories",
-    OLD_CATEGORY_KEY: "betterPinDmsCategories"
+    CATEGORY_BASE_KEY: "PinDMsCategories-",
+    CATEGORY_MIGRATED_PINDMS_KEY: "PinDMsMigratedPinDMs",
+    CATEGORY_MIGRATED_KEY: "PinDMsMigratedOldCategories",
+    OLD_CATEGORY_KEY: "BetterPinDMsCategories-"
 };
 
 
@@ -43,7 +43,7 @@ export function getCategory(id: string) {
 
 export async function createCategory(category: Category) {
     categories.push(category);
-    saveCats(categories);
+    await saveCats(categories);
 }
 
 export async function updateCategory(category: Category) {
@@ -51,7 +51,7 @@ export async function updateCategory(category: Category) {
     if (index === -1) return;
 
     categories[index] = category;
-    saveCats(categories);
+    await saveCats(categories);
 }
 
 export async function addChannelToCategory(channelId: string, categoryId: string) {
@@ -61,7 +61,7 @@ export async function addChannelToCategory(channelId: string, categoryId: string
     if (category.channels.includes(channelId)) return;
 
     category.channels.push(channelId);
-    saveCats(categories);
+    await saveCats(categories);
 
 }
 
@@ -70,22 +70,47 @@ export async function removeChannelFromCategory(channelId: string) {
     if (!category) return;
 
     category.channels = category.channels.filter(c => c !== channelId);
-    saveCats(categories);
+    await saveCats(categories);
 }
 
 export async function removeCategory(categoryId: string) {
     const catagory = categories.find(c => c.id === categoryId);
     if (!catagory) return;
 
-    catagory?.channels.forEach(c => removeChannelFromCategory(c));
+    // catagory?.channels.forEach(c => removeChannelFromCategory(c));
     categories = categories.filter(c => c.id !== categoryId);
-    saveCats(categories);
+    await saveCats(categories);
 }
 
+export async function collapseCategory(id: string, value = true) {
+    const category = categories.find(c => c.id === id);
+    if (!category) return;
+
+    category.collapsed = value;
+    await saveCats(categories);
+}
+
+// utils
 export function isPinned(id: string) {
     return categories.some(c => c.channels.includes(id));
 }
 
+export function categoryLen() {
+    return categories.length;
+}
+
+export function getAllUncollapsedChannels() {
+    return categories.filter(c => !c.collapsed).map(c => c.channels).flat();
+}
+
+export function getSections() {
+    return categories.reduce((acc, category) => {
+        acc.push(category.channels.length === 0 ? 1 : category.channels.length);
+        return acc;
+    }, [] as number[]);
+}
+
+// move categories
 export const canMoveArrayInDirection = (array: any[], index: number, direction: -1 | 1) => {
     const a = array[index];
     const b = array[index + direction];
@@ -121,7 +146,7 @@ export async function moveCategory(id: string, direction: -1 | 1) {
 
     swapElementsInArray(categories, a, b);
 
-    saveCats(categories);
+    await saveCats(categories);
 }
 
 export async function moveChannel(channelId: string, direction: -1 | 1) {
@@ -133,18 +158,12 @@ export async function moveChannel(channelId: string, direction: -1 | 1) {
 
     swapElementsInArray(category.channels, a, b);
 
-    saveCats(categories);
-}
-
-export async function collapseCategory(id: string, value = true) {
-    const category = categories.find(c => c.id === id);
-    if (!category) return;
-
-    category.collapsed = value;
-    saveCats(categories);
+    await saveCats(categories);
 }
 
 
+
+// migrate data
 const getPinDMsPins = () => (Settings.plugins.PinDMs.pinnedDMs || void 0)?.split(",") as string[] | undefined;
 
 async function migratePinDMs() {
@@ -168,8 +187,8 @@ async function migratePinDMs() {
     await DataStore.set(KEYS.CATEGORY_MIGRATED_PINDMS_KEY, true);
 }
 
-async function migrateOldCategories() {
-    const oldCats = await DataStore.get<Category[]>(KEYS.OLD_CATEGORY_KEY);
+async function migrateOldCategories(userId: string) {
+    const oldCats = await DataStore.get<Category[]>(KEYS.OLD_CATEGORY_KEY + userId);
     // dont want to migrate if the user has already has categories.
     if (categories.length === 0 && oldCats?.length) {
         categories.push(...(oldCats.filter(m => m.id !== "oldPins")));
@@ -177,12 +196,12 @@ async function migrateOldCategories() {
     await DataStore.set(KEYS.CATEGORY_MIGRATED_KEY, true);
 }
 
-export async function migrateData() {
+export async function migrateData(userId: string) {
     const m1 = await DataStore.get(KEYS.CATEGORY_MIGRATED_KEY), m2 = await DataStore.get(KEYS.CATEGORY_MIGRATED_PINDMS_KEY);
     if (m1 && m2) return;
 
     // want to migrate the old categories first and then slove any conflicts with the PinDMs pins
-    if (!m1) await migrateOldCategories();
+    if (!m1) await migrateOldCategories(userId);
     if (!m2) await migratePinDMs();
 
     await saveCats(categories);
