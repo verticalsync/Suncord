@@ -20,8 +20,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   MemberListActivities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
 -   VoiceChatUtilities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
 -   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs by [Syncxv](https://github.com/Syncxv/))
--   SettingsCog (by [Kyuuhachi](https://github.com/Kyuuhachi/))
--   FastMenu (by [Kyuuhachi](https://github.com/Kyuuhachi/))
+-   BetterSettings (by [Kyuuhachi](https://github.com/Kyuuhachi/)) (added from Kyuuhachi's [pull request](https://github.com/Vendicated/Vencord/pull/2222))
 -   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   ModalFade (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 
