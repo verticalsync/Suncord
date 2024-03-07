@@ -479,6 +479,10 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
         name: "w00shh.",
         id: 689165844835860522n,
     },
+    Discord: {
+        name: "discord",
+        id: 643945264868098049n,
+    },
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
