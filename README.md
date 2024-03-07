@@ -24,6 +24,7 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 -   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   ModalFade (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
+-   FriendsSince (by [EdVraz](https://github.com/EdVraz)) (added from EdVraz's [pull request](https://github.com/Vendicated/Vencord/pull/2240))
 
 ## Installing / Uninstalling
 
