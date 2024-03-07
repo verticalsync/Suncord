@@ -1,0 +1,6 @@
+[submodule "src/suncordplugins/soundBoardLogger"]
+	path = src/suncordplugins/soundBoardLogger
+	url = https://github.com/ImpishMoxxie/SoundBoardLogger.git
+[submodule "src/suncordplugins/vc-gif-collections"]
+	path = src/suncordplugins/vc-gif-collections
+	url = https://github.com/Syncxv/vc-gif-collections.git
