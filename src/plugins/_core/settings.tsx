@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -28,6 +29,23 @@ export default definePlugin({
     description: "Adds Settings UI and debug info",
     authors: [Devs.Ven, Devs.Megu],
     required: true,
+
+    contextMenus: {
+        // The settings shortcuts in the user settings cog context menu
+        // read the elements from a hardcoded map which for obvious reason
+        // doesn't contain our sections. This patches the actions of our
+        // sections to manually use SettingsRouter (which only works on desktop
+        // but the context menu is usually not available on mobile anyway)
+        "user-settings-cog"(children) {
+            const section = findGroupChildrenByChildId("VencordSettings", children);
+            section?.forEach(c => {
+                const id = c?.props?.id;
+                if (id?.startsWith("Vencord") || id?.startsWith("Vesktop")) {
+                    c!.props.action = () => SettingsRouter.open(id);
+                }
+            });
+        }
+    },
 
     patches: [{
         find: ".versionHash",
