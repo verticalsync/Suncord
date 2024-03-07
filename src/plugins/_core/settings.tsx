@@ -20,7 +20,7 @@ import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { React } from "@webpack/common";
+import { React, SettingsRouter } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
