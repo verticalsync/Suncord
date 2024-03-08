@@ -16,13 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export * from "./classes";
-export * from "./components";
-export * from "./fluxEvents";
-export * from "./i18nMessages";
-export * from "./menu";
-export * from "./passiveupdatestate";
-export * from "./settingsStores";
-export * from "./stores";
-export * from "./utils";
-export * from "./voicestate";
+// cant change them now eh. My friend uses this plugin. LOVE YOU FREEZER
+export const GIF_ITEM_PREFIX = "gc-moment:";
+export const GIF_COLLECTION_PREFIX = "gc:";

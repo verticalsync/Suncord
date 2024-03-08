@@ -16,13 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export * from "./classes";
-export * from "./components";
-export * from "./fluxEvents";
-export * from "./i18nMessages";
-export * from "./menu";
-export * from "./passiveupdatestate";
-export * from "./settingsStores";
-export * from "./stores";
-export * from "./utils";
-export * from "./voicestate";
+import { getUrlExtension } from "./getUrlExtension";
+
+const audioExtensions = ["mp3", "wav", "ogg", "aac", "m4a", "wma", "flac"];
+
+
+export function isAudio(url: string) {
+    const extension = getUrlExtension(url);
+    return extension && audioExtensions.includes(extension);
+}

@@ -16,9 +16,15 @@ import { Timer } from "./Timer";
 export const settings = definePluginSettings({
     showWithoutHover: {
         type: OptionType.BOOLEAN,
-        description: "Always show the timer without needing to hover (not as pretty)!",
+        description: "Always show the timer without needing to hover",
         restartNeeded: false,
-        default: false
+        default: true
+    },
+    showRoleColor: {
+        type: OptionType.BOOLEAN,
+        description: "Show the user's role color (if this plugin in enabled)",
+        restartNeeded: false,
+        default: true
     },
     trackSelf: {
         type: OptionType.BOOLEAN,
@@ -34,7 +40,7 @@ export const settings = definePluginSettings({
     },
     format: {
         type: OptionType.SELECT,
-        description: "The timer format",
+        description: "Compact or human readable format:",
         options: [
             {
                 label: "30:23:00:42",
@@ -60,6 +66,30 @@ export const settings = definePluginSettings({
 type userJoinData = { channelId: string, time: number; guildId: string; };
 const userJoinTimes = new Map<string, userJoinData>();
 
+/**
+ * The function `addUserJoinTime` stores the join time of a user in a specific channel within a guild.
+ * @param {string} userId - The `userId` parameter is a string that represents the unique identifier of
+ * the user who is joining a channel in a guild.
+ * @param {string} channelId - The `channelId` parameter represents the unique identifier of the
+ * channel where the user joined.
+ * @param {string} guildId - The `guildId` parameter in the `addUserJoinTime` function represents the
+ * unique identifier of the guild (server) to which the user belongs. It is used to associate the
+ * user's join time with a specific guild within the application or platform.
+ */
+function addUserJoinTime(userId: string, channelId: string, guildId: string) {
+    // create a random number
+    userJoinTimes.set(userId, { channelId, time: Date.now(), guildId });
+}
+
+/**
+ * The function `removeUserJoinTime` removes the join time of a user identified by their user ID.
+ * @param {string} userId - The `userId` parameter is a string that represents the unique identifier of
+ * a user whose join time needs to be removed.
+ */
+function removeUserJoinTime(userId: string) {
+    userJoinTimes.delete(userId);
+}
+
 // For every user, channelId and oldChannelId will differ when moving channel.
 // Only for the local user, channelId and oldChannelId will be the same when moving channel,
 // for some ungodly reason
@@ -81,7 +111,16 @@ export default definePlugin({
             replacement: [
                 {
                     match: /(render\(\)\{.+\}\),children:)\[(.+renderName\(\),)/,
-                    replace: "$&$self.showInjection(this),"
+                    replace: "$&,$self.showClockInjection(this),"
+                }
+            ]
+        },
+        {
+            find: "renderPrioritySpeaker",
+            replacement: [
+                {
+                    match: /(renderName\(\)\{.+:"")/,
+                    replace: "$&,$self.showTextInjection(this),"
                 }
             ]
         }
@@ -116,10 +155,10 @@ export default definePlugin({
                 if (channelId !== oldChannelId) {
                     if (channelId) {
                         // move or join
-                        userJoinTimes.set(userId, { channelId, time: Date.now(), guildId: guildId });
+                        addUserJoinTime(userId, channelId, guildId);
                     } else if (oldChannelId) {
                         // leave
-                        userJoinTimes.delete(userId);
+                        removeUserJoinTime(userId);
                     }
                 }
             }
@@ -146,7 +185,7 @@ export default definePlugin({
                     const userInVoiceStates = voiceStates.find(state => state.userId === userId);
                     if (!userInVoiceStates) {
                         // remove the user from the map
-                        userJoinTimes.delete(userId);
+                        removeUserJoinTime(userId);
                     }
                 }
             }
@@ -165,11 +204,11 @@ export default definePlugin({
                     // check if the user is in a channel
                     if (channelId !== userJoinTimes.get(userId)?.channelId) {
                         // update the user's join time
-                        userJoinTimes.set(userId, { channelId, time: Date.now(), guildId: passiveUpdate.guildId });
+                        addUserJoinTime(userId, channelId, guildId);
                     }
                 } else {
                     // user wasn't previously tracked, add the user to the map
-                    userJoinTimes.set(userId, { channelId, time: Date.now(), guildId: passiveUpdate.guildId });
+                    addUserJoinTime(userId, channelId, guildId);
                 }
             }
         },
@@ -186,6 +225,20 @@ export default definePlugin({
         if (settings.store.watchLargeGuilds) {
             this.subscribeToAllGuilds();
         }
+    },
+
+    showClockInjection(property: { props: { user: { id: string; }; }; }) {
+        if (settings.store.showWithoutHover) {
+            return "";
+        }
+        return this.showInjection(property);
+    },
+
+    showTextInjection(property: { props: { user: { id: string; }; }; }) {
+        if (!settings.store.showWithoutHover) {
+            return "";
+        }
+        return this.showInjection(property);
     },
 
     showInjection(property: { props: { user: { id: string; }; }; }) {

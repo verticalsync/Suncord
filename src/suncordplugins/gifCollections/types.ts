@@ -16,13 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export * from "./classes";
-export * from "./components";
-export * from "./fluxEvents";
-export * from "./i18nMessages";
-export * from "./menu";
-export * from "./passiveupdatestate";
-export * from "./settingsStores";
-export * from "./stores";
-export * from "./utils";
-export * from "./voicestate";
+export enum Format { NONE = 0, IMAGE = 1, VIDEO = 2 }
+
+export interface Category {
+    type: "Trending" | "Category";
+    name: string;
+    src: string;
+    format: Format;
+    gifs?: Gif[];
+}
+
+export interface Gif {
+    id: string,
+    src: string;
+    url: string;
+    height: number,
+    width: number;
+}
+
+export interface Props {
+    favorites: { [src: string]: any; };
+    trendingCategories: Category[];
+}
+
+type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+
+export type Collection = WithRequired<Category, "gifs">;

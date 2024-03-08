@@ -16,13 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export * from "./classes";
-export * from "./components";
-export * from "./fluxEvents";
-export * from "./i18nMessages";
-export * from "./menu";
-export * from "./passiveupdatestate";
-export * from "./settingsStores";
-export * from "./stores";
-export * from "./utils";
-export * from "./voicestate";
+import { Format } from "../types";
+import { getUrlExtension } from "./getUrlExtension";
+
+const videoExtensions = ["mp4", "ogg", "webm", "avi", "wmv", "flv", "mov", "mkv", "m4v"];
+
+export function getFormat(url: string) {
+    const extension = getUrlExtension(url);
+    return url.startsWith("https://media.tenor") || extension == null || videoExtensions.includes(extension) ? Format.VIDEO : Format.IMAGE;
+}

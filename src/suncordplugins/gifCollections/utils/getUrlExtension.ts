@@ -16,13 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export * from "./classes";
-export * from "./components";
-export * from "./fluxEvents";
-export * from "./i18nMessages";
-export * from "./menu";
-export * from "./passiveupdatestate";
-export * from "./settingsStores";
-export * from "./stores";
-export * from "./utils";
-export * from "./voicestate";
+export function getUrlExtension(url: string) {
+    // tennor stuff is like //media.tenor/blah/blah
+    if (!url.startsWith("https:")) url = "https:" + url;
+    return new URL(url).pathname.split(".").pop();
+}
