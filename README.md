@@ -1,7 +1,7 @@
 # Suncord
 
 [![Tests](https://github.com/verticalsync/Suncord/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/verticalsync/Suncord/actions/workflows/test.yml)
-[![Dev Tests](https://github.com/verticalsync/Suncord/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/verticalsync/Suncord/actions/workflows/test.yml)
+[![Dev Branch Tests](https://github.com/verticalsync/Suncord/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/verticalsync/Suncord/actions/workflows/test.yml)
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
