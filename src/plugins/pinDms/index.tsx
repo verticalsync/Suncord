@@ -14,7 +14,7 @@ import { findByPropsLazy, findStoreLazy, waitFor } from "@webpack";
 import { ContextMenuApi, FluxDispatcher, Menu, React, UserStore } from "@webpack/common";
 import { Channel } from "discord-types/general";
 
-import { addContextMenus, removeContextMenus } from "./components/contextMenu";
+import { contextMenus } from "./components/contextMenu";
 import { openCategoryModal, requireSettingsMenu } from "./components/CreateCategoryModal";
 import { DEFAULT_CHUNK_SIZE } from "./constants";
 import { canMoveCategory, canMoveCategoryInDirection, categories, Category, categoryLen, collapseCategory, getAllUncollapsedChannels, getSections, initCategories, isPinned, migrateData, moveCategory, removeCategory } from "./data";
@@ -67,6 +67,7 @@ export default definePlugin({
     description: "Allows you to pin private channels to the top of your DM list. To pin/unpin or reorder pins, right click DMs",
     authors: [Devs.Ven, Devs.Strencher, Devs.Aria],
     settings,
+    contextMenus,
 
     patches: [
         {
@@ -170,12 +171,7 @@ export default definePlugin({
     getAllUncollapsedChannels,
 
     start() {
-        addContextMenus();
         requireSettingsMenu();
-    },
-
-    stop() {
-        removeContextMenus();
     },
 
     makeProps(instance, { sections }: { sections: number[]; }) {
@@ -224,7 +220,8 @@ export default definePlugin({
     isChannelIndex(sectionIndex: number, channelIndex: number) {
         if (settings.store.dmSectioncollapsed && sectionIndex !== 0)
             return true;
-        return this.isCategoryIndex(sectionIndex) && categories[sectionIndex - 1]?.channels[channelIndex];
+        const cat = categories[sectionIndex - 1];
+        return this.isCategoryIndex(sectionIndex) && (cat.channels.length === 0 || cat?.channels[channelIndex]);
     },
 
     isDMSectioncollapsed() {
@@ -360,6 +357,8 @@ export default definePlugin({
     },
 
     getCategoryChannels(category: Category) {
+        if (category.channels.length === 0) return [];
+
         if (settings.store.sortDmsByNewestMessage) {
             return PrivateChannelSortStore.getPrivateChannelIds().filter(c => category.channels.includes(c));
         }
