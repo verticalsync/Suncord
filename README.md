@@ -1,13 +1,12 @@
 # Suncord
 
 [![Tests](https://github.com/verticalsync/Suncord/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/verticalsync/Suncord/actions/workflows/test.yml)
+[![Discord](https://img.shields.io/discord/1207691698386501634.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord.gg/VasF3Ma4Ab)
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
 You can join our discord server for commits, changes or just chat or maybe even support? Who knows.
 For the invite click [here](https://discord.gg/VasF3Ma4Ab)
-
-<iframe src="https://discord.com/widget?id=1207691698386501634&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 
 ## Included plugins alongside Vencord
 
