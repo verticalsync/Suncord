@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { addContextMenuPatch, findGroupChildrenByChildId, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { Menu } from "@webpack/common";
 
 import { addChannelToCategory, canMoveChannelInDirection, categories, isPinned, moveChannel, removeChannelFromCategory } from "../data";
@@ -77,13 +77,13 @@ function PinMenuItem(channelId: string) {
     );
 }
 
-const GroupDMContext: NavContextMenuPatchCallback = (children, props) => () => {
+const GroupDMContext: NavContextMenuPatchCallback = (children, props) => {
     const container = findGroupChildrenByChildId("leave-channel", children);
     if (container)
         container.unshift(PinMenuItem(props.channel.id));
 };
 
-const UserContext: NavContextMenuPatchCallback = (children, props) => () => {
+const UserContext: NavContextMenuPatchCallback = (children, props) => {
     const container = findGroupChildrenByChildId("close-dm", children);
     if (container) {
         const idx = container.findIndex(c => c?.props?.id === "close-dm");
@@ -91,12 +91,7 @@ const UserContext: NavContextMenuPatchCallback = (children, props) => () => {
     }
 };
 
-export function addContextMenus() {
-    addContextMenuPatch("gdm-context", GroupDMContext);
-    addContextMenuPatch("user-context", UserContext);
-}
-
-export function removeContextMenus() {
-    removeContextMenuPatch("gdm-context", GroupDMContext);
-    removeContextMenuPatch("user-context", UserContext);
-}
+export const contextMenus = {
+    "gdm-context": GroupDMContext,
+    "user-context": UserContext
+};

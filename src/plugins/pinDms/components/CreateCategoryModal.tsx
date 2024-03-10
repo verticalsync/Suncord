@@ -128,4 +128,3 @@ export function NewCategoryModal({ categoryId, modalProps, initalChannelId }: Pr
 
 export const openCategoryModal = (categoryId: string | null, channelId: string | null) =>
     openModal(modalProps => <NewCategoryModal categoryId={categoryId} modalProps={modalProps} initalChannelId={channelId} />);
-
