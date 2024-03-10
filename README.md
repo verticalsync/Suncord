@@ -4,6 +4,11 @@
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
+You can join our discord server for commits, changes or just chat or maybe even support? Who knows.
+For the invite click [here](https://discord.gg/VasF3Ma4Ab)
+
+<iframe src="https://discord.com/widget?id=1207691698386501634&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
 ## Included plugins alongside Vencord
 
 -   purgeMessages (by [bhop](https://github.com/prettylittlelies))
