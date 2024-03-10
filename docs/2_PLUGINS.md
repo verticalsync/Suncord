@@ -108,4 +108,4 @@ If you want to publish your plugin into the Suncord repo, move your plugin from 
 > **Warning**
 > Make sure you've read [CONTRIBUTING.md](../CONTRIBUTING.md) before opening a PR
 
-If you need more help, ask in the support channel in our [Discord Server](https://discord.gg/UNAVAIALBLE).
+If you need more help, ask in the support channel in our [Discord Server](https://discord.gg/VasF3Ma4Ab).

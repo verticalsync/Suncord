@@ -14,4 +14,4 @@ You can select and manage your custom avatar decorations under the "Profiles" pa
 
 Review the [guidelines](https://github.com/decor-discord/.github/blob/main/GUIDELINES.md) before creating your own custom avatar decoration.
 
-Join the [Discord server](https://discord.gg/dXp2SdxDcP) for support and notifications on your decoration's review.
+Join the [Discord server](https://https://discord.gg/VasF3Ma4Ab) for support and notifications on your decoration's review.
