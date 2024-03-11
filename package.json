@@ -1,7 +1,7 @@
 {
     "name": "suncord",
     "private": "true",
-    "version": "1.7.6",
+    "version": "1.7.7",
     "description": "A fork of vencord",
     "homepage": "https://github.com/verticalsync/Suncord#readme",
     "bugs": {
