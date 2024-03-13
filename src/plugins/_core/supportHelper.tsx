@@ -45,8 +45,8 @@ export default definePlugin({
     dependencies: ["CommandsAPI"],
 
     commands: [{
-        name: "vencord-debug",
-        description: "Send Vencord Debug info",
+        name: "suncord-debug",
+        description: "Send Suncord Debug info",
         predicate: ctx => AllowedChannelIds.includes(ctx.channel.id),
         async execute() {
             const { RELEASE_CHANNEL } = window.GLOBAL_ENV;
@@ -67,7 +67,7 @@ export default definePlugin({
             const enabledApiPlugins = Object.keys(plugins).filter(p => Vencord.Plugins.isPluginEnabled(p) && isApiPlugin(p));
 
             const info = {
-                Vencord: `v${VERSION} • ${gitHash}${settings.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
+                Suncord: `v${VERSION} • ${gitHash}${settings.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
                 "Discord Branch": RELEASE_CHANNEL,
                 Client: client,
                 Platform: window.navigator.platform,
