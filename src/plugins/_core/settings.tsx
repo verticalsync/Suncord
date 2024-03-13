@@ -40,7 +40,7 @@ export default definePlugin({
             const section = findGroupChildrenByChildId("VencordSettings", children);
             section?.forEach(c => {
                 const id = c?.props?.id;
-                if (id?.startsWith("Vencord") || id?.startsWith("Vesktop")) {
+                if (id?.startsWith("Vencord") || id?.startsWith("Vesktop") || id?.startsWith("Suncord") || id?.startsWith("Sunroof")) {
                     c!.props.action = () => SettingsRouter.open(id);
                 }
             });
