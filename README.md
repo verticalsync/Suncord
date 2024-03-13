@@ -8,32 +8,48 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 You can join our discord server for commits, changes or just chat or maybe even support? Who knows.
 For the invite click [here](https://discord.gg/VasF3Ma4Ab)
 
-## Included plugins alongside Vencord
+## Installing / Uninstalling
 
--   purgeMessages (by [bhop](https://github.com/prettylittlelies))
--   platformSpoofer (by [drag](https://github.com/dragdotpng))
--   doubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
--   messageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
+Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
+
+## Extra included plugins
+
+-   Plugins by [D3SOX](https://github.com/D3S0X/vencord-userplugins)
+-   -   MemberListActivities
+-   -   VoiceChatUtilities
+-   -   BlockKrisp
+-   -   IgnoreTerms
+-   -   NotifyUserChanges
+-   -   ScreenShareStreamerMode
+-   -   ServerProfilesToolbox
+
+-   Plugins by [Kyuuhachi](https://github.com/Kyuuhachi/VencordPlugins)
+-   -   Anammox
+-   -   ColorMessage
+-   -   DeadMembers
+-   -   ImageLink
+-   -   MessageLinkTooltip
+-   -   ReplyTimestamp
+-   -   ModalFade
+-   -   BetterSettings ([pr to vencord here]())
+-   -   Title
+
+-   Plugins by [Syncxv](https://github.com/Syncxv)
+-   -   [MessageLoggerEnhanced](https://github.com/Syncxv/vc-message-logger-enhanced)
+-   -   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs)
+
+-   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
+-   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
+-   DoubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
--   customScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
+-   CustomScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
 -   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
 -   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
--   ReplyTimestamp (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
--   MemberListActivities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
--   VoiceChatUtilities (by [D3SOX](https://github.com/D3SOX/vencord-userplugins/))
--   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs by [Syncxv](https://github.com/Syncxv/))
--   BetterSettings (by [Kyuuhachi](https://github.com/Kyuuhachi/)) (added from Kyuuhachi's [pull request](https://github.com/Vendicated/Vencord/pull/2222))
--   Anammox (by [Kyuuhachi](https://github.com/Kyuuhachi/))
--   ModalFade (by [Kyuuhachi](https://github.com/Kyuuhachi/))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
-
-## Installing / Uninstalling
-
-Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 ## Disclaimer
 
