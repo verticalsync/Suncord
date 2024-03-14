@@ -14,7 +14,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 ## Extra included plugins
 
--   Plugins by [D3SOX](https://github.com/D3S0X/vencord-userplugins)
+-   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   MemberListActivities
 -   -   VoiceChatUtilities
 -   -   BlockKrisp
@@ -31,7 +31,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   MessageLinkTooltip
 -   -   ReplyTimestamp
 -   -   ModalFade
--   -   BetterSettings ([pr to vencord here]())
+-   -   BetterSettings ([pull request to vencord here](https://github.com/Vendicated/Vencord/pull/2222))
 -   -   Title
 
 -   Plugins by [Syncxv](https://github.com/Syncxv)

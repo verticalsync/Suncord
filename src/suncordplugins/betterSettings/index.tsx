@@ -22,19 +22,19 @@ const settings = definePluginSettings({
         description: "Disable the crossfade animation",
         type: OptionType.BOOLEAN,
         default: true,
-        restartNeeded: true,
+        restartNeeded: true
     },
     organizeMenu: {
         description: "Organizes the settings cog context menu",
         type: OptionType.BOOLEAN,
-        default: true,
+        default: true
     },
     eagerLoad: {
         description: "Eagerly load menu contents",
         type: OptionType.BOOLEAN,
         default: true,
-        restartNeeded: true,
-    },
+        restartNeeded: true
+    }
 });
 
 export default definePlugin({
@@ -50,14 +50,14 @@ export default definePlugin({
                 { // Fade in on layer
                     match: /(?<=(\i)\.contextType=\i\.AccessibilityPreferencesContext;)/,
                     replace: "$1=$self.Layer;",
-                    predicate: () => settings.store.disableFade,
+                    predicate: () => settings.store.disableFade
                 },
                 { // Lazy-load contents
                     match: /createPromise:\(\)=>([^:}]*?),webpackId:"\d+",name:(?!="CollectiblesShop")"[^"]+"/g,
                     replace: "$&,_:$1",
-                    predicate: () => settings.store.eagerLoad,
-                },
-            ],
+                    predicate: () => settings.store.eagerLoad
+                }
+            ]
         },
         { // For some reason standardSidebarView also has a small fade-in
             find: "DefaultCustomContentScroller:function()",
@@ -68,23 +68,23 @@ export default definePlugin({
                 },
                 {
                     match: /\i\.animated\.div/,
-                    replace: "\"div\""
-                },
+                    replace: '"div"'
+                }
             ],
-            predicate: () => settings.store.disableFade,
+            predicate: () => settings.store.disableFade
         },
         { // Load menu stuff on hover, not on click
             find: "Messages.USER_SETTINGS_WITH_BUILD_OVERRIDE.format",
             replacement: {
-                match: /(?<=handleOpenSettingsContextMenu.{0,250}?\i\.el\(("\d+")\)\.then.*?Messages\.USER_SETTINGS,)(?=onClick:)/,
-                replace: "onMouseEnter(){let r=Vencord.Webpack.wreq;r.el($1).then(r.bind(r,$1));},"
+                match: /(?<=handleOpenSettingsContextMenu.{0,250}?\i\.el\(("[^"]+")\)\.then\([^;]*?("\d+").*?Messages\.USER_SETTINGS,)(?=onClick:)/,
+                replace: "onMouseEnter(){Vencord.Webpack.wreq.el($1).then(()=>Vencord.Webpack.wreq($2));},"
             },
-            predicate: () => settings.store.eagerLoad,
+            predicate: () => settings.store.eagerLoad
         },
         { // Settings cog context menu
             find: "Messages.USER_SETTINGS_ACTIONS_MENU_LABEL",
             replacement: {
-                match: /\(0,\i.default\)\(\)(?=\.filter)/,
+                match: /\(0,\i.default\)\(\)(?=\.filter\(\i=>\{let\{section:\i\}=)/,
                 replace: "$self.wrapMenu($&)"
             }
         }
@@ -106,7 +106,7 @@ export default definePlugin({
             className={cl({
                 [Classes.layer]: true,
                 [Classes.baseLayer]: baseLayer,
-                "stop-animations": hidden,
+                "stop-animations": hidden
             })}
             style={{ opacity: hidden ? 0 : undefined }}
             {...props}
@@ -145,12 +145,13 @@ export default definePlugin({
                                 id={label.replace(/\W/, "_")}
                                 label={label}
                                 children={children}
+                                action={children[0].props.action}
                             />;
                         } else {
                             return children;
                         }
                     });
-            },
+            }
         };
     }
 });
