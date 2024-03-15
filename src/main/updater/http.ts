@@ -16,8 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { VENCORD_USER_AGENT } from "@utils/constants";
-import { IpcEvents } from "@utils/IpcEvents";
+import { IpcEvents } from "@shared/IpcEvents";
+import { VENCORD_USER_AGENT } from "@shared/vencordUserAgent";
 import { ipcMain } from "electron";
 import { writeFile } from "fs/promises";
 import { join } from "path";
@@ -52,8 +52,8 @@ async function calculateGitChanges() {
     return data.commits.map((c: any) => ({
         // github api only sends the long sha
         hash: c.sha.slice(0, 7),
-        author: c.author.login || c.commit.author.name,
-        message: c.commit.message
+        author: c.author.login,
+        message: c.commit.message.substring(c.commit.message.indexOf("\n") + 1)
     }));
 }
 

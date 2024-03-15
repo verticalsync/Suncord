@@ -11,18 +11,22 @@ import { Menu } from "@webpack/common";
 import type { Guild } from "discord-types/general";
 import { zipSync } from "fflate";
 
-const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild; }) => () => {
+const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild; }) => {
+    // Assuming "privacy" is the correct ID for the group you want to modify.
     const group = findGroupChildrenByChildId("privacy", children);
 
-    group?.push(
-        <Menu.MenuItem id="emoji.download" label="Download Emojis" action={() => zipServerEmojis(guild)}></Menu.MenuItem>
-    );
+    if (group) {
+        group.push(
+            <Menu.MenuItem id="emoji.download" label="Download Emojis" action={() => zipServerEmojis(guild)}></Menu.MenuItem>
+        );
+    }
 };
 
 export default definePlugin({
     name: "emojiDumper",
-    description: "Context menu to dump and download a servers emojis.",
+    description: "Context menu to dump and download a server's emojis.",
     authors: [
+        SuncordDevs.Cortex,
         Devs.Samwich,
         SuncordDevs.Woosh,
     ],
@@ -35,6 +39,7 @@ export default definePlugin({
 });
 
 async function zipServerEmojis(guild: Guild) {
+
     const emojis = Vencord.Webpack.Common.EmojiStore.getGuilds()[guild.id]?.emojis;
     if (!emojis) {
         return console.log("Server not found!");

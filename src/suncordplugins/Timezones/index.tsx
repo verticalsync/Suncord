@@ -5,7 +5,8 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { Devs, VENCORD_USER_AGENT_HASHLESS } from "@utils/constants";
+import { VENCORD_USER_AGENT_HASHLESS } from "@shared/vencordUserAgent";
+import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { React, SearchableSelect, Text, Toasts, UserStore } from "@webpack/common";
