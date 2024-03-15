@@ -16,8 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import gitHash from "~git-hash";
+import gitRemote from "~git-remote";
+
+export {
+    gitHash,
+    gitRemote
+};
+
 export const WEBPACK_CHUNK = "webpackChunkdiscord_app";
 export const REACT_GLOBAL = "Vencord.Webpack.Common.React";
+export const VENCORD_USER_AGENT = `Suncord/${gitHash}${gitRemote ? ` (https://github.com/${gitRemote})` : ""}`;
+export const VENCORD_USER_AGENT_HASHLESS = `Suncord${gitRemote ? ` (https://github.com/${gitRemote})` : ""}`;
 export const SUPPORT_CHANNEL_ID = "1217501200761622641"; // Suncord > #support
 
 export interface Dev {
@@ -57,8 +67,8 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "botato",
         id: 440990343899643943n,
     },
-    fawn: {
-        name: "fawn",
+    obscurity: {
+        name: "obscurity",
         id: 336678828233588736n,
     },
     rushii: {
@@ -473,15 +483,14 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
         name: "w00shh.",
         id: 689165844835860522n,
     },
-     Cortex: {
-        name: "Cortex",
-        id: 825069530376044594n,
-    },
     Discord: {
         name: "discord",
         id: 643945264868098049n,
     },
-    
+    Cortex: {
+        name: "Cortex",
+        id: 825069530376044594n,
+    },
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
