@@ -1,14 +1,16 @@
+![logo](./src/assets/icon.png)
+
 # Suncord
 
+[![Sunroof](https://img.shields.io/badge/Sunroof-yellow?style=flat)](https://github.com/verticalsync/Sunroof)
 [![Tests](https://github.com/verticalsync/Suncord/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/verticalsync/Suncord/actions/workflows/test.yml)
-[![Discord](https://img.shields.io/discord/1207691698386501634.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord.gg/VasF3Ma4Ab)
+[![Discord](https://img.shields.io/discord/1207691698386501634.svg?color=768AD4&label=Discord&logo=discord&logoColor=white)](https://discord.gg/VasF3Ma4Ab)
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
-You can join our discord server for commits, changes or just chat or maybe even support? Who knows.
-For the invite click [here](https://discord.gg/VasF3Ma4Ab)
+You can join our [discord server](https://discord.gg/VasF3Ma4Ab) for commits, changes, chat or even support.
 
-## Installing / Uninstalling
+## Installing & Uninstalling
 
 Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
