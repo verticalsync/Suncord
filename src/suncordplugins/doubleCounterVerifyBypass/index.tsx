@@ -17,7 +17,6 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Alerts, Menu } from "@webpack/common";
@@ -58,61 +57,62 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) =
             }
         }
     };
+};
 
-    async function verify(link) {
-        try {
-            const res = await fetch(link);
-            console.log(res.ok);
-        } catch { }
-    }
+async function verify(link) {
+    try {
+        const res = await fetch(link);
+        console.log(res.ok);
+    } catch { }
+}
 
-    export default definePlugin({
-        name: "DoubleCounterVerifyBypass",
-        description: "Bypass Double Counter verifications easily.",
-        authors: [SuncordDevs.nyx],
+export default definePlugin({
+    name: "DoubleCounterVerifyBypass",
+    description: "Bypass Double Counter verifications easily.",
+    authors: [SuncordDevs.nyx],
 
-        contextMenus: {
-            "message": patchMessageContextMenu,
-        },
+    contextMenus: {
+        "message": patchMessageContextMenu,
+    },
 
-        start() {
-            if (Settings.plugins.CommandPalette.enabled) {
-                registerAction({
-                    id: "doubleCounterVerify",
-                    label: "Verify a Double Counter Link",
-                    callback: async () => {
-                        const link = await openSimpleTextInput("Please enter the Double Counter link you want to verify.");
-                        if (link) {
-                            await verify(link).then(() => {
-                                Alerts.show({
-                                    title: "Verified",
-                                    body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
-                                    confirmText: "Okay",
-                                    onConfirm: () => { }
-                                });
+    start() {
+        if (Settings.plugins.CommandPalette.enabled) {
+            registerAction({
+                id: "doubleCounterVerify",
+                label: "Verify a Double Counter Link",
+                callback: async () => {
+                    const link = await openSimpleTextInput("Please enter the Double Counter link you want to verify.");
+                    if (link) {
+                        await verify(link).then(() => {
+                            Alerts.show({
+                                title: "Verified",
+                                body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
+                                confirmText: "Okay",
+                                onConfirm: () => { }
                             });
-                        }
-                    },
-                    registrar: "DoubleCounterVerifyBypass"
-                });
-            }
-        },
-
-        flux: {
-            async MESSAGE_CREATE({ message }: { message: Message; }) {
-                if (message.author.id !== DOUBLECOUNTER_APP_ID || message.type !== 19 || message.embeds.length === 0) return;
-
-                // @ts-ignore
-                const link = VERIFICATION_LINK_REGEX.exec(message.embeds.map(embed => embed.fields.map(field => field))[0][1].value);
-                console.log(link);
-                await verify(link).then(() => {
-                    Alerts.show({
-                        title: "Verified",
-                        body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
-                        confirmText: "Okay",
-                        onConfirm: () => { }
-                    });
-                });
-            }
+                        });
+                    }
+                },
+                registrar: "DoubleCounterVerifyBypass"
+            });
         }
-    });
+    },
+
+    flux: {
+        async MESSAGE_CREATE({ message }: { message: Message; }) {
+            if (message.author.id !== DOUBLECOUNTER_APP_ID || message.type !== 19 || message.embeds.length === 0) return;
+
+            // @ts-ignore
+            const link = VERIFICATION_LINK_REGEX.exec(message.embeds.map(embed => embed.fields.map(field => field))[0][1].value);
+            console.log(link);
+            await verify(link).then(() => {
+                Alerts.show({
+                    title: "Verified",
+                    body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
+                    confirmText: "Okay",
+                    onConfirm: () => { }
+                });
+            });
+        }
+    }
+});
