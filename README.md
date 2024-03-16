@@ -51,6 +51,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
+-   CopyEmojiAsFormattedString (by [happyendermangit](https://github.com/happyendermangit/) and [vishnyanetchereshnya](https://github.com/vishnyanetchereshnya)) (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
 
 ## Disclaimer
 
