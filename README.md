@@ -33,7 +33,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   MessageLinkTooltip
 -   -   ReplyTimestamp
 -   -   ModalFade
--   -   BetterSettings ([pull request to vencord here](https://github.com/Vendicated/Vencord/pull/2222))
 -   -   Title
 
 -   Plugins by [Syncxv](https://github.com/Syncxv)
