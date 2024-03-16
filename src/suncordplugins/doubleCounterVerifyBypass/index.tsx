@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { addContextMenuPatch, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
+import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Alerts, Menu } from "@webpack/common";
@@ -27,9 +27,8 @@ import { registerAction } from "../commandPalette/commands";
 import { openSimpleTextInput } from "../commandPalette/components/TextInput";
 
 const DOUBLECOUNTER_APP_ID = "703886990948565003";
-const VERIFICATION_COMPONENT_ID = "verification_panel:verify";
 
-const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) => () => {
+const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) => {
     const { message } = props;
     const { components } = message;
 
@@ -71,9 +70,11 @@ export default definePlugin({
     description: "Bypass Double Counter verifications easily.",
     authors: [SuncordDevs.nyx],
 
-    start() {
-        addContextMenuPatch("message", patchMessageContextMenu);
+    contextMenus: {
+        "message": patchMessageContextMenu
+    },
 
+    start() {
         if (Settings.plugins.CommandPalette.enabled) {
             registerAction({
                 id: "doubleCounterVerify",
@@ -94,10 +95,6 @@ export default definePlugin({
                 registrar: "DoubleCounterVerifyBypass"
             });
         }
-    },
-
-    stop() {
-        removeContextMenuPatch("message", patchMessageContextMenu);
     },
 
     flux: {
