@@ -39,9 +39,13 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   [MessageLoggerEnhanced](https://github.com/Syncxv/vc-message-logger-enhanced)
 -   -   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs)
 
+-   Plugins by [verticalsync](https://github.com/verticalsync)
+-   -   DoubleCounterVerifyBypass
+-   -   QuestionMarkReplacement (for smuki, i think he's acoustic)
+-   -   SmukiCommands (roblox tax calculation and profile commands for smuki)
+
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
--   DoubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
 -   CustomScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
@@ -52,7 +56,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
 -   CopyEmojiAsFormattedString (by [happyendermangit](https://github.com/happyendermangit/) and [vishnyanetchereshnya](https://github.com/vishnyanetchereshnya)) (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
--   questionMarkReplacement (by me for smuki (i think he's acoustic))
+-   questionMarkReplacement (by me )
 
 ## Disclaimer
 
