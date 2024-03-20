@@ -17,8 +17,8 @@ export default definePlugin({
         {
             find: "UsernameDecorationTypes:function()",
             replacement: {
-                match: /children:(\(\i\?"@":""\)\+\i)/,
-                replace: "children:$self.wrapMessageAuthor(arguments[0],$1)"
+                match: /(\i)=\{className:\i.username,style:.*?onContextMenu:\i,children:.*?\}/,
+                replace: "$&,{}=$1.children=$self.wrapMessageAuthor(arguments[0],$1.children)"
             }
         },
         {
@@ -30,7 +30,7 @@ export default definePlugin({
         },
     ],
 
-    wrapMessageAuthor({ author, message }, text) {
+    wrapMessageAuthor({ message }, text) {
         const channel = ChannelStore.getChannel(message.channel_id);
         return message.webhookId
             ? text
@@ -42,11 +42,13 @@ export default definePlugin({
     },
 
     wrapForumAuthor({ channel, user }, text) {
-        return <DeadIndicator
-            channel={channel}
-            userId={user.id}
-            text={text}
-        />;
+        return !user
+            ? text
+            : <DeadIndicator
+                channel={channel}
+                userId={user.id}
+                text={text}
+            />;
     },
 });
 
