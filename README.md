@@ -58,6 +58,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   CopyEmojiAsFormattedString (by [happyendermangit](https://github.com/happyendermangit/) and [vishnyanetchereshnya](https://github.com/vishnyanetchereshnya)) (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
 -   QuestionMarkReplacement (by me)
 -   HolyNotes (by [Wolfie](https://github.com/WolfPlugs/VencordPlugins))
+-   CopyUserMention (by [Cortex](https://github.com/verysillycat))
 
 ## Disclaimer
 
