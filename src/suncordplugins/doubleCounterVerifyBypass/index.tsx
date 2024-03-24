@@ -29,34 +29,38 @@ import { openSimpleTextInput } from "../commandPalette/components/TextInput";
 const DOUBLECOUNTER_APP_ID = "703886990948565003";
 const VERIFICATION_LINK_REGEX = /https:\/\/verify.doublecounter.gg\/v\/[0-9a-z]{8,16}/g;
 
-const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) => {
-    const { message } = props;
+const patchMessageContextMenu: NavContextMenuPatchCallback = (children, { message }) => {
     const { components } = message;
 
     if (message.author.id === DOUBLECOUNTER_APP_ID && components?.length === 0 && message.embeds?.map(embed => embed)[0].fields.length === 4) {
-        const regex_link = VERIFICATION_LINK_REGEX.exec(message.embeds.map(embed => embed.fields.map(field => field))[0][1].rawValue);
-        if (regex_link) {
-            children.push((
-                <Menu.MenuItem
-                    id="ml-dcvp-style"
-                    key="ml-dcvp-style"
-                    label="Bypass Double Counter"
-                    action={() => {
+        children.push((
+            <Menu.MenuItem
+                id="ml-dcvp"
+                key="ml-dcvp-verify"
+                label="Bypass Double Counter"
+                color="brand"
+                action={() => {
+                    const regex_link = VERIFICATION_LINK_REGEX.exec(message.embeds.map(embed => embed.fields.map(field => field))[0][1].rawValue);
+                    if (regex_link) {
                         verify(regex_link[0]).then(() => {
                             Alerts.show({
                                 title: "Verified",
                                 body: "You have been verified successfully, please wait a little bit for DoubleCounter to update your roles.",
                                 confirmText: "Okay",
-                                onConfirm: () => { }
                             });
                         });
-                    }}
-                />
-            ));
-        }
+                    } else {
+                        Alerts.show({
+                            title: "Link not found",
+                            body: "The link has not been found in this message.",
+                            confirmText: "Okay"
+                        });
+                    }
+                }}
+            />
+        ));
     }
 };
-
 async function verify(link) {
     try {
         const res = await fetch(link);
