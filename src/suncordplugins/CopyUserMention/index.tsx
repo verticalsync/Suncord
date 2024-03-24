@@ -23,6 +23,12 @@ const MentionIcon = () => (
     </svg>
 );
 
+interface UserContextProps {
+    channel: Channel;
+    guildId?: string;
+    user: User;
+}
+
 const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: UserContextProps) => {
     if (!user) return;
 
