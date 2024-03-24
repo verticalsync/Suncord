@@ -8,6 +8,7 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { Devs, SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Clipboard, Menu } from "@webpack/common";
+import type { Channel, User } from "discord-types/general";
 
 const MentionIcon = () => (
     <svg
