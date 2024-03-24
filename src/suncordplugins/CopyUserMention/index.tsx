@@ -8,7 +8,6 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { Devs, SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Clipboard, Menu } from "@webpack/common";
-import { UserContextProps } from "plugins/biggerStreamPreview";
 
 const MentionIcon = () => (
     <svg
