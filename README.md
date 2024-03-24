@@ -56,7 +56,8 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
 -   CopyEmojiAsFormattedString (by [happyendermangit](https://github.com/happyendermangit/) and [vishnyanetchereshnya](https://github.com/vishnyanetchereshnya)) (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
--   questionMarkReplacement (by me )
+-   QuestionMarkReplacement (by me)
+-   HolyNotes (by [Wolfie](https://github.com/WolfPlugs/VencordPlugins))
 
 ## Disclaimer
 
