@@ -61,6 +61,7 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (children, { messag
         ));
     }
 };
+
 async function verify(link) {
     try {
         const res = await fetch(link);
