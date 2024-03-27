@@ -1,7 +1,3 @@
-<!-- > [!WARNING]
-> These instructions are only for advanced users. If you're not a Developer, you should use our [graphical installer](https://github.com/verticalsync/SuncordInstaller#usage) instead.
-> No support will be provided for installing in this fashion. If you cannot figure it out, you should just stick to a regular install. -->
-
 > [!WARNING]
 > If you want to use the regular graphical installer, you can use it [here](https://github.com/verticalsync/SuncordInstaller#usage),
 > but updating within the app is currently not possible and will give you an error,
