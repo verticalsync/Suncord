@@ -276,7 +276,7 @@ export default definePlugin({
             }
         },
         {
-            find: '.displayName="UserSettingsProtoStore"',
+            find: '"UserSettingsProtoStore"',
             replacement: [
                 {
                     // Overwrite incoming connection settings proto with our local settings
