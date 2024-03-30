@@ -35,10 +35,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   ModalFade
 -   -   Title
 
--   Plugins by [Syncxv](https://github.com/Syncxv)
--   -   [MessageLoggerEnhanced](https://github.com/Syncxv/vc-message-logger-enhanced)
--   -   PinDMs (but better) ([pull request](https://github.com/Vendicated/Vencord/pull/2203) to PinDMs)
-
 -   Plugins by [verticalsync](https://github.com/verticalsync)
 -   -   DoubleCounterVerifyBypass
 -   -   QuestionMarkReplacement (for smuki, i think he's acoustic)
@@ -51,12 +47,12 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
 -   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
+-   MessageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
 -   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
 -   HideMessage (by [Hanzy](https://github.com/hanzydev/)) (added from Hanzy's [pull request](https://github.com/Vendicated/Vencord/pull/2207))
 -   CopyEmojiAsFormattedString (by [happyendermangit](https://github.com/happyendermangit/) and [vishnyanetchereshnya](https://github.com/vishnyanetchereshnya)) (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
--   QuestionMarkReplacement (by me)
 -   HolyNotes (by [Wolfie](https://github.com/WolfPlugs/VencordPlugins))
 -   CopyUserMention (by [Cortex](https://github.com/verysillycat))
 

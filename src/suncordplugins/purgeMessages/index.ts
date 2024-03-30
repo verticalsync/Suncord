@@ -23,26 +23,22 @@ import { findByPropsLazy } from "@webpack";
 import { MessageStore, UserStore } from "@webpack/common";
 import { Channel, Message } from "discord-types/general";
 
+import { loggedMessages } from "../messageLoggerEnhanced/LoggedMessageManager";
+
 const MessageActions = findByPropsLazy("deleteMessage", "startEditMessage");
 
-function DeleteMessages(amount: number, channel: Channel, delay: number = 1500) {
-    const meId = UserStore.getCurrentUser().id;
-    const messages: Message[] = MessageStore.getMessages(channel.id)._array.filter((m: Message) => m.author.id === meId).reverse().slice(0, amount);
-    var msgs: Message[] = JSON.parse(JSON.stringify(messages));
-    var counter = 0;
+async function DeleteMessages(amount: number, channel: Channel, delay: number = 1500) {
+    const userId = UserStore.getCurrentUser().id;
+    const messages: Message[] = MessageStore.getMessages(channel.id)._array.filter((m: Message) => m.author.id === userId).reverse();
+    const parsedMessages: Message[] = JSON.parse(JSON.stringify(messages));
+    const uniqueMessages: Message[] = parsedMessages.filter(message => !loggedMessages.deletedMessages[channel.id].includes(message.id));
 
-    function deleteNextMessage() {
-        if (counter < msgs.length) {
-            const msg = msgs[counter];
-            MessageActions.deleteMessage(channel.id, msg.id);
-            counter += 1;
-            setTimeout(deleteNextMessage, delay);
-        }
+    for (const message of uniqueMessages) {
+        MessageActions.deleteMessage(channel.id, message.id);
+        amount--;
+        if (amount === 0) break;
+        await new Promise(resolve => setTimeout(resolve, delay));
     }
-
-    deleteNextMessage();
-
-    return counter;
 }
 
 export default definePlugin({
@@ -66,15 +62,30 @@ export default definePlugin({
                     description: "Channel ID you wish to purge from",
                     type: ApplicationCommandOptionType.CHANNEL,
                     required: false
+                },
+                {
+                    name: "delay",
+                    description: "Delay inbetween deleting messages",
+                    type: ApplicationCommandOptionType.INTEGER,
+                    required: false
                 }
             ],
             inputType: ApplicationCommandInputType.BUILT_IN,
-            execute: (opts, ctx) => {
+            execute: async (opts, ctx) => {
                 const amount: number = findOption(opts, "amount", 0);
                 const channel: Channel = findOption(opts, "channel", ctx.channel);
-                const len = DeleteMessages(amount, channel);
-                return sendBotMessage(ctx.channel.id, {
+                const delay: number = findOption(opts, "delay", 1500);
+
+                sendBotMessage(ctx.channel.id, {
                     content: `> deleting ${amount} messages.`
+                });
+
+                DeleteMessages(amount, channel, delay).then(() => {
+                    sendBotMessage(ctx.channel.id,
+                        {
+                            content: `> deleted ${amount} messages`
+                        }
+                    );
                 });
             },
         }
