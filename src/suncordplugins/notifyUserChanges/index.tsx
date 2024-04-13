@@ -4,11 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// TODO: add notify on messages in inactive channels
-
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { showNotification } from "@api/Notifications";
-import { definePluginSettings,Settings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStoreLazy } from "@webpack";
@@ -187,6 +185,12 @@ export const settings = definePluginSettings({
         restartNeeded: false,
         default: false,
     },
+    persistNotifications: {
+        type: OptionType.BOOLEAN,
+        description: "Persist notifications",
+        restartNeeded: false,
+        default: false,
+    },
     userIds: {
         type: OptionType.STRING,
         description: "User IDs (comma separated)",
@@ -209,8 +213,8 @@ const getRichBody = (user: User, text: string | React.ReactNode) => <div
     style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px" }}>
     <div style={{ position: "relative" }}>
         <img src={user.getAvatarURL(void 0, 80, true)}
-            style={{ width: "80px", height: "80px", borderRadius: "15%" }} alt={`${user.username}'s avatar`}/>
-        <PlatformIndicator user={user} style={{ position: "absolute", top: "-8px", right: "-10px" }}/>
+            style={{ width: "80px", height: "80px", borderRadius: "15%" }} alt={`${user.username}'s avatar`} />
+        <PlatformIndicator user={user} style={{ position: "absolute", top: "-8px", right: "-10px" }} />
     </div>
     <span>{text}</span>
 </div>;
@@ -227,7 +231,7 @@ function triggerVoiceNotification(userId: string, userChannelId: string | null) 
             showNotification({
                 title,
                 body: "joined a new voice channel",
-                noPersist: true,
+                noPersist: !settings.store.persistNotifications,
                 richBody: getRichBody(user, `${name} joined a new voice channel`),
             });
         }
@@ -235,7 +239,7 @@ function triggerVoiceNotification(userId: string, userChannelId: string | null) 
         showNotification({
             title,
             body: "left their voice channel",
-            noPersist: true,
+            noPersist: !settings.store.persistNotifications,
             richBody: getRichBody(user, `${name} left their voice channel`),
         });
     }
@@ -310,7 +314,7 @@ export default definePlugin({
                 }
             }
         },
-        PRESENCE_UPDATES({ updates }: { updates: PresenceUpdate[] }) {
+        PRESENCE_UPDATES({ updates }: { updates: PresenceUpdate[]; }) {
             if (!settings.store.notifyStatus || !settings.store.userIds) {
                 return;
             }
@@ -328,7 +332,7 @@ export default definePlugin({
                     showNotification({
                         title: shouldBeNative() ? `User ${name} changed status` : "User status change",
                         body: `is now ${status}`,
-                        noPersist: true,
+                        noPersist: !settings.store.persistNotifications,
                         richBody: getRichBody(user, `${name}'s status is now ${status}`),
                     });
                 }
