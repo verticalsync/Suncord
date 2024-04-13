@@ -7,12 +7,11 @@
 import { definePluginSettings } from "@api/Settings";
 import * as Styles from "@api/Styles";
 import { makeRange } from "@components/PluginSettings/components";
+import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 
 const AuthorStore = findByPropsLazy("useNullableMessageAuthor", "useNullableMessageAuthor");
-
-import { Devs } from "@utils/constants";
 
 import style from "./style.css?managed";
 

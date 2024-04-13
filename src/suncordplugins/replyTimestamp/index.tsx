@@ -13,8 +13,8 @@ import { Timestamp } from "@webpack/common";
 import { Message } from "discord-types/general";
 import { HTMLAttributes } from "react";
 
-const MessageIds = findByPropsLazy("getMessageTimestampId");
-const DateUtils = findByPropsLazy("calendarFormat", "dateFormat", "isSameDay", "accessibilityLabelCalendarFormat");
+const { getMessageTimestampId } = findByPropsLazy("getMessageTimestampId");
+const { calendarFormat, dateFormat, isSameDay } = findByPropsLazy("calendarFormat", "dateFormat", "isSameDay", "accessibilityLabelCalendarFormat");
 const MessageClasses = findByPropsLazy("separator", "latin24CompactTimeStamp");
 
 function Sep(props: HTMLAttributes<HTMLElement>) {
@@ -28,9 +28,9 @@ export default definePlugin({
 
     patches: [
         {
-            find: ",{renderSingleLineMessage:function(){return ",
+            find: "renderSingleLineMessage:function()",
             replacement: {
-                match: /(?<="aria-label":\w+,children:\[)(?=\w+,\w+,\w+\])/,
+                match: /(?<="aria-label":\i,children:\[)(?=\i,\i,\i\])/,
                 replace: "$self.ReplyTimestamp(arguments[0]),"
             }
         }
@@ -47,16 +47,17 @@ export default definePlugin({
             const refTimestamp = referencedMessage.message!.timestamp;
             const baseTimestamp = baseMessage.timestamp;
             return <Timestamp
-                id={MessageIds.getMessageTimestampId(referencedMessage.message)}
+                id={getMessageTimestampId(referencedMessage.message)}
                 className="c98-reply-timestamp"
-                compact={refTimestamp.isSame(baseTimestamp, "date")}
-                timestamp={refTimestamp.toDate()}
+                compact={isSameDay(refTimestamp, baseTimestamp)}
+                // @ts-ignore
+                timestamp={refTimestamp}
                 isInline={false}
             >
                 <Sep>[</Sep>
-                {DateUtils.isSameDay(refTimestamp, baseTimestamp)
-                    ? DateUtils.dateFormat(refTimestamp, "LT")
-                    : DateUtils.calendarFormat(refTimestamp)
+                {isSameDay(refTimestamp, baseTimestamp)
+                    ? dateFormat(refTimestamp, "LT")
+                    : calendarFormat(refTimestamp)
                 }
                 <Sep>]</Sep>
             </Timestamp>;

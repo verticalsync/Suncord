@@ -86,14 +86,6 @@ export default definePlugin({
             },
             predicate: () => settings.store.gift,
         },
-        { // Gift button in DM profile sidebar
-            find: "Messages.MUTUAL_GUILDS_COUNT",
-            replacement: {
-                match: /\(0,\w+\.jsx\)\("div",\{className:\w+\.giftButtonContainer/,
-                replace: "false&&$&",
-            },
-            predicate: () => settings.store.gift,
-        },
         { // Emoji list
             find: "useEmojiGrid:function()",
             replacement: {
