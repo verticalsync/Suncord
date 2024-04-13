@@ -18,7 +18,7 @@ export function Timer({ time }: Readonly<{ time: number; }>) {
     const defaultColorClassName = settings.store.showRoleColor ? "" : "usernameFont__71dd5 username__73ce9";
 
     if (settings.store.showWithoutHover) {
-        return <TimerText text={formatted} className={defaultColorClassName}/>;
+        return <TimerText text={formatted} className={defaultColorClassName} />;
     } else {
         // show as a tooltip
         return (
