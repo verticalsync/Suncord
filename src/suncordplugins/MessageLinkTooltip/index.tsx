@@ -99,6 +99,7 @@ function MessagePreview({ channelId, messageId }) {
 
 function useMessage(channelId, messageId) {
     const cachedMessage = useStateFromStores(
+        // @ts-ignore
         [MessageStore],
         () => MessageStore.getMessage(channelId, messageId)
     );
