@@ -1,9 +1,9 @@
 {
     "name": "suncord",
     "private": "true",
-    "version": "1.8.0",
-    "description": "The cutest Discord client mod",
-    "homepage": "https://github.com/Vendicated/Vencord#readme",
+    "version": "1.8.1",
+    "description": "A fork of the Discord client mod Vencord.",
+    "homepage": "https://github.com/verticalsync/Suncord#readme",
     "bugs": {
         "url": "https://github.com/verticalsync/Suncord/issues"
     },

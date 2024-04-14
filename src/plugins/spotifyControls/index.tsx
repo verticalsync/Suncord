@@ -18,6 +18,7 @@
 
 import { Settings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -43,26 +44,16 @@ export default definePlugin({
             type: OptionType.BOOLEAN,
             description: "Open Spotify URIs instead of Spotify URLs. Will only work if you have Spotify installed and might not work on all platforms",
             default: false
-        },
-        useCoverAsBackground: {
-            type: OptionType.BOOLEAN,
-            description: "Use the album cover as a background",
-            default: false
-        },
-        rotateBackground: {
-            type: OptionType.BOOLEAN,
-            description: "Slowly rotates the background if activated ",
-            default: false
-        },
+        }
     },
     patches: [
         {
             find: "showTaglessAccountPanel:",
             replacement: {
-                // return React.createElement(AccountPanel, { ..., showTaglessAccountPanel: blah })
-                match: /return ?(.{0,30}\(.{1,3},\{[^}]+?,showTaglessAccountPanel:.+?\}\))/,
-                // return [Player, Panel]
-                replace: "return [$self.renderPlayer(),$1]"
+                // react.jsx)(AccountPanel, { ..., showTaglessAccountPanel: blah })
+                match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?showTaglessAccountPanel:)/,
+                // react.jsx(WrapperComponent, { VencordOriginal: AccountPanel, ...
+                replace: "$self.PanelWrapper,{VencordOriginal:$1,"
             }
         },
         {
@@ -88,6 +79,25 @@ export default definePlugin({
             }
         }
     ],
+
     start: () => toggleHoverControls(Settings.plugins.SpotifyControls.hoverControls),
-    renderPlayer: () => <Player useBg={Settings.plugins.SpotifyControls.useCoverAsBackground} rotateBg={Settings.plugins.SpotifyControls.rotateBackground} />
+
+    PanelWrapper({ VencordOriginal, ...props }) {
+        return (
+            <>
+                <ErrorBoundary
+                    fallback={() => (
+                        <div className="vc-spotify-fallback">
+                            <p>Failed to render Spotify Modal :(</p>
+                            <p >Check the console for errors</p>
+                        </div>
+                    )}
+                >
+                    <Player />
+                </ErrorBoundary>
+
+                <VencordOriginal {...props} />
+            </>
+        );
+    }
 });

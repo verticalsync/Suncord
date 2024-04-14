@@ -18,7 +18,6 @@
 
 import "./spotifyStyles.css";
 
-import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { debounce } from "@shared/debounce";
@@ -263,16 +262,6 @@ function makeLinkProps(name: string, condition: unknown, path: string) {
     } satisfies React.HTMLAttributes<HTMLElement>;
 }
 
-function Background({ track, rotate = false }: { track: Track; rotate?: Boolean; }) {
-    const img = track?.album?.image;
-    return (
-        <>
-            {img && (<img id={cl("background-image")} className={rotate ? cl("rotate") : ""} src={img.url} alt="Album Image Background" />)
-            }
-        </>
-    );
-}
-
 function Info({ track }: { track: Track; }) {
     const img = track?.album?.image;
 
@@ -350,7 +339,7 @@ function Info({ track }: { track: Track; }) {
     );
 }
 
-export function Player({ useBg, rotateBg }: { useBg: Boolean; rotateBg: Boolean; }) {
+export function Player() {
     const track = useStateFromStores(
         [SpotifyStore],
         () => SpotifyStore.track,
@@ -381,20 +370,15 @@ export function Player({ useBg, rotateBg }: { useBg: Boolean; rotateBg: Boolean;
     if (!track || !device?.is_active || shouldHide)
         return null;
 
+    const exportTrackImageStyle = {
+        "--vc-spotify-track-image": `url(${track?.album?.image?.url || ""})`,
+    } as React.CSSProperties;
+
     return (
-        <ErrorBoundary fallback={() => (
-            <div className="vc-spotify-fallback">
-                <p>Failed to render Spotify Modal :(</p>
-                <p >Check the console for errors</p>
-            </div>
-        )}>
-            <div id={cl("player")}>
-                {useBg && <Background track={track} />}
-                {(useBg && rotateBg) && <Background track={track} rotate={true} />}
-                <Info track={track} />
-                <SeekBar />
-                <Controls />
-            </div>
-        </ErrorBoundary>
+        <div id={cl("player")} style={exportTrackImageStyle}>
+            <Info track={track} />
+            <SeekBar />
+            <Controls />
+        </div>
     );
 }
