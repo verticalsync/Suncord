@@ -26,7 +26,7 @@ jobs:
                   token: ${{ env.WORKFLOW_TOKEN }}
                   spawn_logs: ${{ env.SPAWN_LOGS }}
 
-            - name: Display Summary
+            - name: Add Summary
               if: always()
               run: |
-                  echo "Summary: ${{ steps.sync.outputs.result }}"
+                  echo "# Summary\n##$(cat output.txt)" >> $GITHUB_STEP_SUMMARY
