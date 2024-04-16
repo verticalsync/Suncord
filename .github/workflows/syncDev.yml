@@ -6,8 +6,6 @@ env:
     UPSTREAM_URL: "https://github.com/Vendicated/Vencord.git"
     UPSTREAM_BRANCH: "dev"
 
-    DOWNSTREAM_URL: "https://github.com/verticalsync/Suncord.git"
-
     SPAWN_LOGS: "false"
 
 on:
@@ -24,6 +22,5 @@ jobs:
               with:
                   upstream_repo: ${{ env.UPSTREAM_URL }}
                   upstream_branch: ${{ env.UPSTREAM_BRANCH }}
-                  downstream_repo: ${{ env.DOWNSTREAM_URL }}
                   token: ${{ env.WORKFLOW_TOKEN }}
                   spawn_logs: ${{ env.SPAWN_LOGS }}
