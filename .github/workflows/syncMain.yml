@@ -25,8 +25,3 @@ jobs:
                   downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
                   token: ${{ env.WORKFLOW_TOKEN }}
                   spawn_logs: ${{ env.SPAWN_LOGS }}
-
-            - name: Add Summary
-              if: always()
-              run: |
-                  echo "# Summary\n##$(cat output.txt)" >> $GITHUB_STEP_SUMMARY
