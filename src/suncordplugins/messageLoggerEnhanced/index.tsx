@@ -29,16 +29,15 @@ import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, FluxDispatcher, Menu, MessageStore, React, Toasts, UserStore } from "@webpack/common";
+import { Alerts, Button, FluxDispatcher, Menu, MessageActions, MessageStore, React, Toasts, UserStore } from "@webpack/common";
 
-import { ImageCacheDir, LogsDir } from "./components/FolderSelectInput";
 import { OpenLogsButton } from "./components/LogsButton";
 import { openLogModal } from "./components/LogsModal";
+import { ImageCacheDir, LogsDir } from "./components/settings/FolderSelectInput";
 import { addMessage, loggedMessages, MessageLoggerStore, removeLog } from "./LoggedMessageManager";
 import * as LoggedMessageManager from "./LoggedMessageManager";
 import { LoadMessagePayload, LoggedAttachment, LoggedMessage, LoggedMessageJSON, MessageCreatePayload, MessageDeleteBulkPayload, MessageDeletePayload, MessageUpdatePayload } from "./types";
 import { addToXAndRemoveFromOpposite, cleanUpCachedMessage, cleanupUserObject, doesBlobUrlExist, getNative, isGhostPinged, ListType, mapEditHistory, reAddDeletedMessages, removeFromX } from "./utils";
-import { checkForUpdates } from "./utils/checkForUpdates";
 import { DEFAULT_IMAGE_CACHE_DIR } from "./utils/constants";
 import { shouldIgnore } from "./utils/index";
 import { LimitedMap } from "./utils/LimitedMap";
@@ -46,6 +45,7 @@ import { doesMatch } from "./utils/parseQuery";
 import * as imageUtils from "./utils/saveImage";
 import * as ImageManager from "./utils/saveImage/ImageManager";
 import { downloadLoggedMessages } from "./utils/settingsUtils";
+import { checkForUpdatesAndNotify } from "./utils/updater";
 
 
 export const Flogger = new Logger("MessageLoggerEnhanced", "#f26c6c");
@@ -57,7 +57,12 @@ const cacheThing = findByPropsLazy("commit", "getOrCreate");
 
 const handledMessageIds = new Set();
 async function messageDeleteHandler(payload: MessageDeletePayload & { isBulk: boolean; }) {
-    if (payload.mlDeleted) return;
+    if (payload.mlDeleted) {
+        if (settings.store.permanentlyRemoveLogByDefault)
+            await removeLog(payload.id);
+
+        return;
+    }
 
     if (handledMessageIds.has(payload.id)) {
         // Flogger.warn("skipping duplicate message", payload.id);
@@ -227,7 +232,13 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         description: "Check for update",
         component: () =>
-            <Button onClick={() => checkForUpdates()}>
+            <Button onClick={() => {
+                Alerts.show({
+                    title: "Updates & Update Checking disabled",
+                    body: "Suncord has disabled auto updates for messageLoggerEnhanced, as they will not work properly. If there is a new update that you know of, contact nyx to get it updated.",
+                    confirmText: "Okay",
+                });
+            }}>
                 Check For Updates
             </Button>
     },
@@ -307,7 +318,32 @@ export const settings = definePluginSettings({
     alwaysLogCurrentChannel: {
         default: true,
         type: OptionType.BOOLEAN,
-        description: "Always log current selected channel",
+        description: "Always log current selected channel. Blacklisted channels/users will still be ignored.",
+    },
+
+    permanentlyRemoveLogByDefault: {
+        default: false,
+        type: OptionType.BOOLEAN,
+        description: "Vencord's base MessageLogger remove log button wiil delete logs permanently",
+    },
+
+    hideMessageFromMessageLoggers: {
+        default: false,
+        type: OptionType.BOOLEAN,
+        description: "When enabled, a context menu button will be added to messages to allow you to delete messages without them being logged by other loggers. Might not be safe, use at your own risk."
+    },
+
+    ShowLogsButton: {
+        default: true,
+        type: OptionType.BOOLEAN,
+        description: "Toggle to whenever show the toolbox or not",
+        restartNeeded: true,
+    },
+
+    hideMessageFromMessageLoggersDeletedMessage: {
+        default: "redacted eh",
+        type: OptionType.STRING,
+        description: "The message content to replace the message with when using the hide message from message loggers feature.",
     },
 
     messageLimit: {
@@ -415,7 +451,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: "displayName=\"MessageStore\"",
+            find: '"MessageStore"',
             replacement: {
                 match: /LOAD_MESSAGES_SUCCESS:function\(\i\){/,
                 replace: "$&$self.messageLoadSuccess(arguments[0]);"
@@ -432,6 +468,7 @@ export default definePlugin({
 
         {
             find: "toolbar:function",
+            predicate: () => settings.store.ShowLogsButton,
             replacement: {
                 match: /(function \i\(\i\){)(.{1,200}toolbar.{1,100}mobileToolbar)/,
                 replace: "$1$self.addIconToToolBar(arguments[0]);$2"
@@ -470,6 +507,15 @@ export default definePlugin({
                 match: /\i\.(?:default\.)?focusMessage\(/,
                 replace: "!(arguments[0]?.message?.deleted || arguments[0]?.message?.editHistory?.length > 0) && $&"
             }
+        },
+
+        // only check for expired attachments if the message is not deleted
+        {
+            find: "\"/ephemeral-attachments/\"",
+            replacement: {
+                match: /\i\.attachments\.some\(\i\)\|\|\i\.embeds\.some/,
+                replace: "!arguments[0].deleted && $&"
+            }
         }
     ],
     settings,
@@ -503,6 +549,8 @@ export default definePlugin({
     LoggedMessageManager,
     ImageManager,
     imageUtils,
+
+    isDeletedMessage: (id: string) => loggedMessages.deletedMessages[id] != null,
 
     getDeleted(m1, m2) {
         const deleted = m2?.deleted;
@@ -569,8 +617,7 @@ export default definePlugin({
         // if (!settings.store.saveMessages)
         //     clearLogs();
 
-        if (settings.store.autoCheckForUpdates)
-            checkForUpdates(10_000, false);
+        checkForUpdatesAndNotify(settings.store.autoCheckForUpdates);
 
         Native.init();
 
@@ -702,6 +749,34 @@ const contextMenuPath: NavContextMenuPatchCallback = (children, props) => {
                                         }))
 
                                 }
+                            />
+                        </>
+                    )
+                }
+
+                {
+                    settings.store.hideMessageFromMessageLoggers
+                    && props.navId === "message"
+                    && props.message?.author?.id === UserStore.getCurrentUser().id
+                    && props.message?.deleted === false
+                    && (
+                        <>
+                            <Menu.MenuSeparator />
+                            <Menu.MenuItem
+                                id="hide-from-message-loggers"
+                                label="Delete Message (Hide From Message Loggers)"
+                                color="danger"
+
+                                action={async () => {
+                                    await MessageActions.deleteMessage(props.message.channel_id, props.message.id);
+                                    MessageActions._sendMessage(props.message.channel_id, {
+                                        "content": settings.store.hideMessageFromMessageLoggersDeletedMessage,
+                                        "tts": false,
+                                        "invalidEmojis": [],
+                                        "validNonShortcutEmojis": []
+                                    }, { nonce: props.message.id });
+                                }}
+
                             />
                         </>
                     )
