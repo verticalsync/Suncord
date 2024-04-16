@@ -5,7 +5,6 @@ env:
     UPSTREAM_URL: "https://github.com/Vendicated/Vencord.git"
     UPSTREAM_BRANCH: "main"
     DOWNSTREAM_BRANCH: "main"
-    SPAWN_LOGS: "false"
 
 on:
     schedule:
@@ -24,4 +23,3 @@ jobs:
                   upstream_branch: ${{ env.UPSTREAM_BRANCH }}
                   downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
                   token: ${{ env.WORKFLOW_TOKEN }}
-                  spawn_logs: ${{ env.SPAWN_LOGS }}
