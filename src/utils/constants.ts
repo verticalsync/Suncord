@@ -490,11 +490,23 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "byeoon",
         id: 1167275288036655133n,
     },
+    puv: {
+        name: "puv",
+        id: 469441552251355137n,
+    },
+    arHSM: {
+        name: "arHSM",
+        id: 841509053422632990n,
+    },
+    iamme: {
+        name: "i am me",
+        id: 984392761929256980n,
+    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({
     nyx: {
-        name: "dropped#0001",
+        name: "verticalsync",
         id: 328165170536775680n,
     },
     bhop: {
