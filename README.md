@@ -60,6 +60,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   ValidReply (by [waresnew](https://github.com/waresnew)) (added from waresnew's [pull request](https://github.com/Vendicated/Vencord/pull/2337))
 -   ModViewBypass (by [Sqaaakoi](https://github.com/Sqaaakoi)) (added from Sqaaakoi's [pull request](https://github.com/Vendicated/Vencord/pull/2220))
 -   HideChatButtons (by [programminglaboratorys](https://github.com/programminglaboratorys/Vencord/blob/fun/src/plugins/hideChatButtons))
+-   AmITyping (by [MrDiamondDog](https://github.com/MrDiamondDog)) (added from MrDiamondDog's [pull request](https://github.com/Vendicated/Vencord/pull/2360))
 
 ## Disclaimer
 

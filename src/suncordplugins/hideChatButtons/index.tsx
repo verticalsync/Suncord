@@ -7,8 +7,8 @@
 import { ChatBarButton } from "@api/ChatButtons";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import definePlugin, { OptionType,StartAt } from "@utils/types";
-import { useMemo,useState } from "@webpack/common";
+import definePlugin, { OptionType, StartAt } from "@utils/types";
+import { useMemo, useState } from "@webpack/common";
 import { MouseEventHandler, ReactNode } from "react";
 
 let hidechatbuttonsopen: boolean | undefined;
@@ -80,7 +80,7 @@ function buttonsInner(buttons: ReactNode[]) {
 
 
 export default definePlugin({
-    name: "hideChatButtons",
+    name: "HideChatButtons",
     description: "able to hide the chat buttons",
     settings: settings,
     authors: [Devs.iamme],
