@@ -514,7 +514,7 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
         id: 328165170536775680n,
     },
     bhop: {
-        name: "femie",
+        name: "femeie",
         id: 442626774841556992n,
     },
     Drag: {
@@ -528,10 +528,6 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
     Cortex: {
         name: "Cortex",
         id: 825069530376044594n,
-    },
-    Discord: {
-        name: "discord",
-        id: 643945264868098049n,
     },
 } satisfies Record<string, Dev>);
 
