@@ -61,6 +61,8 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   ModViewBypass (by [Sqaaakoi](https://github.com/Sqaaakoi)) (added from Sqaaakoi's [pull request](https://github.com/Vendicated/Vencord/pull/2220))
 -   HideChatButtons (by [programminglaboratorys](https://github.com/programminglaboratorys/Vencord/blob/fun/src/plugins/hideChatButtons))
 -   AmITyping (by [MrDiamondDog](https://github.com/MrDiamondDog)) (added from MrDiamondDog's [pull request](https://github.com/Vendicated/Vencord/pull/2360))
+-   UserPFP (by [Nexpid](https://github.com/Nexpid)) (added from Nexpid's [pull request](https://github.com/Vendicated/Vencord/pull/1956))
+-   ShowBadgeInChat (by [KrstlSkll69](https://github.com/KrstlSkll69) (added from KrstlSkll69's [pull request](https://github.com/Vendicated/Vencord/pull/2347)))
 
 ## Disclaimer
 

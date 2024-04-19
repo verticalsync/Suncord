@@ -529,6 +529,18 @@ export const SuncordDevs = /* #__PURE__*/ Object.freeze({
         name: "Cortex",
         id: 825069530376044594n,
     },
+    thororen: {
+        name: "thororen",
+        id: 848339671629299742n
+    },
+    nexpid: {
+        name: "Nexpid",
+        id: 853550207039832084n
+    },
+    KrystalSkull: {
+        name: "krystalskullofficial",
+        id: 929208515883569182n
+    },
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
