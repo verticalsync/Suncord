@@ -33,8 +33,8 @@ interface BadgeCache {
     expires: number;
 }
 
-const API_URL = "https://clientmodbadges-api.herokuapp.com/";
-// const API_URL = "https://suncord-clientmodbadges-api.herokuapp.com/";
+// const API_URL = "https://clientmodbadges-api.herokuapp.com/";
+const API_URL = "https://globalbadges.suncord.rest/";
 
 const cache = new Map<string, BadgeCache>();
 const EXPIRES = 1000 * 60 * 15;
@@ -76,7 +76,7 @@ const GlobalBadges = ({ user }: { user: User; }) => {
 
     Object.keys(badges).forEach(mod => {
         if (mod.toLowerCase() === "vencord") return;
-        // if (mod.toLowerCase() === "suncord") return;
+        if (mod.toLowerCase() === "suncord") return;
         badges[mod].forEach(badge => {
             if (typeof badge === "string") {
                 const fullNames = { "hunter": "Bug Hunter", "early": "Early User" };
