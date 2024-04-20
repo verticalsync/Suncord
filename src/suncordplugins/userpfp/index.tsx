@@ -10,8 +10,6 @@ import { SuncordDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { User } from "discord-types/general";
 
-const BASE_URL = "https://userpfp.github.io/UserPFP/source/data.json";
-
 let data = {
     avatars: {} as Record<string, string>,
 };
@@ -26,11 +24,16 @@ const settings = definePluginSettings({
             { label: "Nitro", value: true, default: true },
         ],
     },
+    urlForDB: {
+        type: OptionType.STRING,
+        description: "Which Database url to use to load avatars, KNOW WHAT YOUR DOING",
+        default: "https://userpfp.github.io/UserPFP/source/data.json",
+        placeholder: "Default value: https://userpfp.github.io/UserPFP/source/data.json"
+    }
 });
 
 export default definePlugin({
     data,
-
     name: "UserPFP",
     description: "Allows you to use an animated avatar without Nitro",
     authors: [SuncordDevs.nexpid, SuncordDevs.thororen],
@@ -38,7 +41,7 @@ export default definePlugin({
     settingsAboutComponent: () => (
         <>
             <Link href="https://userpfp.github.io/UserPFP/#how-to-request-a-profile-picture-pfp">
-                <b>Submit your own pfp here</b>
+                <b>Submit your own PFP here!</b>
             </Link>
         </>
     ),
@@ -58,15 +61,13 @@ export default definePlugin({
             ]
         }
     ],
-
     getAvatarHook: (original: any) => (user: User, animated: boolean, size: number) => {
         if (settings.store.preferNitro && user.avatar?.startsWith("a_")) return original(user, animated, size);
 
         return data.avatars[user.id] ?? original(user, animated, size);
     },
-
     async start() {
-        const res = await fetch(BASE_URL);
+        const res = await fetch(settings.store.urlForDB);
         if (res.ok) this.data = data = await res.json();
-    },
+    }
 });
