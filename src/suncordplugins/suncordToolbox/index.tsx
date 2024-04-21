@@ -131,7 +131,7 @@ function ToolboxFragmentWrapper({ children }: { children: ReactNode[]; }) {
 }
 
 export default definePlugin({
-    name: "SuncordToolbox",
+    name: "VencordToolbox",
     description: "Adds a button next to the inbox button in the channel header that houses Suncord quick actions",
     authors: [SuncordDevs.Cortex, Devs.Ven, Devs.AutumnVN],
 
