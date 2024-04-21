@@ -16,6 +16,9 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 ## Extra included plugins
 
+<details>
+<summary>Included plugins</summary>
+
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   MemberListActivities
 -   -   VoiceChatUtilities
@@ -63,6 +66,8 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   AmITyping (by [MrDiamondDog](https://github.com/MrDiamondDog)) (added from MrDiamondDog's [pull request](https://github.com/Vendicated/Vencord/pull/2360))
 -   UserPFP (by [Nexpid](https://github.com/Nexpid)) (added from Nexpid's [pull request](https://github.com/Vendicated/Vencord/pull/1956))
 -   ShowBadgeInChat (by [KrstlSkll69](https://github.com/KrstlSkll69) (added from KrstlSkll69's [pull request](https://github.com/Vendicated/Vencord/pull/2347)))
+
+</details>
 
 ## Disclaimer
 
