@@ -10,7 +10,7 @@ import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 
-import { IconWithTooltip, LogIcon, ChatBarIcon } from "./components/Icons";
+import { ChatBarIcon, IconWithTooltip, LogIcon } from "./components/Icons";
 import { openSoundBoardLog } from "./components/SoundBoardLog";
 import settings from "./settings";
 import { updateLoggedSounds } from "./store";
