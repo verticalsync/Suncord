@@ -29,7 +29,7 @@ import type { ReactNode } from "react";
 
 const HeaderBarIcon = findExportedComponentLazy("Icon", "Divider");
 
-migratePluginSettings("VencordToolbox", "SuncordToolbox");
+migratePluginSettings("SuncordToolbox", "VencordToolbox");
 
 function VencordPopout(onClose: () => void) {
     const { useQuickCss } = useSettings(["useQuickCss"]);
