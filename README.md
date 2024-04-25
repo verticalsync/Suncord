@@ -43,6 +43,14 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   QuestionMarkReplacement (for smuki, i think he's acoustic)
 -   -   SmukiCommands (roblox tax calculation and profile commands for smuki)
 
+-   Plugins by [Tolgchu](https://github.com/Tolga1452/Vencord)
+-   -   BetterShopPreview
+-   -   GodMode
+-   -   RepeatMessage
+-   -   RunInConsole
+-   -   SlashCommandMentionOptions
+-   -   TalkInReverse
+
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
@@ -50,7 +58,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
 -   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
--   MessageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))
+-   MessageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))/
 -   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
 -   SoundBoardLogger (by [ImpishMoxxie](https://github.com/ImpishMoxxie/SoundBoardLogger))
@@ -66,6 +74,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   AmITyping (by [MrDiamondDog](https://github.com/MrDiamondDog)) (added from MrDiamondDog's [pull request](https://github.com/Vendicated/Vencord/pull/2360))
 -   UserPFP (by [Nexpid](https://github.com/Nexpid)) (added from Nexpid's [pull request](https://github.com/Vendicated/Vencord/pull/1956))
 -   ShowBadgeInChat (by [KrstlSkll69](https://github.com/KrstlSkll69) (added from KrstlSkll69's [pull request](https://github.com/Vendicated/Vencord/pull/2347)))
+-   DiscordColorways (by [DaBluLite](https://github.com/DaBluLite/DiscordColorways))
 
 </details>
 
