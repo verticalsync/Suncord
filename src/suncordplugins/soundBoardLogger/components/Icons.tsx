@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { ChatBarButton } from "@api/ChatButtons";
 import { classes } from "@utils/misc";
 import { Button, ButtonLooks, ButtonWrapperClasses, Tooltip } from "@webpack/common";
 
 import { cl } from "../utils";
-import { ChatBarButton } from "@api/ChatButtons";
 import { openSoundBoardLog } from "./SoundBoardLog";
 
 // Thanks svgrepo.com for the play and download icons.
