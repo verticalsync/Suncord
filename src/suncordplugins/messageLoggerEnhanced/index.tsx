@@ -495,7 +495,7 @@ export default definePlugin({
         {
             find: "handleImageLoad)",
             replacement: {
-                match: /(render\(\){)(.{1,3550}zoomThumbnailPlaceholder)/,
+                match: /(render\(\){)(.{1,100}zoomThumbnailPlaceholder)/,
                 replace: "$1$self.checkImage(this);$2"
             }
         },
