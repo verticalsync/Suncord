@@ -518,6 +518,18 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "Kodarru",
         id: 785227396218748949n,
     },
+    Tolgchu: {
+        name: "✨Tolgchu✨",
+        id: 329671025312923648n,
+    },
+    Slightly: {
+        name: "Slightly",
+        id: 119536078452424704n,
+    },
+    DaBluLite: {
+        name: "DaBluLite",
+        id: 582170007505731594n,
+    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({
