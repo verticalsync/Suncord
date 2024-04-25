@@ -6,7 +6,7 @@
 
 import { addChatBarButton, removeChatBarButton } from "@api/ChatButtons";
 import { disableStyle, enableStyle } from "@api/Styles";
-import { Devs } from "@utils/constants";
+import { Devs, SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 
@@ -20,15 +20,10 @@ import { getListeners } from "./utils";
 export default definePlugin({
     name: "SoundBoardLogger",
     authors: [
-        {
-            id: 712653921692155965n,
-            name: "Moxxie",
-        },
-        {
-            id: 843448897737064448n,
-            name: "Fres",
-        },
-        Devs.echo
+        Devs.Moxxie,
+        Devs.Fres,
+        Devs.echo,
+        SuncordDevs.thororen
     ],
     settings,
     patches: [

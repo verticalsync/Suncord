@@ -1,20 +1,8 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Vencord, a Discord client mod
  * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { Flex } from "@components/Flex";
 import { CopyIcon } from "@components/Icons";
@@ -23,6 +11,7 @@ import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
 import { closeModal, ModalContent, ModalRoot, openModal } from "@utils/modal";
 import { Clickable, Forms, Text, Timestamp } from "@webpack/common";
+import moment from "moment";
 
 import { AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, SoundLogEntry, User, UserSummaryItem } from "../utils";
 import { DownloadIcon, IconWithTooltip, PlayIcon } from "./Icons";
@@ -64,7 +53,7 @@ export default function UserModal({ item, user, sounds, closeModal }: { item: So
                 <Flex flexDirection="column" style={{ gap: "7px", height: "68px", justifyContent: "space-between" }}>
                     <Text variant="text-md/bold" style={{ height: "20px" }}>{item.soundId}</Text>
                     <Text variant="text-md/normal">Played {currentUser.plays.length} {currentUser.plays.length === 1 ? "time" : "times"}.</Text>
-                    <Text variant="text-md/normal">Last played: <Timestamp timestamp={new Date(currentUser.plays[currentUser.plays.length - 1])} /></Text>
+                    <Text variant="text-md/normal">Last played: <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></Text>
                 </Flex>
             </Flex>
             <Text variant="heading-lg/semibold" tag="h2" className={classes(Margins.top16, Margins.bottom8)}>
