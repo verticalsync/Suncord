@@ -26,8 +26,8 @@ dependencies:
     specifier: ^0.8.0
     version: 0.8.0
   gifenc:
-    specifier: github:mattdesl/gifenc#64842fca317b112a8590f8fef2bf3825da8f6fe3
-    version: https://codeload.github.com/mattdesl/gifenc/tar.gz/64842fca317b112a8590f8fef2bf3825da8f6fe3
+    specifier: git+https://github.com/mattdesl/gifenc.git
+    version: github.com/mattdesl/gifenc/64842fca317b112a8590f8fef2bf3825da8f6fe3
   monaco-editor:
     specifier: ^0.43.0
     version: 0.43.0
