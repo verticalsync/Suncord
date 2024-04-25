@@ -487,7 +487,7 @@ export default definePlugin({
         {
             find: ".removeMosaicItemHoverButton",
             replacement: {
-                match: /(\i=(\i)=>{)(.{1,250}isSingleMosaicItem)/,
+                match: /(\i=(\i)=>{)(.{1,1000}isSingleMosaicItem)/,
                 replace: "$1 let forceUpdate=Vencord.Util.useForceUpdater();$self.patchAttachments($2,forceUpdate);$3"
             }
         },
