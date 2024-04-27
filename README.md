@@ -51,6 +51,10 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   SlashCommandMentionOptions
 -   -   TalkInReverse
 
+-   Plugins by [happyendermangit](https://github.com/happyendermangit/)
+-   -   CopyEmojiAsFormattedString (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
+-   -   QuestsCompleter (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2393))
+
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
