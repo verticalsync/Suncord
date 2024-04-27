@@ -183,7 +183,7 @@ export default definePlugin({
                 ...ImagesConfig
             });
 
-            if (event.userStatus.streamProgressSeconds > quest.config.streamDurationRequirementMinutes * 60) {
+            if (event.userStatus.streamProgressSeconds >= quest.config.streamDurationRequirementMinutes * 60) {
                 showNotification({
                     title: `${quest.config.applicationName} - Quests Completer`,
                     body: "Quest Completed",
