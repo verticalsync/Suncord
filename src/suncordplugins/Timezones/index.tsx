@@ -58,7 +58,8 @@ export default definePlugin({
             find: "copyMetaData:\"User Tag\"",
             replacement: {
 
-                match: /return(\(0,.\.jsx\)\(.\.default,{className:.+?}\)]}\)}\))/,
+                // match: /return(\(0,.\.jsx\)\(.\.default,{className:.+?}\)]}\)}\))/,
+                match: /return(\(0,.\.jsxs\)\(.\.default,{className.+?}\)]}\).+?}\)}\)]}\))/, // this patch is prob ass, first time actually doing a patch ~ verticalsync
                 replace: "return [$1, $self.getProfileTimezonesComponent(arguments[0])]"
             },
         },
