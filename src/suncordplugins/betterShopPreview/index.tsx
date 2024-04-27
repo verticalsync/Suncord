@@ -67,10 +67,11 @@ export default definePlugin({
     settings,
     patches: [
         {
-            find: "}),(0,l.jsx)(T.default.Title,{className:en.title,children:er.default.Messages.COLLECTIBLES_SHOP})]",
+            // this can use regex, will do later.
+            find: "}),(0,l.jsx)(T.default.Title,{className:ei.title,children:er.default.Messages.COLLECTIBLES_SHOP})]",
             replacement: [{
-                match: "{className:en.title,children:er.default.Messages.COLLECTIBLES_SHOP}",
-                replace: "{className:en.title,children:[er.default.Messages.COLLECTIBLES_SHOP,$self.PreviewToggle()]}"
+                match: "{className:ei.title,children:er.default.Messages.COLLECTIBLES_SHOP}",
+                replace: "{className:ei.title,children:[er.default.Messages.COLLECTIBLES_SHOP,$self.PreviewToggle()]}"
             }]
         }
     ],
