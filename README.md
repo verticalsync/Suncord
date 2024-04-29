@@ -61,7 +61,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   CustomScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza)) (added from KawiianPizza's [pull request](https://github.com/Vendicated/Vencord/pull/2385))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
--   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins))
+-   GlobalBadges (by [HypedDomi](https://github.com/domi-btnr/Vencord-Plugins)) (using own forked api from [here](https://github.com/verticalsync/ClientModBadges-API/))
 -   MessageLoggerEnhanced (by [Syncxv](https://github.com/Syncxv/vc-message-logger-enhanced))/
 -   CommandPalette (by [Ethan](https://github.com/ethan-davies)) (added from Ethan's [pull request](https://github.com/Vendicated/Vencord/pull/2145) to vencord)
 -   AllCallTimers (by [Max-Herbold](https://github.com/Max-Herbold)) (added from Max's [pull request](https://github.com/Vendicated/Vencord/pull/2132) to vencord)
