@@ -81,7 +81,7 @@ const buildCss = () => {
             width: 2px;
         }
         :is(${elements}) [id^='message-accessories'] > *:not(.vc-hide-message-accessory),
-        :is(${elements}) [id^='message-content'] > * {
+        :is(${elements}) [id^='message-content']:not([class^='repliedTextContent']) > * {
             display: none !important;
         }
         :is(${elements}) [id^='message-content']:empty {
@@ -130,6 +130,7 @@ export default definePlugin({
     name: "HideMessage",
     description: "Adds a context menu option to hide messages",
     authors: [Devs.Hanzy],
+    dependencies: ["MessageAccessoriesAPI", "MessagePopoverAPI"],
     settings,
 
     contextMenus: {
@@ -159,5 +160,5 @@ export default definePlugin({
 
         style.remove();
         hiddenMessages.clear();
-    }
+    },
 });
