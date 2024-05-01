@@ -63,8 +63,8 @@ Object.defineProperty(Function.prototype, "O", {
         // When using react devtools or other extensions, or even when discord loads the sentry, we may also catch their webpack here.
         // This ensures we actually got the right one
         // this.e (wreq.e) is the method for loading a chunk, and only the main webpack has it
-        if (new Error().stack?.includes("discord.com") && this.e.toString().includes("Promise.all")) {
-            logger.info("Found main Webpack onChunksLoaded");
+        if (new Error().stack?.includes("discord.com") && String(this.e).includes("Promise.all")) {
+            logger.info("Found main WebpackRequire.onChunksLoaded");
 
             delete (Function.prototype as any).O;
 
@@ -80,6 +80,7 @@ Object.defineProperty(Function.prototype, "O", {
 
                     const originalCallback = callback;
                     callback = function () {
+                        logger.info("Patched initialize app callback invoked, initializing our internal references to WebpackRequire and running beforeInitListeners");
                         _initWebpack(wreq);
 
                         for (const beforeInitListener of beforeInitListeners) {
@@ -173,7 +174,7 @@ function patchFactories(factories: Record<string, (module: any, exports: any, re
             if (wreq == null) {
                 if (!webpackNotInitializedLogged) {
                     webpackNotInitializedLogged = true;
-                    logger.error("Webpack require was not initialized, running modules without patches instead.");
+                    logger.error("WebpackRequire was not initialized, running modules without patches instead.");
                 }
 
                 return void originalMod(module, exports, require);
