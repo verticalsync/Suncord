@@ -534,6 +534,10 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "SerStars",
         id: 861631850681729045n,
     },
+    GabiRP: {
+        name: "GabiRP",
+        id: 507955112027750401n,
+    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({

@@ -34,6 +34,9 @@ export const PMLogger = logger;
 export const plugins = Plugins;
 export const patches = [] as Patch[];
 
+/** Whether we have subscribed to flux events of all the enabled plugins when FluxDispatcher was ready */
+let enabledPluginsSubscribedFlux = false;
+
 const settings = Settings.plugins;
 
 export function isPluginEnabled(p: string) {
@@ -120,21 +123,25 @@ export function startDependenciesRecursive(p: Plugin) {
 }
 
 export function subscribePluginFluxEvents(p: Plugin, fluxDispatcher: typeof FluxDispatcher) {
-    if (p.flux && !p.fluxEventsSubscribed) {
-        p.fluxEventsSubscribed = true;
-
+    if (p.flux) {
         logger.debug("Subscribing to flux events of plugin", p.name);
-        for (const event in p.flux) {
-            fluxDispatcher.subscribe(event as FluxEvents, p.flux[event]);
+        for (const [event, handler] of Object.entries(p.flux)) {
+            fluxDispatcher.subscribe(event as FluxEvents, handler);
         }
     }
 }
 
-export function subscribeAllPluginsFluxEvents(fluxDispatcher?: typeof FluxDispatcher) {
-    if (!fluxDispatcher) {
-        logger.error("FluxDispatcher not provided to subscribeAllPluginsFluxEvents, not subscribing to any events.");
-        return;
+export function unsubscribePluginFluxEvents(p: Plugin, fluxDispatcher: typeof FluxDispatcher) {
+    if (p.flux) {
+        logger.debug("Unsubscribing from flux events of plugin", p.name);
+        for (const [event, handler] of Object.entries(p.flux)) {
+            fluxDispatcher.unsubscribe(event as FluxEvents, handler);
+        }
     }
+}
+
+export function subscribeAllPluginsFluxEvents(fluxDispatcher: typeof FluxDispatcher) {
+    enabledPluginsSubscribedFlux = true;
 
     for (const name in Plugins) {
         if (!isPluginEnabled(name)) continue;
@@ -172,7 +179,10 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
         }
     }
 
-    subscribePluginFluxEvents(p, FluxDispatcher);
+    if (enabledPluginsSubscribedFlux) {
+        subscribePluginFluxEvents(p, FluxDispatcher);
+    }
+
 
     if (contextMenus) {
         logger.debug("Adding context menus patches of plugin", name);
@@ -213,12 +223,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
         }
     }
 
-    if (flux) {
-        logger.debug("Unsubscribing from flux events of plugin", name);
-        for (const event in flux) {
-            FluxDispatcher.unsubscribe(event as FluxEvents, flux[event]);
-        }
-    }
+    unsubscribePluginFluxEvents(p, FluxDispatcher);
 
     if (contextMenus) {
         logger.debug("Removing context menus patches of plugin", name);
