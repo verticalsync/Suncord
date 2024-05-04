@@ -512,62 +512,11 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     PolisanTheEasyNick: {
         name: "Oleh Polisan",
-        id: 242305263313485825n,
+        id: 242305263313485825n
     },
-    Kodarru: {
-        name: "Kodarru",
-        id: 785227396218748949n,
-    },
-    Tolgchu: {
-        name: "✨Tolgchu✨",
-        id: 329671025312923648n,
-    },
-    Slightly: {
-        name: "Slightly",
-        id: 119536078452424704n,
-    },
-    DaBluLite: {
-        name: "DaBluLite",
-        id: 582170007505731594n,
-    },
-    SerStars: {
-        name: "SerStars",
-        id: 861631850681729045n,
-    },
-} satisfies Record<string, Dev>);
-
-export const SuncordDevs = /* #__PURE__*/ Object.freeze({
-    nyx: {
-        name: "verticalsync",
-        id: 328165170536775680n,
-    },
-    bhop: {
-        name: "femeie",
-        id: 442626774841556992n,
-    },
-    Drag: {
-        name: "dragalt_",
-        id: 1189903210564038697n,
-    },
-    Woosh: {
-        name: "w00shh.",
-        id: 689165844835860522n,
-    },
-    Cortex: {
-        name: "Cortex",
-        id: 825069530376044594n,
-    },
-    thororen: {
-        name: "thororen",
-        id: 848339671629299742n
-    },
-    nexpid: {
-        name: "Nexpid",
-        id: 853550207039832084n
-    },
-    KrystalSkull: {
-        name: "krystalskullofficial",
-        id: 929208515883569182n
+    GabiRP: {
+        name: "GabiRP",
+        id: 507955112027750401n,
     },
 } satisfies Record<string, Dev>);
 

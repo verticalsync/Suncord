@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./fixBadgeOverflow.css";
+
 import { BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { DonateButton, SuncordDonateButton } from "@components/DonateButton";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -37,9 +39,7 @@ const ContributorBadge: ProfileBadge = {
     position: BadgePosition.START,
     shouldShow: ({ user }) => isPluginDev(user.id),
     onClick(_, { user }) {
-        // circular import shenanigans
         const { openContributorModal } = require("@components/PluginSettings/ContributorModal") as typeof import("@components/PluginSettings/ContributorModal");
-        // setImmediate is needed to run on later tick to workaround limitation in proxyLazy
         setImmediate(() => openContributorModal(user));
     }
 };
@@ -48,14 +48,11 @@ const SuncordContributorBadge: ProfileBadge = {
     description: "Suncord Contributor",
     image: SUNCORD_CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
-    props: {
-        style: {
-            borderRadius: "50%",
-            transform: "scale(0.7)" // The image is a bit too big compared to default badges
-        }
-    },
     shouldShow: ({ user }) => isSuncordPluginDev(user.id),
-    link: "https://github.com/verticalsync/Suncord"
+    onClick(_, { user }) {
+        const { openContributorModal } = require("@components/PluginSettings/ContributorModal") as typeof import("@components/PluginSettings/ContributorModal");
+        setImmediate(() => openContributorModal(user));
+    }
 };
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
