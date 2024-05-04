@@ -17,7 +17,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (50 additional plugins)</summary>
+<summary>Included plugins (49 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   MemberListActivities
@@ -32,7 +32,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   Anammox
 -   -   ColorMessage
 -   -   DeadMembers
--   -   ImageLink
 -   -   MessageLinkTooltip
 -   -   ReplyTimestamp
 -   -   ModalFade
