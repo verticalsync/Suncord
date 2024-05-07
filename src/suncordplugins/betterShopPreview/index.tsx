@@ -27,7 +27,7 @@ const settings = definePluginSettings({
     default: {
         type: OptionType.BOOLEAN,
         description: "Enable avatar preview by default.",
-        default: true
+        default: false
     }
 });
 
