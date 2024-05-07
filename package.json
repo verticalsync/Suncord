@@ -1,7 +1,7 @@
 {
     "name": "suncord",
     "private": "true",
-    "version": "1.8.6",
+    "version": "1.8.8",
     "description": "A fork of the Discord client mod Vencord.",
     "homepage": "https://github.com/verticalsync/Suncord#readme",
     "bugs": {
@@ -35,8 +35,8 @@
         "@vap/core": "0.0.12",
         "@vap/shiki": "0.10.5",
         "eslint-plugin-simple-header": "^1.0.2",
-        "fflate": "^0.8.0",
-        "gifenc": "git+https://github.com/mattdesl/gifenc.git",
+        "fflate": "^0.7.4",
+        "gifenc": "github:mattdesl/gifenc#64842fca317b112a8590f8fef2bf3825da8f6fe3",
         "monaco-editor": "^0.43.0",
         "nanoid": "^4.0.2",
         "virtual-merge": "^1.0.1"
@@ -71,7 +71,7 @@
         "zip-local": "^0.3.5",
         "zustand": "^3.7.2"
     },
-    "packageManager": "pnpm@8.10.2",
+    "packageManager": "pnpm@9.1.0",
     "pnpm": {
         "patchedDependencies": {
             "eslint@8.46.0": "patches/eslint@8.46.0.patch"
