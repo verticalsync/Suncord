@@ -139,11 +139,12 @@ export default definePlugin({
     authors: [Devs.Tolgchu],
     patches: [
         {
-            find: 'p.SUPPORTS_COPY?(0,i.jsx)("div",{className:G.codeActions',
+            find: '.SUPPORTS_COPY?(0,i.jsx)("div"',
             replacement: [
                 {
-                    match: 'p.SUPPORTS_COPY?(0,i.jsx)("div",{className:G.codeActions,children:(0,i.jsx)(w,{text:e.content})}):null',
-                    replace: 'p.SUPPORTS_COPY?(0,i.jsx)("div",{className:G.codeActions,children:[(0,i.jsx)(w,{text:e.content}),(0,i.jsx)($self.RunIcon,{text:e.content})]}):null'
+                    // this shit is hot garbage, but it works. :pray:
+                    match: /(className:\i.codeActions,children:)(\(0,(\i).jsx\)\(\i,{text:(\i).content}\))(}\):null)/,
+                    replace: "$1[$2,(0,$3.jsx)($self.RunIcon,{text:$4.content})]$5"
                 }
             ]
         }
