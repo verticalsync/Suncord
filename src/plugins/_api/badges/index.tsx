@@ -23,6 +23,7 @@ import { DonateButton, SuncordDonateButton } from "@components/DonateButton";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
+import { openContributorModal } from "@components/PluginSettings/ContributorModal";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { isPluginDev, isSuncordPluginDev } from "@utils/misc";
@@ -38,10 +39,7 @@ const ContributorBadge: ProfileBadge = {
     image: CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ user }) => isPluginDev(user.id),
-    onClick(_, { user }) {
-        const { openContributorModal } = require("@components/PluginSettings/ContributorModal") as typeof import("@components/PluginSettings/ContributorModal");
-        setImmediate(() => openContributorModal(user));
-    }
+    onClick: (_, { user }) => openContributorModal(user)
 };
 
 const SuncordContributorBadge: ProfileBadge = {
@@ -49,10 +47,7 @@ const SuncordContributorBadge: ProfileBadge = {
     image: SUNCORD_CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ user }) => isSuncordPluginDev(user.id),
-    onClick(_, { user }) {
-        const { openContributorModal } = require("@components/PluginSettings/ContributorModal") as typeof import("@components/PluginSettings/ContributorModal");
-        setImmediate(() => openContributorModal(user));
-    }
+    onClick: (_, { user }) => openContributorModal(user)
 };
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
