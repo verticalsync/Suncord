@@ -21,7 +21,7 @@ import { Link } from "@components/Link";
 import { openUpdaterModal } from "@components/VencordSettings/UpdaterTab";
 import { Devs, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { Margins } from "@utils/margins";
-import { isPluginDev } from "@utils/misc";
+import { isPluginDev, isSuncordPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
@@ -112,7 +112,7 @@ ${makeCodeblock(enabledPlugins.join(", "))}
             if (channelId !== SUPPORT_CHANNEL_ID) return;
 
             const selfId = UserStore.getCurrentUser()?.id;
-            if (!selfId || isPluginDev(selfId)) return;
+            if (!selfId || isPluginDev(selfId) || isSuncordPluginDev(selfId)) return;
 
             if (isOutdated) {
                 return Alerts.show({
@@ -171,7 +171,7 @@ ${makeCodeblock(enabledPlugins.join(", "))}
     },
 
     ContributorDmWarningCard: ErrorBoundary.wrap(({ userId }) => {
-        if (!isPluginDev(userId)) return null;
+        if (!isPluginDev(userId) || !isSuncordPluginDev(userId)) return null;
         if (RelationshipStore.isFriend(userId)) return null;
 
         return (
