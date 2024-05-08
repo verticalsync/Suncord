@@ -7,6 +7,7 @@ Displays an indicator for messages that took ≥n seconds to send.
 > -   This plugin only applies to messages received after opening the channel
 > -   False positives can exist if the user's system clock has drifted.
 > -   Grouped messages only display latency of the first message
+
 ## Demo
 
 ### Chat View
