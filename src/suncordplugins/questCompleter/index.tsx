@@ -18,7 +18,6 @@
 
 import { showNotification } from "@api/Notifications";
 import { Devs } from "@utils/constants";
-import { localStorage } from "@utils/localStorage";
 import definePlugin from "@utils/types";
 import { findByProps } from "@webpack";
 import { Text } from "@webpack/common";
@@ -57,19 +56,16 @@ export default definePlugin({
     ],
     settingsAboutComponent() {
         const isDesktop = navigator.userAgent.includes("discord/");
-        const hasQuestsExtensionEnabled = localStorage.getItem("QUESTS_EXT_ENABLED");
 
         return (<>
             {
-                isDesktop || hasQuestsExtensionEnabled ?
+                isDesktop ?
                     <Text variant="text-lg/bold">
-                        The plugin should work properly because you {isDesktop ? "are on the Desktop Client." : "installed our extension."}
+                        The plugin should work properly because you are on the Desktop Client.
                     </Text>
                     :
                     <Text variant="text-lg/bold">
-                        This plugin won't work right now. Please download
-                        <a href="" target="_blank">our extension</a>
-                        to make the plugin work on web.
+                        This plugin won't work because you are not on the Desktop Client.
                     </Text>
             }
         </>);
@@ -149,7 +145,7 @@ export default definePlugin({
         };
 
         heartBeat();
-        interval = setInterval(heartBeat, 60500); // send the heartbeat each minute
+        interval = setInterval(heartBeat, 60000); // send the heartbeat each minute
 
         return;
     },
@@ -175,13 +171,8 @@ export default definePlugin({
         },
         QUESTS_SEND_HEARTBEAT_SUCCESS: event => {
 
-            const a = event.userStatus.streamProgressSeconds * 100;
-            const b = quest.config.streamDurationRequirementMinutes * 60;
-            showNotification({
-                title: `${quest.config.applicationName} - Quests Completer`,
-                body: `Current progress: ${Math.floor(a / b)}% (${Math.floor(event.userStatus.streamProgressSeconds / 60)} minutes.)`,
-                ...ImagesConfig
-            });
+            const streamProgress = event.userStatus.streamProgressSeconds * 100;
+            const streamDurationRequirement = quest.config.streamDurationRequirementMinutes * 60;
 
             if (event.userStatus.streamProgressSeconds >= quest.config.streamDurationRequirementMinutes * 60) {
                 showNotification({
@@ -191,7 +182,14 @@ export default definePlugin({
                 });
                 clearInterval(interval);
                 interval = null;
+                return;
             }
+
+            showNotification({
+                title: `${quest.config.applicationName} - Quests Completer`,
+                body: `Current progress: ${Math.floor(streamProgress / streamDurationRequirement)}% (${Math.floor(event.userStatus.streamProgressSeconds / 60)} minutes.)`,
+                ...ImagesConfig
+            });
         }
     }
 });
