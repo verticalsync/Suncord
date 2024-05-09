@@ -105,7 +105,7 @@ async function init() {
             }
 
             setTimeout(() => showNotification({
-                title: "A Vencord update is available!",
+                title: "A Suncord update is available!",
                 body: "Click here to view the update",
                 permanent: true,
                 noPersist: true,
