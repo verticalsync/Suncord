@@ -324,7 +324,7 @@ export const settings = definePluginSettings({
     permanentlyRemoveLogByDefault: {
         default: false,
         type: OptionType.BOOLEAN,
-        description: "Vencord's base MessageLogger remove log button wiil delete logs permanently",
+        description: "Suncord's base MessageLogger remove log button wiil delete logs permanently",
     },
 
     hideMessageFromMessageLoggers: {

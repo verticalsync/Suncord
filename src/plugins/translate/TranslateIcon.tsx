@@ -49,7 +49,7 @@ export const TranslateChatBarIcon: ChatBarButton = ({ isMainChat }) => {
         settings.store.autoTranslate = newState;
         if (newState && settings.store.showAutoTranslateAlert !== false)
             Alerts.show({
-                title: "Vencord Auto-Translate Enabled",
+                title: "Suncord Auto-Translate Enabled",
                 body: <>
                     <Forms.FormText>
                         You just enabled auto translate (by right clicking the Translate icon). Any message you send will automatically be translated before being sent.
