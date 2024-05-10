@@ -57,7 +57,7 @@ export function authorize(callback?: any) {
             callback={async (response: any) => {
                 try {
                     const url = new URL(response.location);
-                    url.searchParams.append("clientMod", "suncord");
+                    url.searchParams.append("clientMod", "vencord");
                     const res = await fetch(url, {
                         headers: { Accept: "application/json" }
                     });
