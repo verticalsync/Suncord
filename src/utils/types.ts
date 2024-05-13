@@ -29,8 +29,11 @@ export default function definePlugin<P extends PluginDef>(p: P & Record<string, 
 export type ReplaceFn = (match: string, ...groups: string[]) => string;
 
 export interface PatchReplacement {
+    /** The match for the patch replacement. If you use a string it will be implicitly converted to a RegExp */
     match: string | RegExp;
+    /** The replacement string or function which returns the string for the patch replacement */
     replace: string | ReplaceFn;
+    /** A function which returns whether this patch replacement should be applied */
     predicate?(): boolean;
 }
 
@@ -44,6 +47,7 @@ export interface Patch {
     noWarn?: boolean;
     /** Only apply this set of replacements if all of them succeed. Use this if your replacements depend on each other */
     group?: boolean;
+    /** A function which returns whether this patch should be applied */
     predicate?(): boolean;
 }
 
