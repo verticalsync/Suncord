@@ -94,7 +94,7 @@ export default settings;
 
 const BadgeSettings = () => {
     const [images, setImages] = useState([
-        { src: "https://cdn.nest.rip/uploads/f4beb1cd-ce46-4384-8c29-c6c4142f4339.png", shown: settings.store.showSuncordDonor, title: "Suncord donor badges", key: "SuncordDonor", position: settings.store.SuncordDonorPosition },
+        { src: "https://i.imgur.com/H3GPhpd.png", shown: settings.store.showSuncordDonor, title: "Suncord donor badges", key: "SuncordDonor", position: settings.store.SuncordDonorPosition },
         { src: "https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/icon.png", shown: settings.store.showSuncordContributor, title: "Suncord contributor badge", key: "SuncordContributer", position: settings.store.SuncordContributorPosition },
         { src: "https://cdn.discordapp.com/emojis/1026533070955872337.png", shown: settings.store.showVencordDonor, title: "Vencord donor badges", key: "VencordDonor", position: settings.store.VencordDonorPosition },
         { src: "https://vencord.dev/assets/favicon.png", shown: settings.store.showVencordContributor, title: "Vencord contributor badge", key: "VencordContributer", position: settings.store.VencordContributorPosition },
