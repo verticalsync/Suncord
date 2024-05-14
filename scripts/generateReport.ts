@@ -32,6 +32,7 @@ for (const variable of ["DISCORD_TOKEN", "CHROMIUM_BIN"]) {
 }
 
 const CANARY = process.env.USE_CANARY === "true";
+const PTB = process.env.USE_PTB === "true";
 
 const browser = await pup.launch({
     headless: "new",
@@ -79,7 +80,7 @@ function toCodeBlock(s: string) {
 async function printReport() {
     console.log();
 
-    console.log("# Suncord Report" + (CANARY ? " (Canary)" : ""));
+    console.log("# Suncord Report" + (CANARY ? " (Canary)" : PTB ? " (PTB)" : ""));
 
     console.log();
 
@@ -137,7 +138,7 @@ async function printReport() {
             },
             body: JSON.stringify({
                 description: "Here's the latest Suncord Report!",
-                username: "Suncord Reporter" + (CANARY ? " (Canary)" : ""),
+                username: "Suncord Reporter" + (CANARY ? " (Canary)" : PTB ? " (PTB)" : ""),
                 avatar_url: "https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/icon.png",
                 embeds: [
                     {
@@ -522,4 +523,4 @@ await page.evaluateOnNewDocument(`
     ;(${runtime.toString()})(${JSON.stringify(process.env.DISCORD_TOKEN)});
 `);
 
-await page.goto(CANARY ? "https://canary.discord.com/login" : "https://discord.com/login");
+await page.goto(CANARY ? "https://canary.discord.com/login" : PTB ? "https://ptb.discord.com/login" : "https://discord.com/login");
