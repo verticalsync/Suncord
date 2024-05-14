@@ -62,6 +62,9 @@ jobs:
 
                   esbuild scripts/generateReport.ts > dist/report.mjs
                   node dist/report.mjs >> $GITHUB_STEP_SUMMARY
+              env:
+                  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
             - name: Create Report (PTB)
               timeout-minutes: 10
@@ -73,3 +76,6 @@ jobs:
 
                   esbuild scripts/generateReport.ts > dist/report.mjs
                   node dist/report.mjs >> $GITHUB_STEP_SUMMARY
+              env:
+                  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
