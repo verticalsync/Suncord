@@ -125,7 +125,7 @@ export default definePlugin({
                 element: BackupAndRestoreTab,
                 className: "vc-backup-restore"
             },
-            {
+            IS_DEV && {
                 section: "SuncordPatchHelper",
                 label: "Patch Helper",
                 element: PatchHelperTab,
