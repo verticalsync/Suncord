@@ -554,6 +554,14 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "ScattrdBlade",
         id: 678007540608532491n,
     },
+    Board: {
+        name: "BoardTM",
+        id: 285475344817848320n,
+    },
+    UlyssesZhan: {
+        name: "UlyssesZhan",
+        id: 586808226058862623n,
+    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({
