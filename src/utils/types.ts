@@ -39,7 +39,9 @@ export interface PatchReplacement {
 
 export interface Patch {
     plugin: string;
-    find: string;
+    /** A string or RegExp which is only include/matched in the module code you wish to patch. Prefer only using a RegExp if a simple string test is not enough */
+    find: string | RegExp;
+    /** The replacement(s) for the module being patched */
     replacement: PatchReplacement | PatchReplacement[];
     /** Whether this patch should apply to multiple modules */
     all?: boolean;
