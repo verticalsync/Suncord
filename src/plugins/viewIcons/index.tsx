@@ -19,7 +19,7 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { ImageIcon } from "@components/Icons";
-import { Devs, SuncordDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { openImageModal } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { GuildMemberStore, IconUtils, Menu } from "@webpack/common";
@@ -152,13 +152,10 @@ const GuildContext: NavContextMenuPatchCallback = (children, { guild }: GuildCon
 const GroupDMContext: NavContextMenuPatchCallback = (children, { channel }: GroupDMContextProps) => {
     if (!channel) return;
 
-    const { icon } = channel;
-    if (!icon) return;
-
     children.splice(-1, 0, (
         <Menu.MenuGroup>
             <Menu.MenuItem
-                id="view-icon"
+                id="view-group-channel-icon"
                 label="View Icon"
                 action={() =>
                     openImage(IconUtils.getChannelIconURL(channel)!)
@@ -171,8 +168,8 @@ const GroupDMContext: NavContextMenuPatchCallback = (children, { channel }: Grou
 
 export default definePlugin({
     name: "ViewIcons",
-    authors: [Devs.Ven, Devs.TheKodeToad, Devs.Nuckyz, SuncordDevs.nyx],
-    description: "Makes avatars and banners in user profiles clickable, adds View Icon/Banner entries in the user and server context menu, and adds View Icon entry in the group channel context menu.",
+    authors: [Devs.Ven, Devs.TheKodeToad, Devs.Nuckyz, Devs.nyx],
+    description: "Makes avatars and banners in user profiles clickable, adds View Icon/Banner entries in the user, server and group channel context menu.",
     tags: ["ImageUtilities"],
 
     settings,
@@ -186,7 +183,7 @@ export default definePlugin({
     },
 
     patches: [
-        // Make pfps clickable
+        // Profiles Modal pfp
         {
             find: "User Profile Modal - Context Menu",
             replacement: {
@@ -194,7 +191,7 @@ export default definePlugin({
                 replace: "{src:$1,onClick:()=>$self.openImage($1)"
             }
         },
-        // Make banners clickable
+        // Banners
         {
             find: ".NITRO_BANNER,",
             replacement: {
@@ -205,11 +202,37 @@ export default definePlugin({
                     'onClick:ev=>$1&&ev.target.style.backgroundImage&&$self.openImage($2),style:{cursor:$1?"pointer":void 0,'
             }
         },
+        // User DMs "User Profile" popup in the right
         {
             find: ".avatarPositionPanel",
             replacement: {
                 match: /(?<=avatarWrapperNonUserBot.{0,50})onClick:(\i\|\|\i)\?void 0(?<=,avatarSrc:(\i).+?)/,
                 replace: "style:($1)?{cursor:\"pointer\"}:{},onClick:$1?()=>{$self.openImage($2)}"
+            }
+        },
+        // Group DMs top small & large icon
+        {
+            find: ".recipients.length>=2",
+            all: true,
+            replacement: {
+                match: /null==\i\.icon\?.+?src:(\(0,\i\.getChannelIconURL\).+?\))(?=[,}])/,
+                replace: (m, iconUrl) => `${m},onClick:()=>$self.openImage(${iconUrl})`
+            }
+        },
+        // User DMs top small icon
+        {
+            find: ".cursorPointer:null,children",
+            replacement: {
+                match: /.Avatar,.+?src:(.+?\))(?=[,}])/,
+                replace: (m, avatarUrl) => `${m},onClick:()=>$self.openImage(${avatarUrl})`
+            }
+        },
+        // User Dms top large icon
+        {
+            find: 'experimentLocation:"empty_messages"',
+            replacement: {
+                match: /.Avatar,.+?src:(.+?\))(?=[,}])/,
+                replace: (m, avatarUrl) => `${m},onClick:()=>$self.openImage(${avatarUrl})`
             }
         }
     ]
