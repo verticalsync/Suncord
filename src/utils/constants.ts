@@ -564,7 +564,11 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     nyx: {
         name: "verticalsync",
-        id: 328165170536775680n
+        id: 328165170536775680n,
+    },
+    JohnyTheCarrot: {
+        name: "JohnyTheCarrot",
+        id: 132819036282159104n,
     },
 } satisfies Record<string, Dev>);
 
