@@ -13,9 +13,9 @@ import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRo
 import { chooseFile, saveFile } from "@utils/web";
 import { findByProps } from "@webpack";
 import { Button, Clipboard, Forms, ScrollerThin, Text, TextInput, useEffect, useState } from "@webpack/common";
-import { defaultColorwaySource } from "userplugins/discordColorways/constants";
-import { Colorway } from "userplugins/discordColorways/types";
 
+import { defaultColorwaySource } from "../../constants";
+import { Colorway } from "../../types";
 import { DownloadIcon, ImportIcon } from "../Icons";
 import Spinner from "../Spinner";
 

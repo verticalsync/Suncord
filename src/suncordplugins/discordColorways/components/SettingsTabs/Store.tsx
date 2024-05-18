@@ -11,8 +11,8 @@ import { Link } from "@components/Link";
 import { SettingsTab } from "@components/VencordSettings/shared";
 import { findByProps } from "@webpack";
 import { Button, ScrollerThin, Text, TextInput, Tooltip, useEffect, useState } from "@webpack/common";
-import { StoreItem } from "userplugins/discordColorways/types";
 
+import { StoreItem } from "../../types";
 import { DownloadIcon } from "../Icons";
 
 export default function () {
