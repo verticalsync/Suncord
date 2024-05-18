@@ -77,11 +77,14 @@ export default definePlugin({
     PreviewToggle,
     async start() {
         const user = UserStore.getCurrentUser();
-        const url = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif`;
+        let url = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
+        if (user.avatar.startsWith("a_")) {
+            url = url.replace(".png", ".gif");
+        }
 
         await fetch(url).then(response => {
             if (response.ok) avatarUrl = url;
-            else avatarUrl = url.replace(".gif", ".png");
         });
     },
     stop() { }
