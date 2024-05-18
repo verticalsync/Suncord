@@ -45,7 +45,6 @@ import { doesMatch } from "./utils/parseQuery";
 import * as imageUtils from "./utils/saveImage";
 import * as ImageManager from "./utils/saveImage/ImageManager";
 import { downloadLoggedMessages } from "./utils/settingsUtils";
-import { checkForUpdatesAndNotify } from "./utils/updater";
 
 
 export const Flogger = new Logger("MessageLoggerEnhanced", "#f26c6c");
@@ -228,20 +227,6 @@ function messageLoadSuccess(payload: LoadMessagePayload) {
 }
 
 export const settings = definePluginSettings({
-    checkForUpdate: {
-        type: OptionType.COMPONENT,
-        description: "Check for update",
-        component: () =>
-            <Button onClick={() => {
-                Alerts.show({
-                    title: "Updates & Update Checking disabled",
-                    body: "Suncord has disabled auto updates for messageLoggerEnhanced, as they will not work properly. If there is a new update that you know of, contact nyx to get it updated.",
-                    confirmText: "Okay",
-                });
-            }}>
-                Check For Updates
-            </Button>
-    },
     saveMessages: {
         default: true,
         type: OptionType.BOOLEAN,
@@ -264,12 +249,6 @@ export const settings = definePluginSettings({
         default: false,
         type: OptionType.BOOLEAN,
         description: "Usually message logger only logs from whitelisted ids and dms, enabling this would mean it would log messages from all servers as well. Note that this may cause the cache to exceed its limit, resulting in some messages being missed. If you are in a lot of servers, this may significantly increase the chances of messages being logged, which can result in a large message record and the inclusion of irrelevant messages.",
-    },
-
-    autoCheckForUpdates: {
-        default: true,
-        type: OptionType.BOOLEAN,
-        description: "Automatically check for updates on startup.",
     },
 
     ignoreBots: {
@@ -616,8 +595,6 @@ export default definePlugin({
     async start() {
         // if (!settings.store.saveMessages)
         //     clearLogs();
-
-        checkForUpdatesAndNotify(settings.store.autoCheckForUpdates);
 
         Native.init();
 
