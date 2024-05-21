@@ -95,10 +95,10 @@ export default definePlugin({
             predicate: () => settings.store.emojiList,
         },
         { // Emoji category list
-            find: ".Messages.EMOJI_PICKER_SCROLL_TO_UNICODE_A11Y_LABEL",
+            find: "useEmojiCategories:function()",
             replacement: {
-                match: /(\w+)=\(0,\w+.useCategoryNitroLockedStates\)\(\w+,\w+,(\w+)\)/,
-                replace: "$&,__98=($2=$2.filter((_,$2)=>!$1[$2]))"
+                match: /(?<=(\i)\.unshift\((\i)\):)(?=\1\.push\(\2\))/,
+                replace: "$2.isNitroLocked||"
             },
             predicate: () => settings.store.emojiList,
         }
