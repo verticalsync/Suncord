@@ -8,6 +8,13 @@ Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
 You can join our [discord server](https://discord.gg/VasF3Ma4Ab) for commits, changes, chat or even support.<br><br></br> 
 
+<details>
+<summary>Why does Suncord exist?</summary>
+
+Suncord started out as a little fork just for me and my friends so it's easier to share plugins among the friend group and added our own badges alongside Vencord's cause just why not? But Suncord started to get talked about in servers such as E-Z image host & bio service, because one of the people in our friends group is a moderator there and showed that he was on Suncord, so it caught the eyes of the people there and they were also interested in moving from Vencord to Suncord or just installing Suncord, it wasn't originally made for everyone, but since people have started using it, I've started maintaining it a bit better and pushing most new changes of Vencord to Suncord, and actively adding new plugins as I find them or get them suggested to me.
+
+</details>
+
 ## Installing & Uninstalling
 
 Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
