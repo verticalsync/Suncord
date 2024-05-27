@@ -52,14 +52,10 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   RunInConsole
 -   -   TalkInReverse
 
--   Plugins by [happyendermangit](https://github.com/happyendermangit/)
+-   Plugins by [happyendermangit](https://github.com/happyendermangit/) & [SerStars](https://github.com/SerStars/)
 -   -   CopyEmojiAsFormattedString (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
 -   -   QuestsCompleter (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2393))
     -   CustomAppIcons
- 
--   Plugins by [SerStars](https://github.com/SerStars/)
--   -   QuestsCompleter (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2393))
--   -   CustomAppIcons
 
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
