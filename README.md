@@ -6,7 +6,8 @@
 
 Suncord is a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
-You can join our [discord server](https://discord.gg/VasF3Ma4Ab) for commits, changes, chat or even support.<br><br></br> 
+You can join our [discord server](https://discord.gg/VasF3Ma4Ab) for commits, changes, chat or even support.<br><br></br>
+
 <details>
 <summary>Why does Suncord exist?</summary>
 
@@ -21,7 +22,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (44 additional plugins)</summary>
+<summary>Included plugins (45 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   MemberListActivities
