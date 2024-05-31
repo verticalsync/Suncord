@@ -36,20 +36,13 @@ export const VERSION = PackageJSON.version;
 // https://reproducible-builds.org/docs/source-date-epoch/
 export const BUILD_TIMESTAMP = Number(process.env.SOURCE_DATE_EPOCH) || Date.now();
 
-
 export const watch = process.argv.includes("--watch");
 export const IS_DEV = watch || process.argv.includes("--dev");
 export const IS_REPORTER = process.argv.includes("--reporter");
 export const IS_STANDALONE = process.argv.includes("--standalone");
 
 export const IS_UPDATER_DISABLED = process.argv.includes("--disable-updater");
-export const IS_DEV = watch || process.argv.includes("--dev");
-export const IS_REPORTER = process.argv.includes("--reporter");
-export const IS_STANDALONE = process.argv.includes("--standalone");
-
-export const IS_UPDATER_DISABLED = process.argv.includes("--disable-updater");
-export const gitHash = process.env.VENCORD_HASH || execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
-
+export const gitHash = process.env.SUNCORD_HASH || execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
 
 export const banner = {
     js: `
@@ -60,8 +53,6 @@ export const banner = {
 `.trim()
 };
 
-export async function exists(path) {
-    return await access(path, FsConstants.F_OK)
 export async function exists(path) {
     return await access(path, FsConstants.F_OK)
         .then(() => true)
@@ -77,7 +68,6 @@ export const makeAllPackagesExternalPlugin = {
     setup(build) {
         const filter = /^[^./]|^\.[^./]|^\.\.[^/]/; // Must not start with "/" or "./" or "../"
         build.onResolve({ filter }, args => ({ path: args.path, external: true }));
-    }
     }
 };
 
@@ -96,12 +86,11 @@ export const globPlugins = kind => ({
         });
 
         build.onLoad({ filter, namespace: "import-plugins" }, async () => {
-            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "userplugins", "suncordplugins"];
+            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "userplugins"];
             let code = "";
             let plugins = "\n";
             let i = 0;
             for (const dir of pluginDirs) {
-                if (!await exists(`./src/${dir}`)) continue;
                 if (!await exists(`./src/${dir}`)) continue;
                 const files = await readdir(`./src/${dir}`);
                 for (const file of files) {
@@ -109,7 +98,6 @@ export const globPlugins = kind => ({
                     if (file === "index.ts") continue;
 
                     const target = getPluginTarget(file);
-                    if (target && !IS_REPORTER) {
                     if (target && !IS_REPORTER) {
                         if (target === "dev" && !watch) continue;
                         if (target === "web" && kind === "discordDesktop") continue;
@@ -192,7 +180,6 @@ export const fileUrlPlugin = {
         build.onLoad({ filter, namespace: "file-uri" }, async ({ pluginData: { path, uri } }) => {
             const { searchParams } = new URL(uri);
             const base64 = searchParams.has("base64");
-            const minify = IS_STANDALONE === true && searchParams.has("minify");
             const minify = IS_STANDALONE === true && searchParams.has("minify");
             const noTrim = searchParams.get("trim") === "false";
 
