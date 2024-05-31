@@ -64,7 +64,7 @@ export default definePlugin({
     commands: [{
         name: "suncord-debug",
         description: "Send Suncord Debug info",
-        predicate: ctx => AllowedChannelIds.includes(ctx.channel.id),
+        predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || isSuncordPluginDev(UserStore.getCurrentUser()?.id) || AllowedChannelIds.includes(ctx.channel.id),
         async execute() {
             const { RELEASE_CHANNEL } = window.GLOBAL_ENV;
 
