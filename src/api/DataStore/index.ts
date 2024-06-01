@@ -49,7 +49,7 @@ let defaultGetStoreFunc: UseStore | undefined;
 
 function defaultGetStore() {
     if (!defaultGetStoreFunc) {
-        defaultGetStoreFunc = createStore("SuncordData", "SuncordStore");
+        defaultGetStoreFunc = createStore(!IS_REPORTER ? "SuncordData" : "SuncordDataReporter", "SuncordStore");
     }
     return defaultGetStoreFunc;
 }
