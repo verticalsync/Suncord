@@ -22,16 +22,19 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (45 additional plugins)</summary>
+<summary>Included plugins (48 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
--   -   MemberListActivities
--   -   VoiceChatUtilities
+-   -   AudioPlaybackSpeed
+-   -   BetterActivities
 -   -   BlockKrisp
+-   -   FollowUser
 -   -   IgnoreTerms
 -   -   NotifyUserChanges
 -   -   ScreenShareStreamerMode
 -   -   ServerProfilesToolbox
+-   -   SilentTyping (enhanced)
+-   -   VoiceChatUtilities
 
 -   Plugins by [Kyuuhachi](https://github.com/Kyuuhachi/VencordPlugins)
 -   -   Anammox
