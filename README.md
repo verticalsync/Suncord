@@ -50,7 +50,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   SmukiCommands (roblox tax calculation and profile commands for smuki)
 
 -   Plugins by [Tolgchu](https://github.com/Tolga1452/Vencord)
--   -   BetterShopPreview
 -   -   GodMode
 -   -   RepeatMessage
 -   -   RunInConsole
