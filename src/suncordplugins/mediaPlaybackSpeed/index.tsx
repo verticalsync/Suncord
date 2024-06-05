@@ -16,7 +16,7 @@ import { RefObject } from "react";
 
 import SpeedIcon from "./components/SpeedIcon";
 
-const cl = classNameFactory("vc-audio-playback-speed-");
+const cl = classNameFactory("vc-media-playback-speed-");
 
 const speeds = makeRange(0.25, 3.5, 0.25);
 
