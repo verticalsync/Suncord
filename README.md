@@ -22,7 +22,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (48 additional plugins)</summary>
+<summary>Included plugins (47 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   AudioPlaybackSpeed
@@ -56,7 +56,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   TalkInReverse
 
 -   Plugins by [happyendermangit](https://github.com/happyendermangit/) & [SerStars](https://github.com/SerStars/)
--   -   CopyEmojiAsFormattedString (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2266))
 -   -   QuestsCompleter (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2393))
     -   CustomAppIcons
 
