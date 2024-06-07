@@ -65,17 +65,3 @@ jobs:
               env:
                   DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
                   DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-
-            - name: Create Report (PTB)
-              timeout-minutes: 10
-              if: success() || failure() # even run if previous one failed
-              run: |
-                  export PATH="$PWD/node_modules/.bin:$PATH"
-                  export CHROMIUM_BIN=${{ steps.setup-chrome.outputs.chrome-path }}
-                  export USE_PTB=true
-
-                  esbuild scripts/generateReport.ts > dist/report.mjs
-                  node dist/report.mjs >> $GITHUB_STEP_SUMMARY
-              env:
-                  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
