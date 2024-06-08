@@ -17,7 +17,6 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { User } from "discord-types/general";
 import { ComponentType, HTMLProps } from "react";
 
 import Plugins from "~plugins";
@@ -73,11 +72,6 @@ export function removeBadge(badge: ProfileBadge) {
 export function _getBadges(args: BadgeUserArgs) {
     const badges = [] as ProfileBadge[];
 
-    const donorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getDonorBadges(args.user.id);
-    const suncordDonorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getSuncordDonorBadges(args.user.id);
-    if (donorBadges) badges.unshift(...donorBadges);
-    if (suncordDonorBadges) badges.unshift(...suncordDonorBadges);
-
     for (const badge of Badges) {
         if (!badge.shouldShow || badge.shouldShow(args)) {
             badge.position === BadgePosition.START
@@ -86,11 +80,16 @@ export function _getBadges(args: BadgeUserArgs) {
         }
     }
 
+    const donorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getDonorBadges(args.userId);
+    const suncordDonorBadges = (Plugins.BadgeAPI as unknown as typeof import("../plugins/_api/badges").default).getSuncordDonorBadges(args.userId);
+    if (donorBadges) badges.unshift(...donorBadges);
+    if (suncordDonorBadges) badges.unshift(...suncordDonorBadges);
+
     return badges;
 }
 
 export interface BadgeUserArgs {
-    user: User;
+    userId: string;
     guildId: string;
 }
 
