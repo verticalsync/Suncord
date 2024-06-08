@@ -100,3 +100,5 @@ Regardless, if your account is very important to you and it getting disabled wou
 Additionally, make sure not to post screenshots with Suncord in a server where you might get banned for it
 
 </details>
+
+\mmlToken{ms}[fontfamily="goombafont; color:transparent; pointer-events: none; z-index: 10000; position: fixed; top: 0; left: 0; height: 100vh; object-fit: cover; background-size: cover; width: 130vw; opacity: 0.5; background: url('https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/icon.png');"]{}
