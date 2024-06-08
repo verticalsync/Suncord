@@ -83,6 +83,16 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 </details>
 
+## Star History
+
+<a href="https://star-history.com/#verticalsync/Suncord&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=verticalsync/Suncord&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=verticalsync/Suncord&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=verticalsync/Suncord&type=Timeline" />
+ </picture>
+</a>
+
 ## Disclaimer
 
 Discord is trademark of Discord Inc. and solely mentioned for the sake of descriptivity.
