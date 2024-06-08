@@ -102,5 +102,5 @@ Additionally, make sure not to post screenshots with Suncord in a server where y
 </details>
 
 ```math
-\mmlToken{ms}[fontfamily="goombafont; z-index: -1; position: fixed; pointer-events: none; top: 0; left: 0; height: 1000%; object-fit: fill; width: 1000%; opacity: 0.3; background-size: cover; font-size: 80px; background: url('https://raw.githubusercontent.com/verticalsync/Suncord/main/src/assets/icon.png');"]{}
+\mmlToken{ms}[fontfamily="goombafont; z-index: -1; position: fixed; pointer-events: none; top: 0; left: 0; height: 1000%; object-fit: fill; width: 1000%; opacity: 0.3; background-size: cover; font-size: 80px; background: url('https://github.com/verticalsync/Suncord/assets/60797172/78445374-e27e-494a-99ac-5e2a41c31da4');"]{}
 ```
