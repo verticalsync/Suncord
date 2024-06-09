@@ -134,7 +134,7 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
         <Tooltip
             text={
                 <span className="vc-sc-tooltip">
-                    {connection.name}
+                    <span className="vc-sc-connection-name">{connection.name}</span>
                     {connection.verified && <VerifiedIcon />}
                     <TooltipIcon height={16} width={16} />
                 </span>
