@@ -80,6 +80,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   UserPFP (by [Nexpid](https://github.com/Nexpid)) (added from Nexpid's [pull request](https://github.com/Vendicated/Vencord/pull/1956))
 -   ShowBadgeInChat (by [KrstlSkll69](https://github.com/KrstlSkll69) (added from KrstlSkll69's [pull request](https://github.com/Vendicated/Vencord/pull/2347)))
 -   DiscordColorways (by [DaBluLite](https://github.com/DaBluLite/DiscordColorways))
+-   MediaDownloader (by [TheColorman](https://github.com/TheColorman)) (added from TheColorman's [pull request](https://github.com/Vendicated/Vencord/pull/2480))
 
 </details>
 
