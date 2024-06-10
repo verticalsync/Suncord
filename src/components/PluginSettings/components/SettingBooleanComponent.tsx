@@ -60,4 +60,3 @@ export function SettingBooleanComponent({ option, pluginSettings, definedSetting
         </Forms.FormSection>
     );
 }
-

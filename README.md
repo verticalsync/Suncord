@@ -44,11 +44,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   -   ModalFade
 -   -   Title
 
--   Plugins by [verticalsync](https://github.com/verticalsync)
--   -   DoubleCounterVerifyBypass
--   -   QuestionMarkReplacement (for smuki, i think he's acoustic)
--   -   SmukiCommands (roblox tax calculation and profile commands for smuki)
-
 -   Plugins by [Tolgchu](https://github.com/Tolga1452/Vencord)
 -   -   GodMode
 -   -   RepeatMessage
@@ -62,6 +57,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
 -   Timezones (by [mantikafasi](https://github.com/mantikafasi) & [ArjixWasTaken](https://github.com/ArjixWasTaken))
+-   DoubleCounterVerifyBypass (by [verticalsync](https://github.com/verticalsync/double-counter-verify-bypass))
 -   CustomScreenShare (by [KawaiianPizza](https://github.com/KawaiianPizza)) (added from KawiianPizza's [pull request](https://github.com/Vendicated/Vencord/pull/2385))
 -   iRememberYou (by [zoodogood](https://github.com/zoodogood/vencord-plugins))
 -   EmojiDownloader (by [woosh](https://github.com/w8y) modified version of ServerDownload by [cheesesamwich](https://github.com/cheesesamwich/ServerDownload))
@@ -81,6 +77,9 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   ShowBadgeInChat (by [KrstlSkll69](https://github.com/KrstlSkll69) (added from KrstlSkll69's [pull request](https://github.com/Vendicated/Vencord/pull/2347)))
 -   DiscordColorways (by [DaBluLite](https://github.com/DaBluLite/DiscordColorways))
 -   MediaDownloader (by [TheColorman](https://github.com/TheColorman)) (added from TheColorman's [pull request](https://github.com/Vendicated/Vencord/pull/2480))
+-   BetterBanReasons (by [Inbestigator](https://github.com/Inbestigator)) (added from Inbestigator's [pull request](https://github.com/Vendicated/Vencord/pull/2570))
+-   Draggables (by [pwall2222](https://github.com/pwall2222)) (added from pwall2222's [pull request](https://github.com/Vendicated/Vencord/pull/2555))
+-   MessageColors (by [henmalib](https://github.com/henmalib)) (added from henmalib's [pull request](https://github.com/Vendicated/Vencord/pull/2521))
 
 </details>
 

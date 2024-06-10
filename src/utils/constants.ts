@@ -586,6 +586,14 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "colorman",
         id: 298842558610800650n,
     },
+    PWall: {
+        name: "PWall",
+        id: 0n,
+    },
+    hen: {
+        id: 279266228151779329n,
+        name: "Hen",
+    },
 } satisfies Record<string, Dev>);
 
 export const SuncordDevs = /* #__PURE__*/ Object.freeze({

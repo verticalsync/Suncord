@@ -19,7 +19,6 @@
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
-import { DonateButton } from "@components/DonateButton";
 import { ErrorCard } from "@components/ErrorCard";
 import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
@@ -301,34 +300,6 @@ function NotificationSection({ settings }: { settings: typeof Settings["notifica
         </>
     );
 }
-
-interface DonateCardProps {
-    image: string;
-}
-
-function DonateCard({ image }: DonateCardProps) {
-    return (
-        <Card className={cl("card", "donate")}>
-            <div>
-                <Forms.FormTitle tag="h5">Support the Project</Forms.FormTitle>
-                <Forms.FormText>Please consider supporting the development of Suncord by donating!</Forms.FormText>
-                <DonateButton style={{ transform: "translateX(-1em)" }} />
-            </div>
-            <img
-                role="presentation"
-                src={image}
-                alt=""
-                height={128}
-                style={{
-                    imageRendering: image === SHIGGY_DONATE_IMAGE ? "pixelated" : void 0,
-                    marginLeft: "auto",
-                    transform: image === DEFAULT_DONATE_IMAGE ? "rotate(10deg)" : void 0
-                }}
-            />
-        </Card>
-    );
-}
-
 interface DiscordInviteProps {
     invite: string;
 }

@@ -148,4 +148,4 @@ export const MessageCache = findByPropsLazy("clearCache", "_channelMessages");
 export const UserProfileActions = findByPropsLazy("openUserProfileModal", "closeUserProfileModal");
 export const InviteActions = findByPropsLazy("resolveInvite");
 
-export const IconUtils: t.IconUtils = findByPropsLazy("getGuildBannerURL", "getUserAvatarURL", "getChannelIconURL");
+export const IconUtils: t.IconUtils = findByPropsLazy("getGuildBannerURL", "getUserAvatarURL");

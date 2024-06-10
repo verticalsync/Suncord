@@ -54,13 +54,13 @@ const self = module.exports;
                                 return "function" == typeof t;
                             }
                             var n = Array.isArray
-                                ? Array.isArray
-                                : function (t) {
-                                    return (
-                                        "[object Array]" ===
-                                        Object.prototype.toString.call(t)
-                                    );
-                                },
+                                    ? Array.isArray
+                                    : function (t) {
+                                          return (
+                                              "[object Array]" ===
+                                              Object.prototype.toString.call(t)
+                                          );
+                                      },
                                 r = 0,
                                 e = void 0,
                                 i = void 0,
@@ -70,9 +70,9 @@ const self = module.exports;
                                         2 === (r += 2) && (i ? i(d) : g());
                                 };
                             var t =
-                                "undefined" != typeof window
-                                    ? window
-                                    : void 0,
+                                    "undefined" != typeof window
+                                        ? window
+                                        : void 0,
                                 o = t || {},
                                 s =
                                     o.MutationObserver ||
@@ -130,43 +130,43 @@ const self = module.exports;
                             }
                             g = c
                                 ? function () {
-                                    return G.nextTick(d);
-                                }
+                                      return G.nextTick(d);
+                                  }
                                 : s
-                                    ? ((v = 0),
-                                        (A = new s(d)),
-                                        (m = document.createTextNode("")),
-                                        A.observe(m, { characterData: !0 }),
-                                        function () {
-                                            m.data = v = ++v % 2;
-                                        })
-                                    : f
-                                        ? (((p = new MessageChannel()).port1.onmessage =
-                                            d),
-                                            function () {
-                                                return p.port2.postMessage(0);
-                                            })
-                                        : void 0 === t && "function" == typeof Y
-                                            ? (function () {
-                                                try {
-                                                    var t =
-                                                        Function("return this")().require(
-                                                            "vertx"
-                                                        );
-                                                    return void 0 !==
-                                                        (e =
-                                                            t.runOnLoop || t.runOnContext)
-                                                        ? function () {
-                                                            e(d);
-                                                        }
-                                                        : h();
-                                                } catch (t) {
-                                                    return h();
+                                ? ((v = 0),
+                                  (A = new s(d)),
+                                  (m = document.createTextNode("")),
+                                  A.observe(m, { characterData: !0 }),
+                                  function () {
+                                      m.data = v = ++v % 2;
+                                  })
+                                : f
+                                ? (((p = new MessageChannel()).port1.onmessage =
+                                      d),
+                                  function () {
+                                      return p.port2.postMessage(0);
+                                  })
+                                : void 0 === t && "function" == typeof Y
+                                ? (function () {
+                                      try {
+                                          var t =
+                                              Function("return this")().require(
+                                                  "vertx"
+                                              );
+                                          return void 0 !==
+                                              (e =
+                                                  t.runOnLoop || t.runOnContext)
+                                              ? function () {
+                                                    e(d);
                                                 }
-                                            })()
-                                            : h();
+                                              : h();
+                                      } catch (t) {
+                                          return h();
+                                      }
+                                  })()
+                                : h();
                             var _ = Math.random().toString(36).substring(2);
-                            function b() { }
+                            function b() {}
                             var E = void 0,
                                 P = 1,
                                 x = 2;
@@ -185,9 +185,9 @@ const self = module.exports;
                                             function (t) {
                                                 n ||
                                                     ((n = !0),
-                                                        r !== t
-                                                            ? T(e, t)
-                                                            : O(e, t));
+                                                    r !== t
+                                                        ? T(e, t)
+                                                        : O(e, t));
                                             },
                                             function (t) {
                                                 n || ((n = !0), R(e, t));
@@ -199,14 +199,14 @@ const self = module.exports;
                             }
                             function C(t, e, n) {
                                 e.constructor === t.constructor &&
-                                    n === w &&
-                                    e.constructor.resolve === y
+                                n === w &&
+                                e.constructor.resolve === y
                                     ? (function (e, t) {
-                                        t._state === P
-                                            ? O(e, t._result)
-                                            : t._state === x
-                                                ? R(e, t._result)
-                                                : U(
+                                          t._state === P
+                                              ? O(e, t._result)
+                                              : t._state === x
+                                              ? R(e, t._result)
+                                              : U(
                                                     t,
                                                     void 0,
                                                     function (t) {
@@ -216,12 +216,12 @@ const self = module.exports;
                                                         return R(e, t);
                                                     }
                                                 );
-                                    })(t, e)
+                                      })(t, e)
                                     : void 0 === n
-                                        ? O(t, e)
-                                        : u(n)
-                                            ? N(t, e, n)
-                                            : O(t, e);
+                                    ? O(t, e)
+                                    : u(n)
+                                    ? N(t, e, n)
+                                    : O(t, e);
                             }
                             function T(e, t) {
                                 if (e === t)
@@ -255,8 +255,8 @@ const self = module.exports;
                             function O(t, e) {
                                 t._state === E &&
                                     ((t._result = e),
-                                        (t._state = P),
-                                        0 !== t._subscribers.length && a(I, t));
+                                    (t._state = P),
+                                    0 !== t._subscribers.length && a(I, t));
                             }
                             function R(t, e) {
                                 t._state === E &&
@@ -277,9 +277,9 @@ const self = module.exports;
                                 if (0 !== e.length) {
                                     for (
                                         var r = void 0,
-                                        i = void 0,
-                                        o = t._result,
-                                        a = 0;
+                                            i = void 0,
+                                            o = t._result,
+                                            a = 0;
                                         a < e.length;
                                         a += 3
                                     )
@@ -312,10 +312,10 @@ const self = module.exports;
                                     (i && s
                                         ? T(e, o)
                                         : !1 === s
-                                            ? R(e, a)
-                                            : t === P
-                                                ? O(e, o)
-                                                : t === x && R(e, o));
+                                        ? R(e, a)
+                                        : t === P
+                                        ? O(e, o)
+                                        : t === x && R(e, o));
                             }
                             var D = 0;
                             function j(t) {
@@ -333,148 +333,148 @@ const self = module.exports;
                                     )
                                         this._eachEntry(t[e], e);
                                 }),
-                                    (F.prototype._eachEntry = function (e, t) {
-                                        var n = this._instanceConstructor,
-                                            r = n.resolve;
-                                        if (r === y) {
-                                            var i = void 0,
-                                                o = void 0,
-                                                a = !1;
-                                            try {
-                                                i = e.then;
-                                            } catch (t) {
-                                                (a = !0), (o = t);
-                                            }
-                                            if (i === w && e._state !== E)
-                                                this._settledAt(
-                                                    e._state,
-                                                    t,
-                                                    e._result
-                                                );
-                                            else if ("function" != typeof i)
-                                                this._remaining--,
-                                                    (this._result[t] = e);
-                                            else if (n === S) {
-                                                var s = new n(b);
-                                                a ? R(s, o) : C(s, e, i),
-                                                    this._willSettleAt(s, t);
-                                            } else
-                                                this._willSettleAt(
-                                                    new n(function (t) {
-                                                        return t(e);
-                                                    }),
-                                                    t
-                                                );
-                                        } else this._willSettleAt(r(e), t);
-                                    }),
-                                    (F.prototype._settledAt = function (t, e, n) {
-                                        var r = this.promise;
-                                        r._state === E &&
-                                            (this._remaining--,
-                                                t === x
-                                                    ? R(r, n)
-                                                    : (this._result[e] = n)),
-                                            0 === this._remaining &&
+                                (F.prototype._eachEntry = function (e, t) {
+                                    var n = this._instanceConstructor,
+                                        r = n.resolve;
+                                    if (r === y) {
+                                        var i = void 0,
+                                            o = void 0,
+                                            a = !1;
+                                        try {
+                                            i = e.then;
+                                        } catch (t) {
+                                            (a = !0), (o = t);
+                                        }
+                                        if (i === w && e._state !== E)
+                                            this._settledAt(
+                                                e._state,
+                                                t,
+                                                e._result
+                                            );
+                                        else if ("function" != typeof i)
+                                            this._remaining--,
+                                                (this._result[t] = e);
+                                        else if (n === S) {
+                                            var s = new n(b);
+                                            a ? R(s, o) : C(s, e, i),
+                                                this._willSettleAt(s, t);
+                                        } else
+                                            this._willSettleAt(
+                                                new n(function (t) {
+                                                    return t(e);
+                                                }),
+                                                t
+                                            );
+                                    } else this._willSettleAt(r(e), t);
+                                }),
+                                (F.prototype._settledAt = function (t, e, n) {
+                                    var r = this.promise;
+                                    r._state === E &&
+                                        (this._remaining--,
+                                        t === x
+                                            ? R(r, n)
+                                            : (this._result[e] = n)),
+                                        0 === this._remaining &&
                                             O(r, this._result);
-                                    }),
-                                    (F.prototype._willSettleAt = function (t, e) {
-                                        var n = this;
-                                        U(
-                                            t,
-                                            void 0,
-                                            function (t) {
-                                                return n._settledAt(P, e, t);
-                                            },
-                                            function (t) {
-                                                return n._settledAt(x, e, t);
-                                            }
-                                        );
-                                    }),
-                                    F);
+                                }),
+                                (F.prototype._willSettleAt = function (t, e) {
+                                    var n = this;
+                                    U(
+                                        t,
+                                        void 0,
+                                        function (t) {
+                                            return n._settledAt(P, e, t);
+                                        },
+                                        function (t) {
+                                            return n._settledAt(x, e, t);
+                                        }
+                                    );
+                                }),
+                                F);
                             function F(t, e) {
                                 (this._instanceConstructor = t),
                                     (this.promise = new t(b)),
                                     this.promise[_] || j(this.promise),
                                     n(e)
                                         ? ((this.length = e.length),
-                                            (this._remaining = e.length),
-                                            (this._result = new Array(
-                                                this.length
-                                            )),
-                                            0 === this.length
-                                                ? O(this.promise, this._result)
-                                                : ((this.length =
+                                          (this._remaining = e.length),
+                                          (this._result = new Array(
+                                              this.length
+                                          )),
+                                          0 === this.length
+                                              ? O(this.promise, this._result)
+                                              : ((this.length =
                                                     this.length || 0),
-                                                    this._enumerate(e),
-                                                    0 === this._remaining &&
+                                                this._enumerate(e),
+                                                0 === this._remaining &&
                                                     O(
                                                         this.promise,
                                                         this._result
                                                     )))
                                         : R(
-                                            this.promise,
-                                            new Error(
-                                                "Array Methods must be provided an Array"
-                                            )
-                                        );
+                                              this.promise,
+                                              new Error(
+                                                  "Array Methods must be provided an Array"
+                                              )
+                                          );
                             }
                             var S =
                                 ((M.prototype.catch = function (t) {
                                     return this.then(null, t);
                                 }),
-                                    (M.prototype.finally = function (e) {
-                                        var n = this.constructor;
-                                        return u(e)
-                                            ? this.then(
-                                                function (t) {
-                                                    return n
-                                                        .resolve(e())
-                                                        .then(function () {
-                                                            return t;
-                                                        });
-                                                },
-                                                function (t) {
-                                                    return n
-                                                        .resolve(e())
-                                                        .then(function () {
-                                                            throw t;
-                                                        });
-                                                }
-                                            )
-                                            : this.then(e, e);
-                                    }),
-                                    M);
+                                (M.prototype.finally = function (e) {
+                                    var n = this.constructor;
+                                    return u(e)
+                                        ? this.then(
+                                              function (t) {
+                                                  return n
+                                                      .resolve(e())
+                                                      .then(function () {
+                                                          return t;
+                                                      });
+                                              },
+                                              function (t) {
+                                                  return n
+                                                      .resolve(e())
+                                                      .then(function () {
+                                                          throw t;
+                                                      });
+                                              }
+                                          )
+                                        : this.then(e, e);
+                                }),
+                                M);
                             function M(t) {
                                 (this[_] = D++),
                                     (this._result = this._state = void 0),
                                     (this._subscribers = []),
                                     b !== t &&
-                                    ("function" != typeof t &&
-                                        (function () {
-                                            throw new TypeError(
-                                                "You must pass a resolver function as the first argument to the promise constructor"
-                                            );
-                                        })(),
+                                        ("function" != typeof t &&
+                                            (function () {
+                                                throw new TypeError(
+                                                    "You must pass a resolver function as the first argument to the promise constructor"
+                                                );
+                                            })(),
                                         this instanceof M
                                             ? (function (e, t) {
-                                                try {
-                                                    t(
-                                                        function (t) {
-                                                            T(e, t);
-                                                        },
-                                                        function (t) {
-                                                            R(e, t);
-                                                        }
-                                                    );
-                                                } catch (t) {
-                                                    R(e, t);
-                                                }
-                                            })(this, t)
+                                                  try {
+                                                      t(
+                                                          function (t) {
+                                                              T(e, t);
+                                                          },
+                                                          function (t) {
+                                                              R(e, t);
+                                                          }
+                                                      );
+                                                  } catch (t) {
+                                                      R(e, t);
+                                                  }
+                                              })(this, t)
                                             : (function () {
-                                                throw new TypeError(
-                                                    "Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function."
-                                                );
-                                            })());
+                                                  throw new TypeError(
+                                                      "Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function."
+                                                  );
+                                              })());
                             }
                             return (
                                 (S.prototype.then = w),
@@ -485,20 +485,20 @@ const self = module.exports;
                                     var o = this;
                                     return n(i)
                                         ? new o(function (t, e) {
-                                            for (
-                                                var n = i.length, r = 0;
-                                                r < n;
-                                                r++
-                                            )
-                                                o.resolve(i[r]).then(t, e);
-                                        })
+                                              for (
+                                                  var n = i.length, r = 0;
+                                                  r < n;
+                                                  r++
+                                              )
+                                                  o.resolve(i[r]).then(t, e);
+                                          })
                                         : new o(function (t, e) {
-                                            return e(
-                                                new TypeError(
-                                                    "You must pass an array to race."
-                                                )
-                                            );
-                                        });
+                                              return e(
+                                                  new TypeError(
+                                                      "You must pass an array to race."
+                                                  )
+                                              );
+                                          });
                                 }),
                                 (S.resolve = y),
                                 (S.reject = function (t) {
@@ -532,7 +532,7 @@ const self = module.exports;
                                             n = Object.prototype.toString.call(
                                                 e.resolve()
                                             );
-                                        } catch (t) { }
+                                        } catch (t) {}
                                         if ("[object Promise]" === n && !e.cast)
                                             return;
                                     }
@@ -544,16 +544,16 @@ const self = module.exports;
                         "object" == typeof r && void 0 !== n
                             ? (n.exports = e())
                             : "function" == typeof define && define.amd
-                                ? define(e)
-                                : (t.ES6Promise = e());
+                            ? define(e)
+                            : (t.ES6Promise = e());
                 }).call(
                     this,
                     Y("VCmEsw"),
                     "undefined" != typeof self
                         ? self
                         : "undefined" != typeof window
-                            ? window
-                            : {}
+                        ? window
+                        : {}
                 );
             },
             { VCmEsw: 2 },
@@ -561,7 +561,7 @@ const self = module.exports;
         2: [
             function (t, e, n) {
                 var r = (e.exports = {});
-                function i() { }
+                function i() {}
                 (r.nextTick = (function () {
                     var t = "undefined" != typeof window && window.setImmediate,
                         e =
@@ -582,7 +582,7 @@ const self = module.exports;
                                     (e !== window && null !== e) ||
                                         "process-tick" !== t.data ||
                                         (t.stopPropagation(),
-                                            0 < n.length && n.shift()());
+                                        0 < n.length && n.shift()());
                                 },
                                 !0
                             ),
@@ -632,8 +632,8 @@ const self = module.exports;
                             s ||
                                 u ||
                                 (this.rewind(),
-                                    (s = !0),
-                                    requestAnimationFrame(e));
+                                (s = !0),
+                                requestAnimationFrame(e));
                         }),
                         (this.rewind = function () {
                             (o = i = 0), (a = null), (u = s = !1);
@@ -654,8 +654,8 @@ const self = module.exports;
                             var e = c.indexOf(t);
                             -1 !== e &&
                                 (c.splice(e, 1),
-                                    0 === c.length && this.rewind(),
-                                    "_apng_animation" in t &&
+                                0 === c.length && this.rewind(),
+                                "_apng_animation" in t &&
                                     delete t._apng_animation);
                         }),
                         (this.isPlayed = function () {
@@ -672,7 +672,7 @@ const self = module.exports;
                         u = !1,
                         c = [],
                         e = function (t) {
-                            for (; s && i <= t;) n(t);
+                            for (; s && i <= t; ) n(t);
                             s && requestAnimationFrame(e);
                         },
                         n = function (t) {
@@ -684,55 +684,55 @@ const self = module.exports;
                             ) {
                                 for (
                                     0 == e &&
-                                    (c.forEach(function (t) {
-                                        t.clearRect(
-                                            0,
-                                            0,
-                                            r.width,
-                                            r.height
-                                        );
-                                    }),
-                                        (a = null),
-                                        2 == n.disposeOp && (n.disposeOp = 1)),
-                                    a && 1 == a.disposeOp
-                                        ? c.forEach(function (t) {
+                                        (c.forEach(function (t) {
                                             t.clearRect(
-                                                a.left,
-                                                a.top,
-                                                a.width,
-                                                a.height
-                                            );
-                                        })
-                                        : a &&
-                                        2 == a.disposeOp &&
-                                        c.forEach(function (t) {
-                                            t.putImageData(
-                                                a.iData,
-                                                a.left,
-                                                a.top
+                                                0,
+                                                0,
+                                                r.width,
+                                                r.height
                                             );
                                         }),
-                                    (a = n).iData = null,
-                                    2 == a.disposeOp &&
-                                    (a.iData = c[0].getImageData(
-                                        n.left,
-                                        n.top,
-                                        n.width,
-                                        n.height
-                                    )),
-                                    0 == n.blendOp &&
-                                    c.forEach(function (t) {
-                                        t.clearRect(
-                                            n.left,
-                                            n.top,
-                                            n.width,
-                                            n.height
-                                        );
-                                    }),
-                                    c.forEach(function (t) {
-                                        t.drawImage(n.img, n.left, n.top);
-                                    }),
-                                    0 == i && (i = t);
+                                        (a = null),
+                                        2 == n.disposeOp && (n.disposeOp = 1)),
+                                        a && 1 == a.disposeOp
+                                            ? c.forEach(function (t) {
+                                                  t.clearRect(
+                                                      a.left,
+                                                      a.top,
+                                                      a.width,
+                                                      a.height
+                                                  );
+                                              })
+                                            : a &&
+                                              2 == a.disposeOp &&
+                                              c.forEach(function (t) {
+                                                  t.putImageData(
+                                                      a.iData,
+                                                      a.left,
+                                                      a.top
+                                                  );
+                                              }),
+                                        (a = n).iData = null,
+                                        2 == a.disposeOp &&
+                                            (a.iData = c[0].getImageData(
+                                                n.left,
+                                                n.top,
+                                                n.width,
+                                                n.height
+                                            )),
+                                        0 == n.blendOp &&
+                                            c.forEach(function (t) {
+                                                t.clearRect(
+                                                    n.left,
+                                                    n.top,
+                                                    n.width,
+                                                    n.height
+                                                );
+                                            }),
+                                        c.forEach(function (t) {
+                                            t.drawImage(n.img, n.left, n.top);
+                                        }),
+                                        0 == i && (i = t);
                                     t > i + r.playTime;
 
                                 )
@@ -755,8 +755,8 @@ const self = module.exports;
                 e.exports = function (t, e, n) {
                     for (
                         var r = -1,
-                        i = (e = e || 0),
-                        o = e + (n = n || t.length - e);
+                            i = (e = e || 0),
+                            o = e + (n = n || t.length - e);
                         i < o;
                         i++
                     )
@@ -820,40 +820,40 @@ const self = module.exports;
                                                 s.src
                                             ),
                                             "" != s.alt &&
-                                            e.appendChild(
-                                                document.createTextNode(
-                                                    s.alt
-                                                )
-                                            );
+                                                e.appendChild(
+                                                    document.createTextNode(
+                                                        s.alt
+                                                    )
+                                                );
                                         var n = "",
                                             r = "",
                                             i = 0,
                                             o = "";
                                         "" != s.style.width &&
-                                            "auto" != s.style.width
+                                        "auto" != s.style.width
                                             ? (n = s.style.width)
                                             : s.hasAttribute("width") &&
-                                            (n =
-                                                s.getAttribute("width") +
-                                                "px"),
+                                              (n =
+                                                  s.getAttribute("width") +
+                                                  "px"),
                                             "" != s.style.height &&
-                                                "auto" != s.style.height
+                                            "auto" != s.style.height
                                                 ? (r = s.style.height)
                                                 : s.hasAttribute("height") &&
-                                                (r =
-                                                    s.getAttribute("height") +
-                                                    "px"),
+                                                  (r =
+                                                      s.getAttribute("height") +
+                                                      "px"),
                                             "" != n &&
-                                            "" == r &&
-                                            ((i = parseFloat(n)),
+                                                "" == r &&
+                                                ((i = parseFloat(n)),
                                                 (o = n.match(/\D+$/)[0]),
                                                 (r =
                                                     Math.round(
                                                         (e.height * i) / e.width
                                                     ) + o)),
                                             "" != r &&
-                                            "" == n &&
-                                            ((i = parseFloat(r)),
+                                                "" == n &&
+                                                ((i = parseFloat(r)),
                                                 (o = r.match(/\D+$/)[0]),
                                                 (n =
                                                     Math.round(
@@ -883,8 +883,8 @@ const self = module.exports;
                     "undefined" != typeof self
                         ? self
                         : "undefined" != typeof window
-                            ? window
-                            : {}
+                        ? window
+                        : {}
                 );
             },
             { "./loader": 6, "./parser": 7, "./support-test": 8 },
@@ -927,7 +927,7 @@ const self = module.exports;
                             (w(A, function (t) {
                                 return "acTL" != t || !(r = !0);
                             }),
-                                r)
+                            r)
                         ) {
                             var a = [],
                                 s = [],
@@ -959,7 +959,7 @@ const self = module.exports;
                                             0 == o && (o = 100),
                                                 (c.delay = (1e3 * i) / o),
                                                 c.delay <= 10 &&
-                                                (c.delay = 100),
+                                                    (c.delay = 100),
                                                 (f.playTime += c.delay),
                                                 (c.disposeOp = b(
                                                     e,
@@ -990,14 +990,14 @@ const self = module.exports;
                                             a.push(E(e, n, 12 + r));
                                     }
                                 }),
-                                    c && f.frames.push(c),
-                                    0 != f.frames.length)
+                                c && f.frames.push(c),
+                                0 != f.frames.length)
                             )
                                 for (
                                     var i = 0,
-                                    o = new Blob(a),
-                                    h = new Blob(s),
-                                    l = 0;
+                                        o = new Blob(a),
+                                        h = new Blob(s),
+                                        l = 0;
                                     l < f.frames.length;
                                     l++
                                 ) {
@@ -1031,14 +1031,14 @@ const self = module.exports;
                     });
                 };
                 var w = function (t, e) {
-                    var n = 8;
-                    do {
-                        var r = y(t, n),
-                            i = a(t, n + 4, 4),
-                            o = e(i, t, n, r);
-                        n += 12 + r;
-                    } while (!1 !== o && "IEND" != i && n < t.length);
-                },
+                        var n = 8;
+                        do {
+                            var r = y(t, n),
+                                i = a(t, n + 4, 4),
+                                o = e(i, t, n, r);
+                            n += 12 + r;
+                        } while (!1 !== o && "IEND" != i && n < t.length);
+                    },
                     y = function (t, e) {
                         var n = 0;
                         n += (t[0 + e] << 24) >>> 0;
@@ -1129,10 +1129,10 @@ const self = module.exports;
                                             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACGFjVEwAAAABAAAAAcMq2TYAAAANSURBVAiZY2BgYPgPAAEEAQB9ssjfAAAAGmZjVEwAAAAAAAAAAQAAAAEAAAAAAAAAAAD6A+gBAbNU+2sAAAARZmRBVAAAAAEImWNgYGBgAAAABQAB6MzFdgAAAABJRU5ErkJggg==");
                                 } else e(r);
                             }),
-                                (n = null),
-                                function (t) {
-                                    return (n = n || new r(e)), t && n.then(t), n;
-                                });
+                            (n = null),
+                            function (t) {
+                                return (n = n || new r(e)), t && n.then(t), n;
+                            });
                     a.exports = {
                         checkNativeFeatures: i,
                         ifNeeded: function (r) {
@@ -1156,8 +1156,8 @@ const self = module.exports;
                     "undefined" != typeof self
                         ? self
                         : "undefined" != typeof window
-                            ? window
-                            : {}
+                        ? window
+                        : {}
                 );
             },
             { "es6-promise": 1 },

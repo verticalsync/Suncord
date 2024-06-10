@@ -25,6 +25,7 @@ import { Readable } from "stream";
 import { finished } from "stream/promises";
 import { fileURLToPath } from "url";
 
+
 const BASE_URL = "https://github.com/verticalsync/SuncordInstaller/releases/latest/download/";
 const INSTALLER_PATH_DARWIN = "SuncordInstaller.app/Contents/MacOS/SuncordInstaller";
 
