@@ -133,10 +133,7 @@ export const versionData = {
 export default definePlugin({
     name: "DiscordColorways",
     description: "A plugin that offers easy access to simple color schemes/themes for Discord, also known as Colorways",
-    authors: [{
-        name: "DaBluLite",
-        id: 582170007505731594n
-    }, Devs.ImLvna],
+    authors: [Devs.DaBluLite, Devs.ImLvna],
     dependencies: ["ServerListAPI", "MessageAccessoriesAPI"],
     pluginVersion: versionData.pluginVersion,
     creatorVersion: versionData.creatorVersion,

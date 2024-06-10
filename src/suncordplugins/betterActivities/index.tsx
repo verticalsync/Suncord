@@ -68,7 +68,7 @@ const settings = definePluginSettings({
                 borderTop: "thin solid var(--background-modifier-accent)",
                 paddingTop: 5,
                 paddingBottom: 5
-            }}/>
+            }} />
         ),
     },
     profileSidebar: {
@@ -307,10 +307,7 @@ export default definePlugin({
     description: "Shows activity icons in the member list and allows showing all activities",
     authors: [
         Devs.D3SOX,
-        {
-            name: "dropped#0001",
-            id: 328165170536775680n,
-        },
+        Devs.nyx,
         Devs.Arjix,
         Devs.AutumnVN
     ],
@@ -420,7 +417,7 @@ export default definePlugin({
                         user={user}
                         guild={guild}
                         channelId={channelId}
-                        onClose={onClose}/>
+                        onClose={onClose} />
                     <div
                         className={cl("controls")}
                         style={{
@@ -444,7 +441,7 @@ export default definePlugin({
                             >
                                 <Caret
                                     disabled={activities.indexOf(currentActivity!) < 1}
-                                    direction="left"/>
+                                    direction="left" />
                             </span>;
                         }}</Tooltip>
 
@@ -453,7 +450,7 @@ export default definePlugin({
                                 <div
                                     key={"dot--" + index}
                                     onClick={() => setCurrentActivity(activity)}
-                                    className={`dot ${currentActivity === activity ? "selected" : ""}`}/>
+                                    className={`dot ${currentActivity === activity ? "selected" : ""}`} />
                             ))}
                         </div>
 
@@ -472,7 +469,7 @@ export default definePlugin({
                             >
                                 <Caret
                                     disabled={activities.indexOf(currentActivity!) >= activities.length - 1}
-                                    direction="right"/>
+                                    direction="right" />
                             </span>;
                         }}</Tooltip>
                     </div>

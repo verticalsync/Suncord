@@ -62,7 +62,7 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
     const userCount = Object.keys(VoiceStateStore.getVoiceStatesForChannel(channel.id)).length;
     if (userCount === 0) return;
 
-    const guildChannels: { VOCAL: { channel: Channel, comparator: number }[] } = GuildChannelStore.getChannels(channel.guild_id);
+    const guildChannels: { VOCAL: { channel: Channel, comparator: number; }[]; } = GuildChannelStore.getChannels(channel.guild_id);
     const voiceChannels = guildChannels.VOCAL.map(({ channel }) => channel).filter(({ id }) => id !== channel.id);
 
     children.splice(
@@ -159,7 +159,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "VoiceChatUtilities",
     description: "This plugin allows you to perform multiple actions on an entire channel (move, mute, disconnect, etc.) (originally by dutake)",
-    authors: [{ name: "! 𝕯'𝖆𝖒𝖘", id: 769939285792653325n }, Devs.D3SOX],
+    authors: [Devs.None, Devs.D3SOX], // Devs.None, author got termed
 
     settings,
 
