@@ -127,7 +127,7 @@ ipcMain.handle(IpcEvents.OPEN_MONACO_EDITOR, async () => {
     }
 
     const win = new BrowserWindow({
-        title: title,
+        title,
         autoHideMenuBar: true,
         darkTheme: true,
         webPreferences: {

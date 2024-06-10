@@ -1,6 +1,7 @@
 {
     "manifest_version": 2,
     "minimum_chrome_version": "91",
+
     "name": "Suncord Web",
     "description": "Fork of vencord",
     "author": "verticalsync",
@@ -8,33 +9,29 @@
     "icons": {
         "128": "icon.png"
     },
+
     "permissions": [
         "webRequest",
         "webRequestBlocking",
         "*://*.discord.com/*",
         "https://raw.githubusercontent.com/*"
     ],
+
     "content_scripts": [
         {
             "run_at": "document_start",
-            "matches": [
-                "*://*.discord.com/*"
-            ],
-            "js": [
-                "content.js"
-            ],
+            "matches": ["*://*.discord.com/*"],
+            "js": ["content.js"],
             "all_frames": true
         }
     ],
+
     "background": {
-        "scripts": [
-            "background.js"
-        ]
+        "scripts": ["background.js"]
     },
-    "web_accessible_resources": [
-        "dist/Vencord.js",
-        "dist/Vencord.css"
-    ],
+
+    "web_accessible_resources": ["dist/Vencord.js", "dist/Vencord.css"],
+
     "browser_specific_settings": {
         "gecko": {
             "id": "suncord@riseup.net",

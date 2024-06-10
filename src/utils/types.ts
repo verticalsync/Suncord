@@ -61,7 +61,6 @@ export interface PluginAuthor {
 export interface Plugin extends PluginDef {
     patches?: Patch[];
     started: boolean;
-    fluxEventsSubscribed: boolean;
     isDependency?: boolean;
 }
 

@@ -65,4 +65,3 @@ export function SettingSliderComponent({ option, pluginSettings, definedSettings
         </Forms.FormSection>
     );
 }
-

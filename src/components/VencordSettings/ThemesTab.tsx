@@ -251,7 +251,6 @@ function ThemesTab() {
                                 Edit QuickCSS
                             </Button>
 
-
                             {Vencord.Settings.plugins.ClientTheme.enabled && (
                                 <Button
                                     onClick={() => openModal(modalProps => (

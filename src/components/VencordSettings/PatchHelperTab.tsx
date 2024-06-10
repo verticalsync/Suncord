@@ -388,5 +388,4 @@ function PatchHelper() {
     );
 }
 
-// export default IS_DEV ? wrapTab(PatchHelper, "PatchHelper") : null;
-export default wrapTab(PatchHelper, "PatchHelper");
+export default IS_DEV ? wrapTab(PatchHelper, "PatchHelper") : null;
