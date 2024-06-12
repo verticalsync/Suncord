@@ -33,13 +33,13 @@ export interface Dev {
  * If you are fine with attribution but don't want the badge, add badge: false
  */
 export const Devs = /* #__PURE__*/ Object.freeze({
-    Ven: {
-        name: "Vendicated",
-        id: 343383572805058560n,
-    },
     None: {
         name: "None",
-        id: 0n,
+        id: 0n
+    },
+    Ven: {
+        name: "Vee",
+        id: 343383572805058560n
     },
     Arjix: {
         name: "ArjixWasTaken",
@@ -327,8 +327,8 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         id: 305288513941667851n,
     },
     ImLvna: {
-        name: "Luna <3",
-        id: 799319081723232267n,
+        name: "lillith <3",
+        id: 799319081723232267n
     },
     rad: {
         name: "rad",
