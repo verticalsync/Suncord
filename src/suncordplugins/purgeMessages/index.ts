@@ -31,7 +31,7 @@ async function DeleteMessages(amount: number, channel: Channel, delay: number = 
     const userId = UserStore.getCurrentUser().id;
     const messages: Message[] = MessageStore.getMessages(channel.id)._array.filter((m: Message) => m.author.id === userId).reverse();
     const parsedMessages: Message[] = JSON.parse(JSON.stringify(messages));
-    const uniqueMessages: Message[] = parsedMessages.filter(message => !loggedMessages.deletedMessages[channel.id].includes(message.id));
+    const uniqueMessages: Message[] = !loggedMessages.deletedMessages[channel.id] ? parsedMessages : parsedMessages.filter(message => !loggedMessages.deletedMessages[channel.id].includes(message.id));
 
     for (const message of uniqueMessages) {
         MessageActions.deleteMessage(channel.id, message.id);
