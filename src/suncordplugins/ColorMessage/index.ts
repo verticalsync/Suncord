@@ -40,7 +40,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: /\i\.\i\.Messages.MESSAGE_EDITED,")"/,
+            find: /\i\.\i\.Messages.MESSAGE_EDITED,"\)"/,
             replacement: {
                 match: /id:\(0,\w+.\i\)\((\w+)\),/,
                 replace: '$&style:{"--98-message-color":$self.getMessageColor($1)},'
