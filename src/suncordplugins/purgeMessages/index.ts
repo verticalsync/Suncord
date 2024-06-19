@@ -17,6 +17,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
+import { migratePluginSettings } from "@api/Settings";
 import { SuncordDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -44,8 +45,9 @@ async function deleteMessages(amount: number, channel: Channel, delay: number = 
     return deleted;
 }
 
+migratePluginSettings("PurgeMessages", "MessagePurge");
 export default definePlugin({
-    name: "MessagePurge",
+    name: "PurgeMessages",
     description: "Purges messages from a channel",
     dependencies: ["CommandsAPI"],
     authors: [SuncordDevs.bhop, SuncordDevs.nyx],

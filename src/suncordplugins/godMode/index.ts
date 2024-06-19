@@ -26,7 +26,27 @@ export default definePlugin({
     authors: [Devs.Tolgchu],
 
     start: () => {
-        ["can", "canAccessMemberSafetyPage", "canAccessGuildSettings", "canBasicChannel", "canImpersonateRole", "canManageUser", "canWithPartialContext", "getGuildVersion", "getChannelsVersion", "getChannelPermissions", "getHighestRole", "initialize", "constructor", "isRoleHigher"].forEach(a => PermissionStore.__proto__[a] = () => !0);
+        // if commented out then it means it breaks ur discord
+        [
+            "can",
+            "canAccessGuildSettings",
+            "canAccessMemberSafetyPage",
+            "canBasicChannel",
+            "canImpersonateRole",
+            "canManageUser",
+            "canWithPartialContext",
+            // "computeBasicPermissions",
+            // "computePermissions",
+            "constructor",
+            "getChannelPermissions",
+            "getChannelsVersion",
+            // "getGuildPermissionsProps",
+            // "getGuildPermissions",
+            "getGuildVersion",
+            "getHighestRole",
+            "initialize",
+            "isRoleHigher",
+        ].forEach(a => PermissionStore.__proto__[a] = () => !0);
     },
 
     stop: () => { }

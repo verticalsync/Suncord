@@ -49,7 +49,7 @@ export default definePlugin({
         {
             find: ',className:"channelMention",children:[',
             replacement: {
-                match: /(?<=\.jsxs\)\()(\i\.default)/,
+                match: /(?<=\.jsxs\)\()(\i\.\i)/,
                 replace: "$self.wrapComponent(arguments[0], $1)"
             }
         }
