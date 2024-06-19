@@ -20,23 +20,24 @@ import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
-    name: "DisableCallIdle",
-    description: "Disables automatically getting kicked from a DM voice call after 3 minutes and being moved to an AFK voice channel.",
+    name: "SettingsStoreAPI",
+    description: "Patches Discord's SettingsStores to expose their group and name",
     authors: [Devs.Nuckyz],
+
     patches: [
         {
-            find: ".Messages.BOT_CALL_IDLE_DISCONNECT",
-            replacement: {
-                match: /,?(?=\i\(this,"idleTimeout",new \i\.\i\))/,
-                replace: ";return;"
-            }
-        },
-        {
-            find: "handleIdleUpdate(){",
-            replacement: {
-                match: /(?<=_initialize\(\){)/,
-                replace: "return;"
-            }
+            find: ",updateSetting:",
+            replacement: [
+                {
+                    match: /(?<=INFREQUENT_USER_ACTION.{0,20}),useSetting:/,
+                    replace: ",settingsStoreApiGroup:arguments[0],settingsStoreApiName:arguments[1]$&"
+                },
+                // some wrapper. just make it copy the group and name
+                {
+                    match: /updateSetting:.{0,20}shouldSync/,
+                    replace: "settingsStoreApiGroup:arguments[0].settingsStoreApiGroup,settingsStoreApiName:arguments[0].settingsStoreApiName,$&"
+                }
+            ]
         }
     ]
 });
