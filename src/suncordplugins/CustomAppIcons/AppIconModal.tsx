@@ -7,7 +7,7 @@
 import { localStorage } from "@utils/localStorage";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { findByProps } from "@webpack";
-import { Button, FluxDispatcher,Forms, React, showToast, Text, TextInput, Toasts, useState } from "@webpack/common";
+import { Button, FluxDispatcher, Forms, React, showToast, Text, TextInput, Toasts, useState } from "@webpack/common";
 
 
 interface AppIcon {
@@ -32,13 +32,13 @@ function AppIconModal(props: ModalProps) {
 
 
         appIcons.push(icon);
-        findByProps("ICONS", "ICONS_BY_ID").ICONS.push(icon);
-        findByProps("ICONS", "ICONS_BY_ID").ICONS_BY_ID[icon.id] = icon;
+        findByProps("UZ", "QA").UZ.push(icon);
+        findByProps("UZ", "QA").QA[icon.id] = icon;
         showToast("Added custom app icon!", Toasts.Type.SUCCESS);
         props.onClose();
         const oldIcon = findByProps("getCurrentDesktopIcon").getCurrentDesktopIcon();
 
-        let random_icon = Object.keys(findByProps("ICONS_BY_ID")).filter(icon => icon !== oldIcon) as [];
+        let random_icon = Object.keys(findByProps("UZ")).filter(icon => icon !== oldIcon) as [];
         random_icon = random_icon[Math.floor(Math.random() * random_icon.length)];
 
         FluxDispatcher.dispatch({
@@ -72,7 +72,7 @@ function AppIconModal(props: ModalProps) {
             <br />
             <Forms.FormSection title="Image URL">
                 <Forms.FormText type="description">
-                Paste here your image URL to upload your icon (.webp, .jpg, .jpeg, .png, .gif, .ico and Discord Icons, Emojis, PFPs, etc.).
+                    Paste here your image URL to upload your icon (.webp, .jpg, .jpeg, .png, .gif, .ico and Discord Icons, Emojis, PFPs, etc.).
                 </Forms.FormText>
                 <TextInput
                     placeholder="https://cdn.discordapp.com/emojis/1098881040900173895.gif"
