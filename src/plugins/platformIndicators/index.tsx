@@ -70,7 +70,8 @@ const PlatformIcon = ({ platform, status, small }: { platform: Platform, status:
 const getStatus = (id: string): Record<Platform, string> => PresenceStore.getState()?.clientStatuses?.[id];
 
 const PlatformIndicator = ({ user, wantMargin = true, wantTopMargin = false, small = false }: { user: User; wantMargin?: boolean; wantTopMargin?: boolean; small?: boolean; }) => {
-    if (!user || user.bot) return null;
+    if (!user) return null;
+    if (user.bot && !Settings.plugins.PlatformIndicators.showBots) return null;
 
     if (user.id === UserStore.getCurrentUser().id) {
         const sessions = SessionsStore.getSessions();
@@ -159,7 +160,7 @@ const indicatorLocations = {
             </ErrorBoundary>
         ),
         onDisable: () => removeDecoration("platform-indicator")
-    }
+    },
 };
 
 export default definePlugin({
@@ -260,6 +261,12 @@ export default definePlugin({
             description: "Whether to make the mobile indicator match the color of the user status.",
             default: true,
             restartNeeded: true
-        }
+        },
+        showBots: {
+            type: OptionType.BOOLEAN,
+            description: "Whether to show platform indicators on bots",
+            default: false,
+            restartNeeded: false
+        },
     }
 });
