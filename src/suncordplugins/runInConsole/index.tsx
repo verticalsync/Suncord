@@ -20,7 +20,7 @@ import { classNameFactory, disableStyle, enableStyle } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
-import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
+import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { Button, Forms, showToast, Toasts, useState } from "@webpack/common";
 
@@ -44,7 +44,7 @@ function EditCodeModal({ rootProps, close, value }: { rootProps: ModalProps, clo
     const [code, setCode] = useState(value);
 
     return (
-        <ModalRoot {...rootProps} className="vc-ric-modal" >
+        <ModalRoot {...rootProps} className="vc-ric-modal" size={ModalSize.LARGE}>
             <ModalHeader className={cl("modal-header")}>
                 <Forms.FormTitle tag="h2">
                     Edit Code & Run
@@ -55,7 +55,7 @@ function EditCodeModal({ rootProps, close, value }: { rootProps: ModalProps, clo
 
             <ModalContent className={cl("modal-content-code-input")}>
                 <textarea
-                    className="inputDefault__22335 input_f27786 textArea__6e373 scrollbarDefault__3545a scrollbar_b61b2b"
+                    className="inputDefault_f8bc55 input_f8bc55 textArea__6e373 scrollbarGhostHairline_c858ce scrollbar_c858ce"
                     value={code}
                     onChange={e => setCode(e.currentTarget.value)}
                 />
@@ -139,7 +139,7 @@ export default definePlugin({
     authors: [Devs.Tolgchu],
     patches: [
         {
-            find: '.SUPPORTS_COPY?(0,i.jsx)("div"',
+            find: /\i\(\)\(\i\.scrollbarGhostHairline,"hljs"\)/,
             replacement: [
                 {
                     // this shit is hot garbage, but it works. :pray:

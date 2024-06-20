@@ -37,7 +37,7 @@ import { ImageCacheDir, LogsDir } from "./components/settings/FolderSelectInput"
 import { addMessage, loggedMessages, MessageLoggerStore, removeLog } from "./LoggedMessageManager";
 import * as LoggedMessageManager from "./LoggedMessageManager";
 import { LoadMessagePayload, LoggedAttachment, LoggedMessage, LoggedMessageJSON, MessageCreatePayload, MessageDeleteBulkPayload, MessageDeletePayload, MessageUpdatePayload } from "./types";
-import { addToXAndRemoveFromOpposite, cleanUpCachedMessage, cleanupUserObject, doesBlobUrlExist, getNative, isGhostPinged, ListType, mapEditHistory, reAddDeletedMessages, removeFromX } from "./utils";
+import { addToXAndRemoveFromOpposite, cleanUpCachedMessage, cleanupUserObject, doesBlobUrlExist, getNative, isGhostPinged, ListType, mapEditHistory, messageJsonToMessageClass, reAddDeletedMessages, removeFromX } from "./utils";
 import { DEFAULT_IMAGE_CACHE_DIR } from "./utils/constants";
 import { shouldIgnore } from "./utils/index";
 import { LimitedMap } from "./utils/LimitedMap";
@@ -536,8 +536,8 @@ export default definePlugin({
         {
             find: "THREAD_STARTER_MESSAGE?null===",
             replacement: {
-                match: /(attachments: \i\(.{1,500})deleted:.{1,50},editHistory:.{1,30},/,
-                replace: "$1deleted: $self.getDeleted(...arguments),editHistory: $self.getEdited(...arguments),"
+                match: / deleted:\i\.deleted, editHistory:\i\.editHistory,/,
+                replace: "deleted:$self.getDeleted(...arguments), editHistory:$self.getEdited(...arguments),"
             }
         },
 
@@ -579,7 +579,7 @@ export default definePlugin({
         {
             find: "Using PollReferenceMessageContext without",
             replacement: {
-                match: /\i\.(?:default\.)?focusMessage\(/,
+                match: /(?:\i\.)?\i\.(?:default\.)?focusMessage\(/,
                 replace: "!(arguments[0]?.message?.deleted || arguments[0]?.message?.editHistory?.length > 0) && $&"
             }
         },
@@ -700,6 +700,15 @@ export default definePlugin({
         // if (!settings.store.saveMessages)
         //     clearLogs();
 
+        this.oldGetMessage = MessageStore.getMessage;
+        // we have to do this because the original message logger fetches the message from the store now
+        MessageStore.getMessage = (channelId: string, messageId: string) => {
+            const MLMessage = LoggedMessageManager.getMessage(channelId, messageId);
+            if (MLMessage?.message) return messageJsonToMessageClass(MLMessage);
+
+            return this.oldGetMessage(channelId, messageId);
+        };
+
         Native.init();
 
         const { imageCacheDir, logsDir } = await Native.getSettings();
@@ -710,6 +719,8 @@ export default definePlugin({
     stop() {
         // if (!settings.store.saveMessages)
         //     clearLogs();
+
+        MessageStore.getMessage = this.oldGetMessage;
     }
 });
 
