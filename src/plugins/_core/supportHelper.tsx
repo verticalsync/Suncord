@@ -217,7 +217,7 @@ export default definePlugin({
     },
 
     ContributorDmWarningCard: ErrorBoundary.wrap(({ userId }) => {
-        if (!isPluginDev(userId) || !isSuncordPluginDev(userId)) return null;
+        if (isPluginDev(userId) || isSuncordPluginDev(userId)) return null;
         if (RelationshipStore.isFriend(userId)) return null;
 
         return (
