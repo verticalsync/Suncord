@@ -217,8 +217,7 @@ export default definePlugin({
     },
 
     ContributorDmWarningCard: ErrorBoundary.wrap(({ userId }) => {
-        if (isPluginDev(userId) || isSuncordPluginDev(userId)) return null;
-        if (RelationshipStore.isFriend(userId)) return null;
+        if (isPluginDev(userId) || isSuncordPluginDev(userId) || RelationshipStore.isFriend(userId)) return null;
 
         return (
             <Card className={`vc-plugins-restart-card ${Margins.top8}`}>
