@@ -308,10 +308,7 @@ export default definePlugin({
     description: "Shows activity icons in the member list and allows showing all activities",
     authors: [
         Devs.D3SOX,
-        {
-            name: "dropped#0001",
-            id: 328165170536775680n,
-        },
+        Devs.nyx,
         Devs.Arjix,
         Devs.AutumnVN
     ],
