@@ -38,7 +38,7 @@ const { Spinner } = proxyLazy(() => Forms as any as {
     SpinnerTypes: typeof SpinnerTypes;
 });
 
-const ChannelMessage = findComponentByCodeLazy("renderSimpleAccessories)") as ComponentType<any>;
+const ChannelMessage = findComponentByCodeLazy("childrenExecutedCommand:", ".hideAccessories");
 
 export default definePlugin({
     name: "MessageLinkTooltip",
