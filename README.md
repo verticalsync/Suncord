@@ -22,7 +22,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (44 additional plugins)</summary>
+<summary>Included plugins (43 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   AudioPlaybackSpeed
@@ -75,7 +75,6 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   DiscordColorways (by [DaBluLite](https://github.com/DaBluLite/DiscordColorways))
 -   MediaDownloader (by [TheColorman](https://github.com/TheColorman)) (added from TheColorman's [pull request](https://github.com/Vendicated/Vencord/pull/2480))
 -   BetterBanReasons (by [Inbestigator](https://github.com/Inbestigator)) (added from Inbestigator's [pull request](https://github.com/Vendicated/Vencord/pull/2570))
--   Draggables (by [pwall2222](https://github.com/pwall2222)) (added from pwall2222's [pull request](https://github.com/Vendicated/Vencord/pull/2555))
 -   MessageColors (by [henmalib](https://github.com/henmalib)) (added from henmalib's [pull request](https://github.com/Vendicated/Vencord/pull/2521))
 
 </details>

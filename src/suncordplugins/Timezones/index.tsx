@@ -58,8 +58,7 @@ export default definePlugin({
             find: "copyMetaData:\"User Tag\"",
             replacement: {
 
-                // match: /return(\(0,.\.jsx\)\(.\.default,{className:.+?}\)]}\)}\))/,
-                match: /return(\(0,.\.jsxs\)\(.\.default,{className.+?}\)]}\).+?}\)}\)]}\))/, // this patch is prob ass, first time actually doing a patch ~ verticalsync
+                match: /return(\(0,.\.jsxs\)\(\i.\i,{className.+?}\)]}\).+?}\)}\)]}\))/,
                 replace: "return [$1, $self.getProfileTimezonesComponent(arguments[0])]"
             },
         },
@@ -67,7 +66,7 @@ export default definePlugin({
             // thank you https://github.com/Syncxv/vc-timezones/blob/master/index.tsx for saving me from painful work
             find: ".badgesContainer,",
             replacement: {
-                match: /id:\(0,\i\.getMessageTimestampId\)\(\i\),timestamp.{1,50}}\),/,
+                match: /id:\(0,\i\.\i\)\(\i\),timestamp.{1,50}}\),/,
                 replace: "$&,$self.getTimezonesComponent(arguments[0]),"
             }
         }
