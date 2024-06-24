@@ -22,7 +22,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (47 additional plugins)</summary>
+<summary>Included plugins (44 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   AudioPlaybackSpeed
@@ -38,11 +38,8 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 -   Plugins by [Kyuuhachi](https://github.com/Kyuuhachi/VencordPlugins)
 -   -   Anammox
--   -   ColorMessage
--   -   DeadMembers
 -   -   MessageLinkTooltip
 -   -   ModalFade
--   -   Title
 
 -   Plugins by [Tolgchu](https://github.com/Tolga1452/Vencord)
 -   -   GodMode

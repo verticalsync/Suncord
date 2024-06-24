@@ -14,7 +14,7 @@ import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { openModal } from "@utils/modal";
-import definePlugin, { OptionType, PluginNative } from "@utils/types";
+import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import { Button, DraftType, FluxDispatcher, Forms, UploadHandler, UploadManager, UserStore } from "@webpack/common";
 import { Channel } from "discord-types/general";
 
@@ -195,6 +195,7 @@ export default definePlugin({
     description: "Download and send videos with from YouTube, Twitter, Reddit and more.",
     authors: [Devs.Colorman],
     dependencies: ["CommandsAPI"],
+    reporterTestable: ReporterTestable.Patches,
     settings,
     commands: [{
         inputType: ApplicationCommandInputType.BUILT_IN,
