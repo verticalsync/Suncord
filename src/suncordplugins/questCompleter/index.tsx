@@ -19,7 +19,7 @@
 import { showNotification } from "@api/Notifications";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { findByProps } from "@webpack";
+import { findByCode, findByProps } from "@webpack";
 import { Text } from "@webpack/common";
 
 interface Stream {
@@ -49,7 +49,7 @@ export default definePlugin({
         {
             find: "\"invite-button\"",
             replacement: {
-                match: /(function .+?\(.+?\){let{inPopout:.+allowIdle.+?}=.+?\.usePreventIdle\)\("popup"\),(.+?)=\[\];if\(.+?\){.+"chat-spacer"\)\)\),\(\d,.+?\.jsx\)\(.+?,{children:).+?}}/,
+                match: /(function .+?\(.+?\){let{inPopout:.+allowIdle.+?}=.+?\.\i\)\("popup"\),(.+?)=\[\];if\(.+?\){.+"chat-spacer"\)\)\),\(\d,.+?\.jsx\)\(.+?,{children:).+?}}/,
                 replace: "$1[$self.renderQuestButton(),...$2]})}}"
             }
         }
@@ -96,7 +96,8 @@ export default definePlugin({
 
 
 
-        const ToolTipButton = findByProps("CenterControlButton").default;
+        // const ToolTipButton = findByProps("CenterControlButton").default;
+        const ToolTipButton = findByCode("}),color:\"currentColor\"})})}}");
         const QuestsIcon = () => props => (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -132,11 +133,11 @@ export default definePlugin({
         // check if user is sharing screen and there is someone that is watching the stream
 
         const currentStream: Stream | null = findByProps("getCurrentUserActiveStream").getCurrentUserActiveStream();
-        const encodedStreamKey = findByProps("encodeStreamKey").encodeStreamKey(currentStream);
+        const encodedStreamKey = findByProps("encodeStreamKey").encodeStreamKey(currentStream); // broken
         quest = getLeftQuests();
         ImagesConfig = {
-            icon: findByProps("getQuestBarHeroAssetUrl").getQuestBarHeroAssetUrl(quest),
-            image: findByProps("getHeroAssetUrl").getHeroAssetUrl(quest)
+            icon: findByProps("getQuestBarHeroAssetUrl").getQuestBarHeroAssetUrl(quest), // broken
+            image: findByProps("getHeroAssetUrl").getHeroAssetUrl(quest) // broken
         };
 
         const heartBeat = async () => {
