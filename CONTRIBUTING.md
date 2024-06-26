@@ -1,82 +1,57 @@
-# Contribution Guide
+# The documentation is the same as Vencord because we have just added plugins on top or such, so everything will be the same, however do not make issues on Vencord if you use Suncord unless redirected by a staff member.
 
-First of all, thank you for contributing! :3
+# Contributing to Vencord
 
-To ensure your contribution is robust, please follow the below guide!
+Vencord is a community project and welcomes any kind of contribution from anyone!
 
-For a friendly introduction to plugins, see [Megu's Plugin Guide!](docs/2_PLUGINS.md)
+We have development documentation for new contributors, which can be found at <https://docs.vencord.dev>.
 
-## Style Guide
+All contributions should be made in accordance with our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
--   This project has a very minimal .editorconfig. Make sure your editor supports this!
-    If you are using VSCode, it should automatically recommend you the extension; If not,
-    please install the Editorconfig extension
--   Try to follow the formatting in the rest of the project and stay consistent
--   Follow the file naming convention. File names should usually be camelCase, unless they export a Class
-    or React Component, in which case they should be PascalCase
+## How to contribute
 
-## Contributing a Plugin
+Contributions can be sent via pull requests. If you're new to Git, check [this guide](https://opensource.com/article/19/7/create-pull-request-github).
 
-Because plugins modify code directly, incompatibilities are a problem.
+Pull requests can be made either to the `main` or the `dev` branch. However, unless you're an advanced user, I recommend sticking to `main`. This is because the dev branch might contain unstable changes and be force pushed frequently, which could cause conflicts in your pull request.
 
-Thus, 3rd party plugins are not supported, instead all plugins are part of Suncord itself.
-This way we can ensure compatibility and high quality patches.
+## Write a plugin
 
-Follow the below guide to make your first plugin!
+Writing a plugin is the primary way to contribute.
 
-### Finding the right module to patch
+Before starting your plugin:
+- Check existing pull requests to see if someone is already working on a similar plugin
+- Check our [plugin requests tracker](https://github.com/Vencord/plugin-requests/issues) to see if there is an existing request, or if the same idea has been rejected
+- If there isn't an existing request, [open one](https://github.com/Vencord/plugin-requests/issues/new?assignees=&labels=&projects=&template=request.yml) yourself
+  and include that you'd like to work on this yourself. Then wait for feedback to see if the idea even has any chance of being accepted. Or maybe others have some ideas to improve it!
+- Familarise yourself with our plugin rules below to ensure your plugin is not banned
 
-If the thing you want to patch is an action performed when interacting with a part of the UI, use React DevTools.
-They come preinstalled and can be found as the "Components" tab in DevTools.
-Use the Selector (top left) to select the UI Element. Now you can see all callbacks, props or jump to the source
-directly.
+### Plugin Rules
 
-If it is anything else, or you're too lazy to use React DevTools, hit `CTRL + Shift + F` while in DevTools and
-enter a search term, for example "getUser" to search all source files.
-Look at the results until you find something promising. Set a breakpoint and trigger the execution of that part of Code to inspect arguments, locals, etc...
+- No simple slash command plugins like `/cat`. Instead, make a [user installable Discord bot](https://discord.com/developers/docs/change-log#userinstallable-apps-preview)
+- No simple text replace plugins like Let me Google that for you. The TextReplace plugin can do this
+- No raw DOM manipulation. Use proper patches and React
+- No FakeDeafen or FakeMute
+- No StereoMic
+- No plugins that simply hide or redesign ui elements. This can be done with CSS
+- No selfbots or API spam (animated status, message pruner, auto reply, nitro snipers, etc)
+- No untrusted third party APIs. Popular services like Google or GitHub are fine, but absolutely no self hosted ones
+- No plugins that require the user to enter their own API key
+- Do not introduce new dependencies unless absolutely necessary and warranted
 
-### Writing a robust patch
+## Improve Vencord itself
 
-##### "find"
+If you have any ideas on how to improve Vencord itself, or want to propose a new plugin API, feel free to open a feature request so we can discuss.
 
-First you need to find a good `find` value. This should be a string that is unique to your module.
-If you want to patch the `getUser` function, usually a good first try is `getUser:` or `function getUser()`,
-depending on how the module is structured. Again, make sure this string is unique to your module and is not
-found in any other module. To verify this, search for it in all bundles (CTRL + Shift + F)
+Or if you notice any bugs or typos, feel free to fix them!
 
-##### "match"
+## Contribute to our Documentation
 
-This is the regex that will operate on the module found with "find". Just like in find, you should make sure
-this only matches exactly the part you want to patch and no other parts in the file.
+The source code of our documentation is available at <https://github.com/Vencord/Docs>
 
-The easiest way to write and test your regex is the following:
+If you see anything outdated, incorrect or lacking, please fix it!
+If you think a new page should be added, feel free to suggest it via an issue and we can discuss.
 
--   Get the ID of the module you want to patch. To do this, go to it in the sources tab and scroll up until you
-    see something like `447887: (e,t,n)=>{` (Obviously the number will differ).
--   Now paste the following into the console: `Vencord.Webpack.wreq.m[447887].toString()` (Changing the number to your ID)
--   Now either test regexes on this string in the console or use a tool like https://regex101.com
+## Help out users in our Discord community
 
-Also pay attention to the following:
-
--   Never hardcode variable or parameter names or any other minified names. They will change in the future. The only Exception to this rule
-    are the react props parameter which seems to always be `e`, but even then only rely on this if it is necessary.
-    Instead, use one of the following approaches where applicable:
-    -   Match 1 or 2 of any character: `.{1,2}`, for example to match the variable name in `var a=b`, `var (.{1,2})=`
-    -   Match any but a guaranteed terminating character: `[^;]+`, for example to match the entire assigned value in `var a=b||c||func();`,
-        `var .{1,2}=([^;]+);`
-    -   If you don't care about that part, just match a bunch of chars: `.{0,50}`, for example to extract the variable "b" in `createElement("div",{a:"foo",c:"bar"},b)`, `createElement\("div".{0,30},(.{1,2})\),`. Note the `.{0,30}`, this is essentially the same as `.+`, but safer as you can't end up accidently eating thousands of characters
--   Additionally, as you might have noticed, all of the above approaches use regex groups (`(...)`) to capture the variable name. You can then use those groups in your replacement to access those variables dynamically
-
-#### "replace"
-
-This is the replacement for the match. This is the second argument to [String.replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace), so refer to those docs for info.
-
-Never hardcode minified variable or parameter names here. Instead, use capture groups in your regex to capture the variable names
-and use those in your replacement
-
-Make sure your replacement does not introduce any whitespace. While this might seem weird, random whitespace may mess up other patches.
-This includes spaces, tabs and especially newlines
-
----
-
-And that's it! Now open a Pull Request with your Plugin
+We have an open support channel in our [Discord community](https://vencord.dev/discord).
+Helping out users there is always appreciated! The more, the merrier.

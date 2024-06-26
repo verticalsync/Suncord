@@ -18,4 +18,6 @@ DON'T
 
 Repetitive violations of these guidelines might get your access to the repository restricted.
 
-If you feel like a user is violating these guidelines or feel treated unfairly, please refrain from publicly challenging them and instead contact a Moderator on our Discord server or send an email to jne@riseup.net!
+If you feel like a user is violating these guidelines or feel treated unfairly, please refrain from vigilantism
+and instead report the issue to a moderator! The best way is joining our [official Discord community](https://discord.gg/suncord)
+and opening a modmail ticket.
