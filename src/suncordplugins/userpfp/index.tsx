@@ -1,106 +1,72 @@
 /*
  * Vencord, a Discord client mod
- * Copyright (c) 2024 Vendicated and contributors
+ * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { Devs } from "@utils/constants";
+import { Link } from "@components/Link";
+import { SuncordDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
+import { User } from "discord-types/general";
 
-export const settings = definePluginSettings({
-    dms: {
-        type: OptionType.BOOLEAN,
-        default: true,
-        description: "Remove shops above DMs list",
-        restartNeeded: true,
+let data = {
+    avatars: {} as Record<string, string>,
+};
+
+const settings = definePluginSettings({
+    preferNitro: {
+        description: "Which avatar to use if both default animated (Nitro) pfp and UserPFP avatars are present",
+        type: OptionType.SELECT,
+        options: [
+            { label: "UserPFP", value: false },
+            { label: "Nitro", value: true, default: true },
+        ],
     },
-    billing: {
-        type: OptionType.BOOLEAN,
-        default: true,
-        description: "Remove billing settings",
-        restartNeeded: true,
-    },
-    gift: {
-        type: OptionType.BOOLEAN,
-        default: true,
-        description: "Remove gift button",
-        restartNeeded: true,
-    },
-    emojiList: {
-        type: OptionType.BOOLEAN,
-        default: true,
-        description: "Remove unavailable categories from the emoji picker",
-        restartNeeded: true,
-    },
+    urlForDB: {
+        type: OptionType.STRING,
+        description: "Which Database url to use to load avatars, KNOW WHAT YOUR DOING",
+        default: "https://userpfp.github.io/UserPFP/source/data.json",
+        placeholder: "Default value: https://userpfp.github.io/UserPFP/source/data.json"
+    }
 });
 
 export default definePlugin({
-    name: "Anammox",
-    description: "A microbial process that plays an important part in the nitrogen cycle",
-    authors: [Devs.Kyuuhachi],
+    data,
+    name: "UserPFP",
+    description: "Allows you to use an animated avatar without Nitro",
+    authors: [SuncordDevs.nexpid, SuncordDevs.thororen],
     settings,
-
+    settingsAboutComponent: () => (
+        <>
+            <Link href="https://userpfp.github.io/UserPFP/#how-to-request-a-profile-picture-pfp">
+                <b>Submit your own PFP here!</b>
+            </Link>
+            <br></br>
+            <Link href="https://ko-fi.com/coolesding">
+                <b>Support UserPFP here!</b>
+            </Link>
+        </>
+    ),
     patches: [
-        { // Above DMs, mouse nav
-            find: 'tutorialId:"direct-messages"',
+        {
+            // Normal Profiles
+            find: "getUserAvatarURL:",
             replacement: [
                 {
-                    match: /"premium"\)/,
-                    replace: "$&&&undefined",
-                },
-                {
-                    match: /"discord-shop"\)/,
-                    replace: "$&&&undefined",
-                },
-            ],
-            predicate: () => settings.store.dms,
-        },
-        { // Above DMs, keyboard nav
-            find: ".hasLibraryApplication()&&!",
-            replacement: [
-                {
-                    match: /\i\.\i\.APPLICATION_STORE,/,
-                    replace: "/*$&*/",
-                },
-                {
-                    match: /\i\.\i\.COLLECTIBLES_SHOP,/,
-                    replace: "/*$&*/",
-                },
-            ],
-            predicate: () => settings.store.dms,
-        },
-        { // Settings, sidebar
-            find: "Messages.BILLING_SETTINGS",
-            replacement: {
-                match: /\{header:[^:,]*\.Messages.BILLING_SETTINGS,[^}]*\]},/,
-                replace: "/*$&*/"
-            },
-            predicate: () => settings.store.billing,
-        },
-        { // Gift button
-            find: 'Messages.PREMIUM_GIFT_BUTTON_LABEL,"aria-haspopup":"dialog",onClick:',
-            replacement: {
-                match: /if\(\w+\)return null;/,
-                replace: "return null;",
-            },
-            predicate: () => settings.store.gift,
-        },
-        { // Emoji list
-            find: /\.filter\(\i=>\i\.\i\i\.getEmojiUnavailableReason/,
-            replacement: {
-                match: /(\w+)=!\w+&&\w+.\i.isEmojiCategoryNitroLocked\(\{[^}]*\}\);/,
-                replace: "$&$1||"
-            },
-            predicate: () => settings.store.emojiList,
-        },
-        { // Emoji category list
-            find: "useEmojiCategories:function()",
-            replacement: {
-                match: /(?<=(\i)\.unshift\((\i)\):)(?=\1\.push\(\2\))/,
-                replace: "$2.isNitroLocked||"
-            },
-            predicate: () => settings.store.emojiList,
+                    match: /(getUserAvatarURL:)(\i),/,
+                    replace: "$1$self.getAvatarHook($2),"
+                }
+            ]
         }
     ],
+    getAvatarHook: (original: any) => (user: User, animated: boolean, size: number) => {
+        if (settings.store.preferNitro && user.avatar?.startsWith("a_")) return original(user, animated, size);
+
+        return data.avatars[user.id] ?? original(user, animated, size);
+    },
+    async start() {
+        const res = await fetch(settings.store.urlForDB);
+        if (res.ok) this.data = data = await res.json();
+    }
 });
