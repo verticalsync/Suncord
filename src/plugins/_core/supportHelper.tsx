@@ -17,6 +17,7 @@
 */
 
 import { addAccessory } from "@api/MessageAccessories";
+import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
@@ -36,7 +37,7 @@ import { Alerts, Button, Card, ChannelStore, Forms, GuildMemberStore, Parser, Re
 import gitHash from "~git-hash";
 import plugins, { PluginMeta } from "~plugins";
 
-import settings from "./settings";
+import SettingsPlugin from "./settings";
 
 const SUNCORD_GUILD_ID = "1207691698386501634";
 
@@ -77,9 +78,9 @@ async function generateDebugInfoMessage() {
     })();
 
     const info = {
-        Suncord:
-            `v${VERSION} • [${gitHash}](<https://github.com/verticalsync/Suncord/commit/${gitHash}>)` +
-            `${settings.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
+        Vencord:
+            `v${VERSION} • [${gitHash}](<https://github.com/Vendicated/Vencord/commit/${gitHash}>)` +
+            `${SettingsPlugin.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${client}`,
         Platform: window.navigator.platform
     };
@@ -125,12 +126,18 @@ function generatePluginList() {
 
 const checkForUpdatesOnce = onlyOnce(checkForUpdates);
 
+const settings = definePluginSettings({}).withPrivateSettings<{
+    dismissedDevBuildWarning?: boolean;
+}>();
+
 export default definePlugin({
     name: "SupportHelper",
     required: true,
     description: "Helps us provide support to you",
     authors: [Devs.Ven],
     dependencies: ["CommandsAPI", "UserSettingsAPI", "MessageAccessoriesAPI"],
+
+    settings,
 
     patches: [{
         find: ".BEGINNING_DM.format",
@@ -200,17 +207,20 @@ export default definePlugin({
                 });
             }
 
-            const repo = await VencordNative.updater.getRepo();
-            if (repo.ok && !repo.value.includes("verticalsync/Suncord")) {
+            if (!IS_STANDALONE && !settings.store.dismissedDevBuildWarning) {
                 return Alerts.show({
                     title: "Hold on!",
                     body: <div>
-                        <Forms.FormText>You are using a fork of Suncord, which we do not provide support for!</Forms.FormText>
+                        <Forms.FormText>You are using a custom build of Suncord, which we do not provide support for!</Forms.FormText>
+
                         <Forms.FormText className={Margins.top8}>
-                            Please either switch to an <Link href="https://github.com/verticalsync/suncord">officially supported version of Suncord</Link>, or
-                            contact your package maintainer for support instead.
+                            We only provide support for <Link href="https://github.com/verticalsync/suncord/releases">official builds</Link>.
+                            Either <Link href="https://github.com/verticalsync/suncordinstaller/releases/latest">switch to an official build</Link> or figure your issue out yourself.
                         </Forms.FormText>
-                    </div>
+                    </div>,
+                    confirmText: "Understood",
+                    secondaryConfirmText: "Don't show again",
+                    onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
                 });
             }
         }
