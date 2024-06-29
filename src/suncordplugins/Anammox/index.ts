@@ -27,12 +27,6 @@ export const settings = definePluginSettings({
         description: "Remove gift button",
         restartNeeded: true,
     },
-    emojiList: {
-        type: OptionType.BOOLEAN,
-        default: true,
-        description: "Remove unavailable categories from the emoji picker",
-        restartNeeded: true,
-    },
 });
 
 export default definePlugin({
@@ -57,14 +51,14 @@ export default definePlugin({
             predicate: () => settings.store.dms,
         },
         { // Above DMs, keyboard nav
-            find: ".default.hasLibraryApplication()&&!",
+            find: ".hasLibraryApplication()&&!",
             replacement: [
                 {
-                    match: /\i\.Routes\.APPLICATION_STORE,/,
+                    match: /\i\.\i\.APPLICATION_STORE,/,
                     replace: "/*$&*/",
                 },
                 {
-                    match: /\i\.Routes\.COLLECTIBLES_SHOP,/,
+                    match: /\i\.\i\.COLLECTIBLES_SHOP,/,
                     replace: "/*$&*/",
                 },
             ],
@@ -85,22 +79,6 @@ export default definePlugin({
                 replace: "return null;",
             },
             predicate: () => settings.store.gift,
-        },
-        { // Emoji list
-            find: "useEmojiGrid:function()",
-            replacement: {
-                match: /(\w+)=!\w+&&\w+.default.isEmojiCategoryNitroLocked\(\{[^}]*\}\);/,
-                replace: "$&$1||"
-            },
-            predicate: () => settings.store.emojiList,
-        },
-        { // Emoji category list
-            find: "useEmojiCategories:function()",
-            replacement: {
-                match: /(?<=(\i)\.unshift\((\i)\):)(?=\1\.push\(\2\))/,
-                replace: "$2.isNitroLocked||"
-            },
-            predicate: () => settings.store.emojiList,
         }
     ],
 });
