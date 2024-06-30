@@ -31,7 +31,7 @@ fetch(DB_URL).then(res => res.json()).then(res => {
 
 export default definePlugin({
     name: "CustomEffects",
-    description: "Use Custom Profile Effects on your Discord Profile",
+    description: "Use Custom Profile Effects on your Discord Profile without Nitro",
     authors: [Devs.HappyEnderman, Devs.SerStars],
     patches: [
         // modify the get profile effect id function so it returns our profile effects
