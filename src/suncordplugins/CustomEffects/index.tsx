@@ -113,13 +113,13 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <>
-            <Link href="https://github.com/CustomEffects/CustomEffects">
-            <b>Click here to get your own effect!</b>
-            </Link>
-            <br></br>
-             <Link href="https://ko-fi.com/happyenderman">
-            <b>Support CustomEffects!</b>
-            </Link>
+                <Link href="https://github.com/CustomEffects/CustomEffects">
+                <b>Click here to get your own effect!</b>
+                </Link>
+                <br></br>
+                 <Link href="https://ko-fi.com/happyenderman">
+                <b>Support CustomEffects!</b>
+                </Link>
             </>
         );
     }
