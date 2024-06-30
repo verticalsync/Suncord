@@ -1,21 +1,10 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -23,7 +12,7 @@ const DB_URL = "https://customeffects.github.io/CustomEffects/src/data.json";
 
 let DB: Record<string, string> = {};
 
-/** Download the database */
+// Download the database
 
 fetch(DB_URL).then(res => res.json()).then(res => {
     DB = res;
@@ -31,7 +20,7 @@ fetch(DB_URL).then(res => res.json()).then(res => {
 
 export default definePlugin({
     name: "CustomEffects",
-    description: "Use Custom Profile Effects on your Discord Profile without Nitro",
+    description: "Use Custom Profile Effects on your Discord Profile without Nitro!",
     authors: [Devs.HappyEnderman, Devs.SerStars],
     patches: [
         // modify the get profile effect id function so it returns our profile effects
@@ -71,8 +60,8 @@ export default definePlugin({
                     .catch(_ => null);
             }
             return {
-                "id": "1",
-                "skuId": "1",
+                "id": skuId,
+                "skuId": skuId,
                 "config": {
                     "type": 1,
                     "id": "1",
@@ -98,7 +87,7 @@ export default definePlugin({
                             "zIndex": 100
                         }
                     ],
-                    "skuId": "1"
+                    "skuId": skuId
                 }
             };
         }
@@ -115,8 +104,24 @@ export default definePlugin({
     getDatabase() {
         return DB;
     },
-    // try an effect before requesting:
+    // Try your effect before requesting
+    // Open the devtools and paste this code onto the console: Vencord.Plugins.plugins.CustomEffects.tryEffect("your userid","image url")
     tryEffect(user_id, effect_url) {
         DB[user_id] = effect_url;
     },
+
+    settingsAboutComponent: () => {
+        return (
+            <>
+                <Link href="https://github.com/CustomEffects/CustomEffects">
+                <b>Click here to get your own effect!</b>
+                </Link>
+                <br></br>
+                <Link href="https://ko-fi.com/happyenderman">
+                <b>Support CustomEffects!</b>
+                </Link>
+            </>
+        );
+    }
+
 });
