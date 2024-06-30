@@ -22,7 +22,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 ## Extra included plugins
 
 <details>
-<summary>Included plugins (43 additional plugins)</summary>
+<summary>Included plugins (44 additional plugins)</summary>
 
 -   Plugins by [D3SOX](https://github.com/D3SOX/vencord-userplugins)
 -   -   AudioPlaybackSpeed
