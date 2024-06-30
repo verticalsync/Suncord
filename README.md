@@ -50,6 +50,7 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 -   Plugins by [happyendermangit](https://github.com/happyendermangit/) & [SerStars](https://github.com/SerStars/)
 -   -   QuestsCompleter (added from vishnyanetchereshnya's [pull request](https://github.com/Vendicated/Vencord/pull/2393))
     -   CustomAppIcons
+    -   CustomEffects
 
 -   PurgeMessages (by [bhop](https://github.com/prettylittlelies))
 -   PlatformSpoofer (by [drag](https://github.com/dragdotpng))
