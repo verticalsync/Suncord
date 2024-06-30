@@ -44,7 +44,7 @@ export default definePlugin({
         },
         {
             // modify the get user profile so it modify's the user profile effect
-            find: `"UserProfileStore"`,
+            find: "\"UserProfileStore\"",
             replacement: {
                 match: /getUserProfile\((\w+)\){return (\w+)\[\w+\]}/,
                 replace: "getUserProfile($1){ return $self.patchUserProfile($2[$1]) }"
@@ -119,4 +119,4 @@ export default definePlugin({
     tryEffect(user_id, effect_url) {
         DB[user_id] = effect_url;
     },
-});;
+});
