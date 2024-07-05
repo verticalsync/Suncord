@@ -27,8 +27,7 @@
     iframe,
     .messagelogger-deleted-attachment,
     [class|="inlineMediaEmbed"]
-):hover,
-.messagelogger-deleted {
+):hover {
     filter: grayscale(0) !important;
 }
 
