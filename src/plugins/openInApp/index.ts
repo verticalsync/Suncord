@@ -27,6 +27,7 @@ const SpotifyMatcher = /^https:\/\/open\.spotify\.com\/(track|album|artist|playl
 const SteamMatcher = /^https:\/\/(steamcommunity\.com|(?:help|store)\.steampowered\.com)\/.+$/;
 const EpicMatcher = /^https:\/\/store\.epicgames\.com\/(.+)$/;
 const TidalMatcher = /^https:\/\/tidal\.com\/browse\/(track|album|artist|playlist|user|video|mix)\/(.+)(?:\?.+?)?$/;
+const TelegramMatcher = /^https:\/\/t\.me\/(.+)$/;
 
 const settings = definePluginSettings({
     spotify: {
@@ -48,6 +49,11 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Open Tidal links in the Tidal app",
         default: true,
+    },
+    telegram: {
+        type: OptionType.BOOLEAN,
+        description: "Open Telegram links in the Telegram app",
+        default: true,
     }
 });
 
@@ -55,7 +61,7 @@ const Native = VencordNative.pluginHelpers.OpenInApp as PluginNative<typeof impo
 
 export default definePlugin({
     name: "OpenInApp",
-    description: "Open Spotify, Tidal, Steam and Epic Games URLs in their respective apps instead of your browser",
+    description: "Open Spotify, Tidal, Telegram, Steam and Epic Games URLs in their respective apps instead of your browser",
     authors: [Devs.Ven],
     settings,
 
@@ -141,6 +147,32 @@ export default definePlugin({
 
             const [, type, id] = match;
             VencordNative.native.openExternal(`tidal://${type}/${id}`);
+
+            event?.preventDefault();
+            return true;
+        }
+
+        telegram: {
+            if (!settings.store.telegram) break telegram;
+
+            const match = TelegramMatcher.exec(url);
+            if (!match) break telegram;
+
+            let [, user] = match;
+            let resolveType = user.startsWith("+") ? "phone" : "domain";
+            user = user.replace("+", "");
+
+            if (resolveType === "phone" && user.length > 15) {
+                resolveType = "hash";
+            }
+
+            // only supports username (domain), phone number links and chat invite links
+
+            if (resolveType === "hash") {
+                VencordNative.native.openExternal(`tg://join?invite=${user}`);
+            } else {
+                VencordNative.native.openExternal(`tg://resolve?${resolveType}=${user}`);
+            }
 
             event?.preventDefault();
             return true;
