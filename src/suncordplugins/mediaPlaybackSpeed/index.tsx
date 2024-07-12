@@ -62,7 +62,7 @@ export default definePlugin({
 
     settings,
 
-    PlaybackSpeedComponent({ mediaRef }: { mediaRef: MediaRef }) {
+    PlaybackSpeedComponent({ mediaRef }: { mediaRef: MediaRef; }) {
         const changeSpeed = (speed: number) => {
             const media = mediaRef?.current;
             if (media) {
@@ -109,7 +109,7 @@ export default definePlugin({
                                 </Menu.Menu>
                             );
                         }}>
-                        <SpeedIcon/>
+                        <SpeedIcon />
                     </button>
                 )}
             </Tooltip>
@@ -143,7 +143,7 @@ export default definePlugin({
         {
             find: "AUDIO:\"AUDIO\"",
             replacement: {
-                match: /onVolumeHide:\i,iconClassName:\i.controlIcon,sliderWrapperClassName:\i.volumeSliderWrapper\}\)\}\),/,
+                match: /iconClassName.\i.controlIcon,iconColor:"\i",sliderWrapperClassName:\i.\i}\)}\),/,
                 replace: "$&$self.renderComponent(this.props.mediaRef),"
             }
         }
