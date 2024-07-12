@@ -73,8 +73,7 @@ const IGNORED_DISCORD_ERRORS = [
     "Downloading the full bad domains file",
     /\[GatewaySocket\].{0,110}Cannot access '/,
     "search for 'name' in undefined",
-    "Attempting to set fast connect zstd when unsupported",
-    "Webpack Find Fail: waitForStore(\"PermissionStore\")"
+    "Attempting to set fast connect zstd when unsupported"
 ] as Array<string | RegExp>;
 
 function toCodeBlock(s: string, indentation = 0, isDiscord = false) {
