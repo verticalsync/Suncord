@@ -57,19 +57,6 @@ export default definePlugin({
                 match: /(function .{1,2}\(.{1,2}\){)(.{1,40}(?=selectGuild).+?(?:]}\)}\)))(})/,
                 replace: "$1return $self.replacedScreenshareModalComponent(function(){$2}, this, arguments)$3"
             }
-        },
-        {
-            find: "Unknown resolution:",
-            replacement: [
-                {
-                    match: /throw Error\("Unknown resolution: ".concat\((\i)\)\)/,
-                    replace: "return $1;"
-                },
-                {
-                    match: /throw Error\("Unknown frame rate: ".concat\((\i)\)\)/,
-                    replace: "return $1;"
-                }
-            ]
         }
     ],
 
