@@ -536,8 +536,8 @@ export default definePlugin({
         {
             find: "THREAD_STARTER_MESSAGE?null===",
             replacement: {
-                match: / deleted:\i\.deleted, editHistory:\i\.editHistory,/,
-                replace: "deleted:$self.getDeleted(...arguments), editHistory:$self.getEdited(...arguments),"
+                match: /interactionData:null!=.{0,50}.interaction_data/,
+                replace: "deleted:$self.getDeleted(...arguments), editHistory:$self.getEdited(...arguments)"
             }
         },
 
@@ -697,9 +697,6 @@ export default definePlugin({
     },
 
     async start() {
-        // if (!settings.store.saveMessages)
-        //     clearLogs();
-
         this.oldGetMessage = oldGetMessage = MessageStore.getMessage;
         // we have to do this because the original message logger fetches the message from the store now
         MessageStore.getMessage = (channelId: string, messageId: string) => {

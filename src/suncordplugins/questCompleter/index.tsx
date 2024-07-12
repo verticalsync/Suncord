@@ -17,34 +17,16 @@
 */
 
 import { showNotification } from "@api/Notifications";
-import { Devs } from "@utils/constants";
+import { Devs, SuncordDevs } from "@utils/constants";
+import { getTheme, Theme } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { findByCode, findByProps } from "@webpack";
-import { Text } from "@webpack/common";
-
-interface Stream {
-    streamType: string;
-    state: string;
-    ownerId: string;
-    guildId: string;
-    channelId: string;
-}
-
-function getLeftQuests() {
-    const QuestsStore = findByProps("getQuest");
-    // check if user still has incompleted quests
-    const quest = [...QuestsStore.quests.values()].find(quest => quest.userStatus?.enrolledAt && !quest?.userStatus?.completedAt && new Date(quest?.config?.expiresAt) >= new Date());
-    return quest;
-}
-
-let interval;
-let quest;
-let ImagesConfig = {};
+import { FluxDispatcher, Forms, RestAPI, Text, UserStore } from "@webpack/common";
 
 export default definePlugin({
     name: "QuestCompleter",
     description: "A plugin to complete quests without having the game installed.",
-    authors: [Devs.HappyEnderman, Devs.SerStars],
+    authors: [Devs.HappyEnderman, SuncordDevs.SerStars, SuncordDevs.thororen],
     patches: [
         {
             find: "\"invite-button\"",
@@ -71,32 +53,10 @@ export default definePlugin({
         </>);
     },
     start() {
-        const currentUserId: string = findByProps("getCurrentUser").getCurrentUser().id;
+        const currentUserId: string = UserStore.getCurrentUser().id;
         window.currentUserId = currentUserId; // this is here because discord will lag if we get the current user id every time
     },
     renderQuestButton() {
-        const currentStream: Stream | null = findByProps("getCurrentUserActiveStream").getCurrentUserActiveStream();
-        let shouldDisable = !!interval;
-        const { Divider } = findByProps("Divider", "Icon");
-
-        if (!currentStream) {
-            shouldDisable = true;
-        }
-        if (currentStream) {
-            if (!findByProps("getParticipants").getParticipants(currentStream.channelId).filter(participent => participent.user.id !== window.currentUserId).length) {
-                shouldDisable = true;
-            }
-            if (currentStream?.ownerId !== window.currentUserId) {
-                shouldDisable = true;
-            }
-        }
-        if (!getLeftQuests()) {
-            shouldDisable = true;
-        }
-
-
-
-        // const ToolTipButton = findByProps("CenterControlButton").default;
         const ToolTipButton = findByCode("}),color:\"currentColor\"})})}}");
         const QuestsIcon = () => props => (
             <svg
@@ -117,80 +77,138 @@ export default definePlugin({
         return (
             <>
                 <ToolTipButton
-                    disabled={shouldDisable}
                     label="Complete Quest"
                     tooltipPosition="bottom"
                     iconComponent={QuestsIcon()}
                     onClick={this.openCompleteQuestUI}
                 >
                 </ToolTipButton>
-                <Divider></Divider>
+                <Forms.FormDivider></Forms.FormDivider>
 
             </>
         );
     },
-    openCompleteQuestUI() {
+    async openCompleteQuestUI() {
         // check if user is sharing screen and there is someone that is watching the stream
+        const ApplicationStreamingStore = findByProps("getStreamerActiveStreamMetadata");
+        const RunningGameStore = findByProps("getRunningGames");
+        const ExperimentStore = findByProps("getGuildExperiments");
+        const QuestsStore = findByProps("getQuest");
+        const quest = [...QuestsStore.quests.values()].find(quest => quest.userStatus?.enrolledAt && !quest?.userStatus?.completedAt && new Date(quest?.config?.expiresAt) >= new Date());
 
-        const currentStream: Stream | null = findByProps("getCurrentUserActiveStream").getCurrentUserActiveStream();
-        const encodedStreamKey = findByProps("encodeStreamKey").encodeStreamKey(currentStream); // broken
-        quest = getLeftQuests();
-        ImagesConfig = {
-            icon: findByProps("getQuestBarHeroAssetUrl").getQuestBarHeroAssetUrl(quest), // broken
-            image: findByProps("getHeroAssetUrl").getHeroAssetUrl(quest) // broken
-        };
-
-        const heartBeat = async () => {
-            findByProps("HTTP", "getAPIBaseURL"); // rest api module
-            findByProps("sendHeartbeat").sendHeartbeat({ questId: quest.id, streamKey: encodedStreamKey });
-        };
-
-        heartBeat();
-        interval = setInterval(heartBeat, 60000); // send the heartbeat each minute
-
-        return;
-    },
-    flux: {
-        STREAM_STOP: event => {
-            const stream: Stream = findByProps("encodeStreamKey").decodeStreamKey(event.streamKey);
-            // we check if the stream is by the current user id so we do not clear the interval without any reason.
-            if (stream.ownerId === window.currentUserId && interval) {
-                clearInterval(interval);
-                interval = null;
-            }
-        },
-        QUESTS_SEND_HEARTBEAT_FAILURE: () => {
-            showNotification(
-                {
-                    title: "Couldn't start Completing Quest",
-                    body: "You are probally using web, please check the plugin settings for help.",
-                    ...ImagesConfig
-                }
-            );
-            clearInterval(interval);
-            interval = null;
-        },
-        QUESTS_SEND_HEARTBEAT_SUCCESS: event => {
-
-            const streamProgress = event.userStatus.streamProgressSeconds * 100;
-            const streamDurationRequirement = quest.config.streamDurationRequirementMinutes * 60;
-
-            if (event.userStatus.streamProgressSeconds >= quest.config.streamDurationRequirementMinutes * 60) {
-                showNotification({
-                    title: `${quest.config.applicationName} - Quests Completer`,
-                    body: "Quest Completed",
-                    ...ImagesConfig
-                });
-                clearInterval(interval);
-                interval = null;
-                return;
-            }
-
+        const isApp = navigator.userAgent.includes("Electron/");
+        if (!isApp) {
             showNotification({
-                title: `${quest.config.applicationName} - Quests Completer`,
-                body: `Current progress: ${Math.floor(streamProgress / streamDurationRequirement)}% (${Math.floor(event.userStatus.streamProgressSeconds / 60)} minutes.)`,
-                ...ImagesConfig
+                title: "Quests Completer",
+                body: "This no longer works in browser. Use the desktop app!",
             });
+        } else if (!quest) {
+            showNotification({
+                title: "Quests Completer",
+                body: "No Quests To Complete",
+            });
+        } else {
+            const pid = Math.floor(Math.random() * 30000) + 1000;
+            const theme = getTheme() === Theme.Light
+                ? "light"
+                : "dark";
+
+            let applicationId, applicationName, secondsNeeded, secondsDone, canPlay, icon, questId;
+            if (quest.config.configVersion === 1) {
+                questId = quest.id;
+                applicationId = quest.config.applicationId;
+                applicationName = quest.config.applicationName;
+                secondsNeeded = quest.config.streamDurationRequirementMinutes * 60;
+                secondsDone = quest.userStatus?.streamProgressSeconds ?? 0;
+                icon = `https://cdn.discordapp.com/assets/quests/${questId}/${theme}/${quest.config.assets.gameTile}`;
+                canPlay = quest.config.variants.includes(2);
+            } else if (quest.config.configVersion === 2) {
+                questId = quest.id;
+                applicationId = quest.config.application.id;
+                applicationName = quest.config.application.name;
+                icon = `https://cdn.discordapp.com/assets/quests/${questId}/${theme}/${quest.config.assets.gameTile}`;
+                canPlay = ExperimentStore.getUserExperimentBucket("2024-04_quest_playtime_task") > 0 && quest.config.taskConfig.tasks.PLAY_ON_DESKTOP;
+                const taskName = canPlay ? "PLAY_ON_DESKTOP" : "STREAM_ON_DESKTOP";
+                secondsNeeded = quest.config.taskConfig.tasks[taskName]?.target;
+                secondsDone = quest.userStatus?.progress?.[taskName]?.value ?? 0;
+            }
+            if (canPlay) {
+                await RestAPI.get({ url: `/applications/public?application_ids=${applicationId}` }).then(res => {
+                    const appData = res.body[0];
+                    const exeName = appData.executables.find(x => x.os === "win32").name.replace(">", "");
+
+                    const games = RunningGameStore.getRunningGames();
+                    const fakeGame = {
+                        cmdLine: `C:\\Program Files\\${appData.name}\\${exeName}`,
+                        exeName,
+                        exePath: `c:/program files/${appData.name.toLowerCase()}/${exeName}`,
+                        hidden: false,
+                        isLauncher: false,
+                        id: applicationId,
+                        name: appData.name,
+                        pid: pid,
+                        pidPath: [pid],
+                        processName: appData.name,
+                        start: Date.now(),
+                    };
+                    games.push(fakeGame);
+                    FluxDispatcher.dispatch({ type: "RUNNING_GAMES_CHANGE", removed: [], added: [fakeGame], games: games });
+
+                    const fn = data => {
+                        const progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.PLAY_ON_DESKTOP.value);
+                        showNotification({
+                            title: `${applicationName} - Quests Completer`,
+                            body: `Current progress: ${progress}/${secondsNeeded} minutes.`,
+                            icon: icon,
+                        });
+
+                        if (progress >= secondsNeeded) {
+                            showNotification({
+                                title: `${applicationName} - Quests Completer`,
+                                body: "Quest Completed",
+                                icon: icon,
+                            });
+
+                            const idx = games.indexOf(fakeGame);
+                            if (idx > -1) {
+                                games.splice(idx, 1);
+                                FluxDispatcher.dispatch({ type: "RUNNING_GAMES_CHANGE", removed: [fakeGame], added: [], games: [] });
+                            }
+                            FluxDispatcher.unsubscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
+                        }
+                    };
+                    FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
+                });
+            } else {
+                const realFunc = ApplicationStreamingStore.getStreamerActiveStreamMetadata;
+                ApplicationStreamingStore.getStreamerActiveStreamMetadata = () => ({
+                    id: applicationId,
+                    pid,
+                    sourceName: null
+                });
+
+                const fn = data => {
+                    const progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.STREAM_ON_DESKTOP.value);
+                    showNotification({
+                        title: `${applicationName} - Quests Completer`,
+                        body: `Current progress: ${progress}/${secondsNeeded} minutes.`,
+                        icon: icon,
+                    });
+
+                    if (progress >= secondsNeeded) {
+                        showNotification({
+                            title: `${applicationName} - Quests Completer`,
+                            body: "Quest Completed",
+                            icon: icon,
+                        });
+
+                        ApplicationStreamingStore.getStreamerActiveStreamMetadata = realFunc;
+                        FluxDispatcher.unsubscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
+                    }
+                };
+                FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
+            }
+            return;
         }
     }
 });
