@@ -543,10 +543,9 @@ export default definePlugin({
 
         {
             find: "toolbar:function",
-            predicate: () => settings.store.ShowLogsButton,
             replacement: {
-                match: /(function \i\(\i\){)(.{1,200}toolbar.{1,100}mobileToolbar)/,
-                replace: "$1$self.addIconToToolBar(arguments[0]);$2"
+                match: /(function \i\(\i\){)/,
+                replace: "$1$self.addIconToToolBar(arguments[0]);"
             }
         },
 
