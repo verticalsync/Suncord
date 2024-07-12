@@ -78,8 +78,8 @@ async function generateDebugInfoMessage() {
     })();
 
     const info = {
-        Vencord:
-            `v${VERSION} • [${gitHash}](<https://github.com/Vendicated/Vencord/commit/${gitHash}>)` +
+        Suncord:
+            `v${VERSION} • [${gitHash}](<https://github.com/verticalsync/Suncord/commit/${gitHash}>)` +
             `${SettingsPlugin.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${client}`,
         Platform: window.navigator.platform
