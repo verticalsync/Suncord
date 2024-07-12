@@ -544,8 +544,8 @@ export default definePlugin({
         {
             find: "toolbar:function",
             replacement: {
-                match: /(function \i\(\i\){)/,
-                replace: "$1$self.addIconToToolBar(arguments[0]);"
+                match: /function \i\(\i\){/,
+                replace: "$&$self.addIconToToolBar(arguments[0]);"
             }
         },
 
