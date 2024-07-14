@@ -76,6 +76,9 @@ export default definePlugin({
                 replace: "$2.open($1);return;"
             }
         },
+
+        // fix crashes when viewing a screenshare of unsupported resolution or frame rate
+        // people with third-party plugins can cause you to crash by setting their frame rates/resolutions to something else
         {
             find: "Unknown resolution:",
             replacement: [
