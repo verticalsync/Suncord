@@ -79,6 +79,13 @@ Visit [1_INSTALLING.md](/docs/1_INSTALLING.md)
 
 </details>
 
+## Sponsors
+
+|                       **Thanks a lot to all Suncord [sponsors](https://github.com/sponsors/verticalsync)!!**                        |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| [![](https://raw.githubusercontent.com/verticalsync/github-sponsor-graph/main/graph.png)](https://github.com/sponsors/verticalsync) |
+|                _generated using forked [github-sponsor-graph](https://github.com/verticalsync/github-sponsor-graph)_                |
+
 ## Star History
 
 <a href="https://star-history.com/#verticalsync/Suncord&Timeline">
