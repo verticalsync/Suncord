@@ -40,7 +40,7 @@ var microphonePatcher;
 // });
 
 export default definePlugin({
-    name: "PhilsBetterMicrophone",
+    name: "BetterMicrophone",
     description: "This plugin allows you to further customize your microphone.",
     authors: [Devs.philhk],
     dependencies: ["PhilsPluginLibrary"],

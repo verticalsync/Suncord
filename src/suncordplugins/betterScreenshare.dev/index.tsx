@@ -30,7 +30,7 @@ var screensharePatcher;
 var screenshareAudioPatcher;
 
 export default definePlugin({
-    name: "PhilsBetterScreenshare",
+    name: "BetterScreenshare",
     description: "This plugin allows you to further customize your screen sharing.",
     authors: [Devs.philhk, Devs.walrus],
     dependencies: ["PhilsPluginLibrary"],
