@@ -28,7 +28,7 @@ import { relaunch, showItemInFolder } from "@utils/native";
 import { useAwaiter } from "@utils/react";
 import { Button, Card, Forms, React, Select, showToast, Switch } from "@webpack/common";
 
-import { Flex, FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "..";
+import { Flex, FolderIcon, GithubIcon, Heart, LogIcon, PaintbrushIcon, RestartIcon } from "..";
 import { openNotificationSettingsModal } from "./NotificationSettings";
 import { QuickAction, QuickActionCard } from "./quickActions";
 import { SettingsTab, wrapTab } from "./shared";
@@ -250,15 +250,24 @@ function DiscordInviteCard({ invite }: DiscordInviteProps) {
             <div>
                 <Forms.FormTitle tag="h5">Join the discord!</Forms.FormTitle>
                 <Forms.FormText>Please consider joining the discord for any news on breaking changes, or new bigger updates!</Forms.FormText>
-                <Button
-                    style={{ transform: "translateY(2.3em)" }}
-                    onClick={async e => {
-                        e.preventDefault();
-                        openInviteModal(invite).catch(() => showToast("Invalid or expired invite"));
-                    }}
-                >
-                    Join
-                </Button>
+                <Forms.FormText>You can also donate to me if you'd like to support this project. <Heart /></Forms.FormText>
+
+                <div className={cl("card-buttons")}>
+                    <Button
+                        onClick={async e => {
+                            e.preventDefault();
+                            openInviteModal(invite).catch(() => showToast("Invalid or expired invite"));
+                        }}
+                    >
+                        Join
+                    </Button>
+
+                    <Button
+                        onClick={() => { VencordNative.native.openExternal("https://github.com/sponsors/verticalsync"); }}
+                    >
+                        Donate
+                    </Button>
+                </div>
             </div>
             <img
                 role="presentation"

@@ -25,6 +25,12 @@
     margin-bottom: 1em;
 }
 
+.vc-settings-card-buttons {
+    display: flex;
+    margin-top: 1.5em;
+    gap: 0.5em;
+}
+
 .vc-backup-restore-card {
     background-color: var(--info-warning-background);
     border-color: var(--info-warning-foreground);
