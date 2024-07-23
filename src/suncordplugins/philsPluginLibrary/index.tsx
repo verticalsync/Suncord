@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 import { replacedUserPanelComponent } from "./patches";
-import { definePluginSettings } from "@api/Settings";
 
 const settings = definePluginSettings({
     hideDefaultSettings: {
