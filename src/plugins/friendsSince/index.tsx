@@ -17,7 +17,6 @@ const container = findByPropsLazy("memberSince");
 const getCreatedAtDate = findByCodeLazy('month:"short",day:"numeric"');
 const locale = findByPropsLazy("getLocale");
 const lastSection = findByPropsLazy("lastSection");
-
 const section = findLazy((m: any) => m.section !== void 0 && m.heading !== void 0 && Object.values(m).length === 2);
 
 export default definePlugin({
@@ -53,7 +52,7 @@ export default definePlugin({
         {
             find: ".PANEL}),nicknameIcons",
             replacement: {
-                match: /BOT_PROFILE_CREATED_ON,.{0,100}userId:(\i\.id)}\)}\)/,
+                match: /USER_PROFILE_MEMBER_SINCE,.{0,100}userId:(\i\.id)}\)}\)/,
                 replace: "$&,$self.friendsSinceNew({userId:$1,isSidebar:true})"
             }
         },
