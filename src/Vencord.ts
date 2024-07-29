@@ -95,7 +95,7 @@ async function init() {
 
     Alerts.show({
         title: "Suncord End Of Life",
-        body: "Suncord has gone EOL. Because I don't always have the time to keep up with what people suggest or such and it's easier for me to work on Equicord with other people, the source and everything will stay here and you can still use it, but it'll probably become outdated after some time and break.",
+        body: `Suncord has gone EOL. Because I don't always have the time to keep up with what people suggest or such and it's easier for me to work on ${equiName} with other people, the source and everything will stay here and you can still use it, but it'll probably become outdated after some time and break.`,
         confirmText: `Switch to ${equiName}`,
         cancelText: "Ignore",
         onConfirm: () => { VencordNative.native.openExternal(`https://github.com/Equicord/${equiName}`); }
