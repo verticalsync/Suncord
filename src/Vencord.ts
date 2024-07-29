@@ -40,7 +40,7 @@ import { relaunch } from "./utils/native";
 import { getCloudSettings, putCloudSettings } from "./utils/settingsSync";
 import { checkForUpdates, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
-import { SettingsRouter } from "./webpack/common";
+import { Alerts, SettingsRouter } from "./webpack/common";
 
 if (IS_REPORTER) {
     require("./debug/runReporter");
@@ -90,6 +90,14 @@ async function init() {
     startAllPlugins(StartAt.WebpackReady);
 
     syncSettings();
+
+    Alerts.show({
+        title: "Suncord End Of Life",
+        body: "Suncord has gone EOL. Because I don't always have the time to keep up with what people suggest or such and it's easier for me to work on Equicord with other people, the source and everything will stay here and you can still use it, but it'll probably become outdated after some time and break.",
+        confirmText: "Switch to Equicord",
+        cancelText: "Ignore",
+        onConfirm: () => { VencordNative.native.openExternal("https://github.com/Equicord/Equicord"); }
+    });
 
     if (!IS_WEB && !IS_UPDATER_DISABLED) {
         try {
